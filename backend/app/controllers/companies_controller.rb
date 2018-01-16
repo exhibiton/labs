@@ -1,0 +1,62 @@
+class CompaniesController < BaseController
+  before_action :authenticate_request!
+  before_action :set_company, only: [:show, :update, :destroy]
+  before_action :set_user
+
+  # GET /companies
+  def index
+    companies = Company.all
+    json_response(companies)
+  end
+
+  # POST /companies
+  def create
+    company = Company.create!(company_params)
+    company.users << @user if @user
+    json_response(company, :created)
+  end
+
+
+  # GET /companies/:id
+  def show
+    json_response(@company)
+  end
+
+  # PUT /companies/:id
+  def update
+    if @company.users.include?(@user)
+      if @company.update(company_params)
+      @company.users << User.find(params[:new_user_id]) if params[:new_user_id].present?
+      json_response(@company)
+      else
+        head :unprocessable_entity
+      end
+    else
+      head :unauthorized
+    end
+  end
+
+  # DELETE /companies/:id
+  def destroy
+    if @company.users.include?(@user)
+      @company.destroy
+      head :no_content
+    else
+      head :unauthorized
+    end
+  end
+
+  private
+
+  def company_params
+    params.permit(:name, :description, :github, :facebook, :linkedin, :twitter, :logo)
+  end
+
+  def set_company
+    @company = Company.find(params[:id])
+  end
+
+  def set_user
+    @user = current_user || User.find(params[:user_id])
+  end
+end

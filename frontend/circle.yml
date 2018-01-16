@@ -1,0 +1,21 @@
+machine:
+  timezone: Europe/Helsinki
+  node:
+    version: 6
+dependencies:
+  pre:
+    - npm install
+    - pip install awscli==1.11.83
+  cache_directories:
+    - node_modules
+test:
+  override:
+    - npm rebuild node-sass
+    - yarn deploy
+deployment:
+  prod:
+    branch: master
+    commands:
+      - aws s3 sync dist s3://tossdeck
+      - aws configure set preview.cloudfront true
+      - aws cloudfront create-invalidation --distribution-id E25IAPCXPZGBI4 --paths /*

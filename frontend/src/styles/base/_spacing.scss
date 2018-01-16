@@ -1,0 +1,70 @@
+$spacing-tiny: 0.5rem;
+$spacing-small: 1rem;
+$spacing-medium: 2rem;
+$spacing-large: 4rem;
+$spacing-xlarge: 7rem;
+
+$size-map: (
+  't': $spacing-tiny,
+  's': $spacing-small,
+  'm': $spacing-medium,
+  'l': $spacing-large,
+  'xl': $spacing-xlarge
+);
+
+@mixin spacing-classes($type-abbr, $type, $size-abbr, $size, $breakpoint: '') {
+  .#{$type-abbr}a#{$size-abbr}#{$breakpoint} {
+    #{$type}: $size;
+  }
+
+  .#{$type-abbr}h#{$size-abbr}#{$breakpoint} {
+    #{$type}-left: $size;
+    #{$type}-right: $size;
+  }
+
+  .#{$type-abbr}v#{$size-abbr}#{$breakpoint} {
+    #{$type}-top: $size;
+    #{$type}-bottom: $size;
+  }
+
+  .#{$type-abbr}l#{$size-abbr}#{$breakpoint} {
+    #{$type}-left: $size;
+  }
+
+  .#{$type-abbr}r#{$size-abbr}#{$breakpoint} {
+    #{$type}-right: $size;
+  }
+
+  .#{$type-abbr}t#{$size-abbr}#{$breakpoint} {
+    #{$type}-top: $size;
+  }
+
+  .#{$type-abbr}b#{$size-abbr}#{$breakpoint} {
+    #{$type}-bottom: $size;
+  }
+}
+
+@mixin spacing-classes-generator($breakpoint: '') {
+  @each $type-abbr, $type in ('m': 'margin', 'p': 'padding') {
+    @each $size-abbr, $size in $size-map {
+      @include spacing-classes($type-abbr, $type, $size-abbr, $size, $breakpoint);
+    }
+  }
+}
+
+@include spacing-classes-generator;
+@include mobile {
+  @include spacing-classes-generator('-mobile');
+}
+@include tablet {
+  @include spacing-classes-generator('-tablet');
+}
+@include desktop {
+  @include spacing-classes-generator('-desktop');
+}
+@include gt-mobile {
+  @include spacing-classes-generator('-gt-mobile');
+}
+@include lt-desktop {
+  @include spacing-classes-generator('-lt-desktop');
+}

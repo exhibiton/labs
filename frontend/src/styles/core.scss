@@ -1,0 +1,46 @@
+// Import vendor libraries from node_modules here
+@import '~bootstrap/dist/css/bootstrap';
+
+// Base classes are fundamental building blocks based on the site design
+@import 'base/reset';
+@import 'base/breakpoints';
+@import 'base/typography';
+@import 'base/colors';
+@import 'base/layout';
+@import 'base/spacing';
+
+// UI Components are generic and reusable, and only relies on base and vendor css
+
+// Components can rely on UI components, base, and vendor css
+
+// Default page settings
+html {
+  font-size: 16px;
+
+  // Since rem is used for all font, height, and width measurements,
+  // this decreases the spacing when viewed on a small screen
+  @include mobile {
+    font-size: 14px;
+  }
+}
+
+body {
+  @extend .t4;
+  @extend .color-grey;
+  @extend .flex-col;
+
+  font-family: 'Proxima Nova', sans-serif;
+  min-height: 100vh;
+}
+
+.no-padding {
+  padding: 0 !important;
+}
+
+.no-borders {
+  border: none !important;
+}
+
+.no-margins {
+  margin: 0 !important;
+}
