@@ -3,6 +3,7 @@ import LabsLogo from '../assets/WeWorkLabsLogo.png'
 import './HomeViewStyle.scss'
 
 import LoginForm from './LoginForm'
+import SocialFooter from './SocialFooter'
 
 export const HomeView = () => (
   <div>
@@ -12,9 +13,12 @@ export const HomeView = () => (
       <div className='flex-column'>
         <img src={LabsLogo} alt={"WeWork Labs Logo"} className='labs-logo'/>
         <div className='mal side-container'>
-            <h2 className='text-center'>Hello</h2>
-            <p className='text-center'>Some text about wework labs and how dope and exclusive it is.</p>
-            <LoginForm/>
+          <h2 className='text-center'>Hello</h2>
+          <p className='text-center'>Some text about wework labs and how dope and exclusive it is.</p>
+          <LoginForm/>
+        </div>
+        <div className='mal side-container'>
+          <SocialFooter/>
         </div>
       </div>
     </div>
