@@ -16,11 +16,11 @@ const socials = [
 ]
 
 export const SocialFooter = (props) => (
-  <div class="flex-row flex-hc">
-    <ul class="list-inline">
-      <li class="list-inline-item">Follow Us:</li>
-      {socials.map((social) => (
-        <li class="list-inline-item">
+  <div className="flex-row flex-hc">
+    <ul className="list-inline">
+      <li className="list-inline-item">Follow Us:</li>
+      {socials.map((social, i) => (
+        <li className="list-inline-item" key={i}>
           <a href={social.url}>{social.name}</a>
         </li>
       ))}
