@@ -12,6 +12,7 @@ const LoginForm = props => {
         type="input"
         label= 'Email Address'
         placeholder= 'Email Address'
+        className = 'mts w-100'
       />
       <Field
         name="password"
@@ -19,9 +20,10 @@ const LoginForm = props => {
         type="password"
         label='Password'
         placeholder='Password'
+        className = 'mts w-100'
       />
-      <div className="mvm">
-        <button className="btn btn-primary" type="submit" disabled={ submitting }>
+      <div className="mvs">
+        <button className="ww-btn-primary w-100" type="submit" disabled={ submitting }>
           Log In
         </button>
       </div>
