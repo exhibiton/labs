@@ -20,7 +20,7 @@ jobs:
     steps:
       - checkout
         path: ~/repo
-        
+
       # Restore bundle cache
       - restore_cache:
           keys:
@@ -53,8 +53,3 @@ jobs:
       # Save test results for timing analysis
       - store_test_results:
           path: test_results
-workflows:
-  version: 2
-  test_everything:
-    jobs:
-      - build
