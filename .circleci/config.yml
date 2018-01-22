@@ -14,8 +14,8 @@ jobs:
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
       - run:
-          name: install-npm-wee
-          command: npm install
+          name: install yarnman
+          command: yarn install
       - save_cache:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
@@ -25,7 +25,7 @@ jobs:
           command: npm test
       - run:
           name: lint
-          command: yarn lint
+          command: eslint .
       - store_artifacts:
           path: test-results.xml
           prefix: tests
@@ -88,3 +88,4 @@ workflows:
   test_everything:
     jobs:
       - frontend-tests
+      - backend-tests
