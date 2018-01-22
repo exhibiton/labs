@@ -12,12 +12,15 @@ const karmaConfig = {
       { type: 'text-summary' },
     ],
   },
-  files: [{
-    pattern  : TEST_BUNDLER,
-    watched  : false,
-    served   : true,
-    included : true
-  }],
+  files: [
+    'node_modules/babel-polyfill/dist/polyfill.js',
+    {
+      pattern  : TEST_BUNDLER,
+      watched  : false,
+      served   : true,
+      included : true
+    }
+  ],
   frameworks: ['mocha'],
   reporters: ['mocha'],
   preprocessors: {
