@@ -51,7 +51,7 @@ const config = {
 // ------------------------------------
 config.module.rules.push({
   test: /\.(js|jsx)$/,
-  exclude: /node_modules/,
+  exclude: /node_modules\/(?!(chai-as-promised)\/).*/,
   use: [{
     loader: 'babel-loader',
     query: {
