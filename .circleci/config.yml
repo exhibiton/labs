@@ -2,7 +2,6 @@ version: 2
 jobs:
   build:
     parallelism: 1
-    working_directory: ~/repo/backend/
     docker:
       - image: circleci/ruby:2.5-node
         environment:
@@ -17,8 +16,10 @@ jobs:
           POSTGRES_USER: circleci-demo-ruby
           POSTGRES_DB: rails_blog
           POSTGRES_PASSWORD: ""
+    - working_directory: ~/repo/backend
     steps:
       - checkout
+          path: ~/repo/
 
       # Which version of bundler?
       - run:
