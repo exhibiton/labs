@@ -24,12 +24,15 @@ jobs:
       - run:
           name: Subdirectory folder
           command: cd backend/
-
+      
+      - run:
+          name: LS
+          command: ls -a
+          
       # Restore bundle cache
       - restore_cache:
           keys:
             - rails-demo-bundle-v2-{{ checksum "Gemfile.lock" }}
-            - rails-demo-bundle-v2-
 
       - run:
           name: Bundle Install
