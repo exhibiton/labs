@@ -3,9 +3,11 @@ import ReactDOM from 'react-dom'
 import createStore from './store/createStore'
 import './styles/core.scss'
 
+/* eslint-disable */
 // Store Initialization
 // ------------------------------------
 const store = createStore(window.__INITIAL_STATE__)
+/* eslint-enable */
 
 // Render Setup
 // ------------------------------------
@@ -16,7 +18,7 @@ let render = () => {
   const routes = require('./routes/index').default(store)
 
   ReactDOM.render(
-    <App store={store} routes={routes} />,
+    <App store={ store } routes={ routes } />,
     MOUNT_NODE
   )
 }
@@ -26,16 +28,17 @@ let render = () => {
 if (__DEV__) {
   if (module.hot) {
     const renderApp = render
-    const renderError = (error) => {
+    const renderError = error => {
       const RedBox = require('redbox-react').default
 
-      ReactDOM.render(<RedBox error={error} />, MOUNT_NODE)
+      ReactDOM.render(<RedBox error={ error } />, MOUNT_NODE)
     }
 
     render = () => {
       try {
         renderApp()
-      } catch (e) {
+      }
+      catch (e) {
         console.error(e)
         renderError(e)
       }
