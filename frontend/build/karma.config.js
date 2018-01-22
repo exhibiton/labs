@@ -15,11 +15,11 @@ const karmaConfig = {
   files: [
     'node_modules/babel-polyfill/dist/polyfill.js',
     {
-      pattern  : TEST_BUNDLER,
-      watched  : false,
-      served   : true,
-      included : true
-    }
+      pattern: TEST_BUNDLER,
+      watched: false,
+      served: true,
+      included: true,
+    },
   ],
   frameworks: ['mocha'],
   reporters: ['mocha'],
@@ -50,4 +50,4 @@ const karmaConfig = {
   },
 }
 
-module.exports = (cfg) => cfg.set(karmaConfig)
+module.exports = cfg => cfg.set(karmaConfig)

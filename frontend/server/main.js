@@ -7,6 +7,7 @@ const project = require('../project.config')
 const compress = require('compression')
 
 const app = express()
+
 app.use(compress())
 
 // ------------------------------------
@@ -17,16 +18,16 @@ if (project.env === 'development') {
 
   logger.info('Enabling webpack development and HMR middleware')
   app.use(require('webpack-dev-middleware')(compiler, {
-    publicPath  : webpackConfig.output.publicPath,
-    contentBase : path.resolve(project.basePath, project.srcDir),
-    hot         : true,
-    quiet       : false,
-    noInfo      : false,
-    lazy        : false,
-    stats       : 'normal',
+    publicPath: webpackConfig.output.publicPath,
+    contentBase: path.resolve(project.basePath, project.srcDir),
+    hot: true,
+    quiet: false,
+    noInfo: false,
+    lazy: false,
+    stats: 'normal',
   }))
   app.use(require('webpack-hot-middleware')(compiler, {
-    path: '/__webpack_hmr'
+    path: '/__webpack_hmr',
   }))
 
   // Serve static assets from ~/public since Webpack is unaware of
@@ -38,8 +39,10 @@ if (project.env === 'development') {
   // This rewrites all routes requests to the root /index.html file
   // (ignoring file requests). If you want to implement universal
   // rendering, you'll want to remove this middleware.
-  app.use('*', function (req, res, next) {
+  /* eslint-disable */
+  app.use('*', (req, res, next) => {
     const filename = path.join(compiler.outputPath, 'index.html')
+
     compiler.outputFileSystem.readFile(filename, (err, result) => {
       if (err) {
         return next(err)
@@ -49,7 +52,9 @@ if (project.env === 'development') {
       res.end()
     })
   })
-} else {
+}
+/* eslint-enable */
+else {
   logger.warn(
     'Server is being run outside of live development mode, meaning it will ' +
     'only serve the compiled application bundle in ~/dist. Generally you ' +

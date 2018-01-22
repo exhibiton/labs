@@ -34,10 +34,8 @@ const testsContext = require.context('./', true, /\.(spec|test)\.(js|ts|tsx)$/)
 // When a test file changes, only rerun that spec file. If something outside of a
 // test file changed, rerun all tests.
 // https://www.npmjs.com/package/karma-webpack-with-fast-source-maps
-const __karmaWebpackManifest__ = []
+const karmaWebpackManifest = []
 const allTests = testsContext.keys()
-const changedTests = allTests.filter(path => {
-  return __karmaWebpackManifest__.indexOf(path) !== -1
-})
+const changedTests = allTests.filter(path => karmaWebpackManifest.indexOf(path) !== -1)
 
 ;(changedTests.length ? changedTests : allTests).forEach(testsContext)
