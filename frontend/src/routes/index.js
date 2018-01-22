@@ -1,17 +1,42 @@
 // We only need to import the modules necessary for initial render
 import CoreLayout from '../layouts/PageLayout/PageLayout'
+import { getToken } from '../api/utils/authorization-token'
 import Home from './Home'
+import SignIn from './SignIn'
+import CompanyRoute from './Company'
+
+function redirectToLogin(nextState, replace) {
+  if (!getToken() && nextState.location.pathname !== '/signup') {
+    replace({
+      pathname: '/auth',
+      state: { nextPathname: nextState.location.pathname },
+    })
+  }
+}
+
+function redirectToHome(nextState, replace) {
+  if (getToken()) {
+    replace('/')
+  }
+}
 
 /*  Note: Instead of using JSX, we recommend using react-router
     PlainRoute objects to build route definitions.   */
 
-export const createRoutes = (store) => ({
-  path        : '/',
-  component   : CoreLayout,
-  indexRoute  : Home,
-  childRoutes : [
-  ]
-})
+export const createRoutes = store => [{
+  onEnter: (nextState, replace) => redirectToLogin(nextState, replace),
+  path: '/',
+  component: CoreLayout,
+  indexRoute: Home,
+  childRoutes: [
+    CompanyRoute(store),
+  ],
+}, {
+  onEnter: redirectToHome,
+  path: '/auth',
+  component: CoreLayout,
+  indexRoute: SignIn(store),
+}]
 
 /*  Note: childRoutes can be chunked or otherwise loaded programmatically
     using getChildRoutes with the following signature:
