@@ -13,7 +13,7 @@ jobs:
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
       - run:
-          name: npminstall
+          name: install-npm-wee
           command: npm install
       - save_cache:
           key: dependency-cache-{{ checksum "package.json" }}
@@ -24,7 +24,7 @@ jobs:
           command: npm test
       - run:
           name: lint
-          command: eslint .
+          command: yarn lint
       - store_artifacts:
           path: test-results.xml
           prefix: tests
@@ -40,21 +40,25 @@ jobs:
           BUNDLE_RETRY: 3
           BUNDLE_PATH: vendor/bundle
           PGHOST: 127.0.0.1
-          PGUSER: circleci
+          PGUSER: circleci-demo-ruby
           RAILS_ENV: test
       - image: circleci/postgres:9.5-alpine
         environment:
-          POSTGRES_USER: circleci
-          POSTGRES_DB: test
+          POSTGRES_USER: circleci-demo-ruby
+          POSTGRES_DB: rails_blog
           POSTGRES_PASSWORD: ""
     steps:
       - checkout:
           path: ~/repo
       
+      - run:
+          name: LS
+          command: ls -a
+
       # Restore bundle cache
       - restore_cache:
           keys:
-            - rails-labs-{{ checksum "Gemfile.lock" }}
+            - rails-demo-bundle-v2-{{ checksum "Gemfile.lock" }}
 
       - run:
           name: Bundle Install
@@ -62,7 +66,7 @@ jobs:
 
       # Store bundle cache
       - save_cache:
-          key: rails-labs-{{ checksum "Gemfile.lock" }}
+          key: rails-demo-bundle-v2-{{ checksum "Gemfile.lock" }}
           paths:
             - vendor/bundle
 
@@ -83,4 +87,3 @@ workflows:
   test_everything:
     jobs:
       - frontend-tests
-      - backend-tests
