@@ -1,6 +1,7 @@
 import React from 'react'
 import { browserHistory } from 'react-router'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 
 import './HomeViewStyle.scss'
 
@@ -24,7 +25,7 @@ class HomeView extends React.Component {
     if (isLoading) return false
 
     if (currentUser) {
-      browserHistory.push('/companies')
+      browserHistory.push('/company')
     }
 
     return true
@@ -40,4 +41,17 @@ class HomeView extends React.Component {
   }
 }
 
-export default HomeView
+const mapStateToProps = state => {
+  const { currentUser, isSigningIn } = state.auth
+
+  return {
+    isLoading: isSigningIn,
+    currentUser,
+  }
+}
+
+const mapDispatchToProps = {
+
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomeView)

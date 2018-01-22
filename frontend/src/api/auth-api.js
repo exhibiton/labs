@@ -2,6 +2,7 @@ import axios from 'axios'
 import apiEndpoints from '../../config/apis'
 import setAuthorizationToken from './utils/authorization-token'
 import jwt from 'jsonwebtoken'
+import { browserHistory } from 'react-router'
 
 import {
   loginLoading,
@@ -23,6 +24,7 @@ export const login = data => dispatch => {
     const user = jwt.decode(token)
 
     dispatch(loginSuccess(user))
+    browserHistory.push('/')
   }).catch(error => {
     dispatch(loginFail(error))
   })
