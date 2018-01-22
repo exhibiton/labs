@@ -8,7 +8,6 @@ coverage
 backend/tmp/
 
 backend/config/application.yml
-backend/config/database.yml
 capybara-*.html
 .rspec
 backend/log
