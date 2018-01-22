@@ -1,0 +1,20 @@
+version: 2.0
+
+jobs:
+  "backend":
+    docker:
+      - image: circleci/ruby:2.5-node
+      - image: circleci/postgres:9.4.12-alpine
+        environment:
+          BUNDLE_JOBS: 3
+          BUNDLE_RETRY: 3
+          BUNDLE_PATH: vendor/bundle
+          RAILS_ENV: test
+    working_directory: ~/backend/
+    steps:
+      - checkout
+      - run: bundle install --path vendor/bundle
+      - run: bundle exec rake db:create db:schema:load
+      - run:
+          name: Run tests
+          command: bundle exec rspec
