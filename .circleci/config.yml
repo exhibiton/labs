@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     parallelism: 1
-    working_directory: ~/repo/backend/
+    working_directory: ~/repo/
     docker:
       - image: circleci/ruby:2.5-node
         environment:
@@ -19,7 +19,7 @@ jobs:
           POSTGRES_PASSWORD: ""
     steps:
       - checkout
-        path: ~/repo
+        path: ~/repo/backend/
 
       # Restore bundle cache
       - restore_cache:
