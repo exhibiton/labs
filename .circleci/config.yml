@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     parallelism: 1
-    working_directory: ~/backend
+    working_directory: ~/labs/backend
     docker:
       - image: circleci/ruby:2.5-node
         environment:
