@@ -1,12 +1,13 @@
 version: 2
 jobs:
   frontend-tests:
-    working_directory: ~/mern-starter
+    working_directory: ~/repo/frontend
     docker:
       - image: circleci/node:4.8.2
       - image: mongo:3.4.4
     steps:
-      - checkout
+      - checkout:
+          path: ~/repo
       - run:
           name: update-npm
           command: 'sudo npm install -g npm@latest'
