@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     parallelism: 1
-    working_directory: ~/repo/
+    working_directory: ~/repo/backend
     docker:
       - image: circleci/ruby:2.5-node
         environment:
@@ -19,7 +19,7 @@ jobs:
           POSTGRES_PASSWORD: ""
     steps:
       - checkout:
-          path: ~/repo/backend/
+          path: ~/repo
       
       - run:
           name: LS
