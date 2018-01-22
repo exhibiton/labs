@@ -3,8 +3,7 @@ jobs:
   frontend-tests:
     working_directory: ~/repo/frontend
     docker:
-      - image: circleci/node:4.8.2
-      - image: mongo:3.4.4
+      - image: circleci/node:9.4.0
     steps:
       - checkout:
           path: ~/repo
@@ -41,12 +40,12 @@ jobs:
           BUNDLE_RETRY: 3
           BUNDLE_PATH: vendor/bundle
           PGHOST: 127.0.0.1
-          PGUSER: circleci-demo-ruby
+          PGUSER: circleci
           RAILS_ENV: test
       - image: circleci/postgres:9.5-alpine
         environment:
-          POSTGRES_USER: circleci-demo-ruby
-          POSTGRES_DB: rails_blog
+          POSTGRES_USER: circleci
+          POSTGRES_DB: test
           POSTGRES_PASSWORD: ""
     steps:
       - checkout:
@@ -59,7 +58,7 @@ jobs:
       # Restore bundle cache
       - restore_cache:
           keys:
-            - rails-demo-bundle-v2-{{ checksum "Gemfile.lock" }}
+            - rails-labs-{{ checksum "Gemfile.lock" }}
 
       - run:
           name: Bundle Install
@@ -67,7 +66,7 @@ jobs:
 
       # Store bundle cache
       - save_cache:
-          key: rails-demo-bundle-v2-{{ checksum "Gemfile.lock" }}
+          key: rails-labs-{{ checksum "Gemfile.lock" }}
           paths:
             - vendor/bundle
 
