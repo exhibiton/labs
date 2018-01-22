@@ -13,8 +13,8 @@ jobs:
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
       - run:
-          name: install yarnman
-          command: yarn install
+          name: npminstall
+          command: npm install
       - save_cache:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
@@ -51,10 +51,6 @@ jobs:
       - checkout:
           path: ~/repo
       
-      - run:
-          name: LS
-          command: ls -a
-
       # Restore bundle cache
       - restore_cache:
           keys:
