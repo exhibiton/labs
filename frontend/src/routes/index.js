@@ -3,7 +3,7 @@ import CoreLayout from '../layouts/PageLayout/PageLayout'
 import { getToken } from '../api/utils/authorization-token'
 import Home from './Home'
 import SignIn from './SignIn'
-import {CompanyRoute} from './Company'
+import { CompanyRoute } from './Company'
 
 function redirectToLogin(nextState, replace) {
   if (!getToken() && nextState.location.pathname !== '/signup') {
