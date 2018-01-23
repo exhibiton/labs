@@ -1,5 +1,5 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+import propTypes from 'prop-types'
 
 export const PageLayout = ({ children }) => (
   <div className="children">
@@ -8,7 +8,7 @@ export const PageLayout = ({ children }) => (
 )
 
 PageLayout.propTypes = {
-  children: PropTypes.node,
+  children: propTypes.node,
 }
 
 export default PageLayout

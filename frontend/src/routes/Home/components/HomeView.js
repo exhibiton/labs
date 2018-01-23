@@ -1,14 +1,14 @@
 import React from 'react'
 import { browserHistory } from 'react-router'
-import PropTypes from 'prop-types'
+import propTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import './HomeViewStyle.scss'
 
 class HomeView extends React.Component {
   static propTypes = {
-    isLoading: PropTypes.bool,
-    currentUser: PropTypes.object.isRequired,
+    isLoading: propTypes.bool,
+    currentUser: propTypes.object.isRequired,
   }
 
   componentDidMount() {
@@ -23,8 +23,10 @@ class HomeView extends React.Component {
     const { isLoading, currentUser } = this.props
 
     if (isLoading) return false
-
-    if (currentUser) {
+    if (currentUser && currentUser.company === null) {
+      browserHistory.push('/company/new')
+    }
+    else if (currentUser) {
       browserHistory.push('/company')
     }
 

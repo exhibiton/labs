@@ -14,10 +14,11 @@ $color-map: (
   'grey-800': #474747,
   'grey-900': #212121,
   'green': #00d187,
-  'dark-blue': #444fff,
+  'dark-blue': #2A2C41,
   'mid-blue': #00a1ff,
   'light-blue': #00d7ff,
-
+  'dark-grey': #2a2c41,
+  'yellow': #ffed98,
 );
 
 @mixin color-classes($color-name, $color) {

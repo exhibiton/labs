@@ -1,7 +1,7 @@
 
 import React from 'react'
 import { connect } from 'react-redux'
-import PropTypes from 'prop-types'
+import propTypes from 'prop-types'
 
 import { login } from '../../../api/auth-api'
 import LabsLogo from '../assets/WeWorkLabsLogo.png'
@@ -11,7 +11,7 @@ import './SignInStyle.scss'
 
 class SignIn extends React.Component {
   static propTypes = {
-    login: PropTypes.func.isRequired,
+    login: propTypes.func.isRequired,
   }
 
   handleSignIn = data =>

@@ -1,15 +1,17 @@
-$spacing-tiny: 0.5rem;
-$spacing-small: 1rem;
-$spacing-medium: 2rem;
-$spacing-large: 4rem;
-$spacing-xlarge: 7rem;
+$spacing-tiny: 0.5rem; // 8px
+$spacing-small: 1rem; // 16px
+$spacing-medium: 2rem; // 32px
+$spacing-large: 5rem; // 64px
+$spacing-xlarge: 7rem; // 112px
+$spacing-xxlarge: 8.75rem; // 140
 
 $size-map: (
   't': $spacing-tiny,
   's': $spacing-small,
   'm': $spacing-medium,
   'l': $spacing-large,
-  'xl': $spacing-xlarge
+  'xl': $spacing-xlarge,
+  'xxl': $spacing-xxlarge
 );
 
 @mixin spacing-classes($type-abbr, $type, $size-abbr, $size, $breakpoint: '') {
