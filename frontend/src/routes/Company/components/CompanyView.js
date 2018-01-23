@@ -15,7 +15,6 @@ class CompanyView extends React.Component {
   }
 
   render() {
-    const companies = this.props.companies.companies ? this.props.companies.companies : []
     return(
       <div>
         <CompanyHeader
@@ -32,7 +31,7 @@ class CompanyView extends React.Component {
 
         />
         <CardList
-          companies={companies}
+          companies={this.props.companies}
         />
       </div>
     )
