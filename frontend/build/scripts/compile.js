@@ -6,7 +6,8 @@ const logger = require('../lib/logger')
 const webpackConfig = require('../webpack.config')
 const project = require('../../project.config')
 
-const runWebpackCompiler = (webpackConfig) =>
+/* eslint-disable */
+const runWebpackCompiler = webpackConfig =>
   new Promise((resolve, reject) => {
     webpack(webpackConfig).run((err, stats) => {
       if (err) {
@@ -15,23 +16,25 @@ const runWebpackCompiler = (webpackConfig) =>
       }
 
       const jsonStats = stats.toJson()
+
       if (jsonStats.errors.length > 0) {
         logger.error('Webpack compiler encountered errors.')
         logger.log(jsonStats.errors.join('\n'))
         return reject(new Error('Webpack compiler encountered errors'))
-      } else if (jsonStats.warnings.length > 0) {
+      }
+      else if (jsonStats.warnings.length > 0) {
         logger.warn('Webpack compiler encountered warnings.')
         logger.log(jsonStats.warnings.join('\n'))
       }
       resolve(stats)
     })
   })
-
+/* eslint-enable */
 const compile = () => Promise.resolve()
   .then(() => logger.info('Starting compiler...'))
-  .then(() => logger.info('Target application environment: ' + chalk.bold(project.env)))
+  .then(() => logger.info(`Target application environment: ${chalk.bold(project.env)}`))
   .then(() => runWebpackCompiler(webpackConfig))
-  .then((stats) => {
+  .then(stats => {
     logger.info(`Copying static assets from ./public to ./${project.outDir}.`)
     fs.copySync(
       path.resolve(project.basePath, 'public'),
@@ -39,7 +42,7 @@ const compile = () => Promise.resolve()
     )
     return stats
   })
-  .then((stats) => {
+  .then(stats => {
     if (project.verbose) {
       logger.log(stats.toString({
         colors: true,
@@ -48,6 +51,6 @@ const compile = () => Promise.resolve()
     }
     logger.success(`Compiler finished successfully! See ./${project.outDir}.`)
   })
-  .catch((err) => logger.error('Compiler encountered errors.', err))
+  .catch(err => logger.error('Compiler encountered errors.', err))
 
 compile()

@@ -1,0 +1,85 @@
+version: 2
+jobs:
+  frontend-tests:
+    working_directory: ~/repo/frontend
+    docker:
+      - image: circleci/node:9.4.0
+    steps:
+      - checkout:
+          path: ~/repo
+      - run:
+          name: update-npm
+          command: 'sudo npm install -g npm@latest'
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: install-npm-wee
+          command: yarn install
+      - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
+      - run:
+          name: test
+          command: yarn test
+      - run:
+          name: lint
+          command: yarn lint
+      - store_artifacts:
+          path: test-results.xml
+          prefix: tests
+      - store_test_results:
+          path: test-results.xml
+  backend-tests:
+    parallelism: 1
+    working_directory: ~/repo/backend
+    docker:
+      - image: circleci/ruby:2.5-node
+        environment:
+          BUNDLE_JOBS: 3
+          BUNDLE_RETRY: 3
+          BUNDLE_PATH: vendor/bundle
+          PGHOST: 127.0.0.1
+          PGUSER: circleci
+          RAILS_ENV: test
+      - image: circleci/postgres:9.5-alpine
+        environment:
+          POSTGRES_USER: circleci
+          POSTGRES_DB: test
+          POSTGRES_PASSWORD: ""
+    steps:
+      - checkout:
+          path: ~/repo
+      
+      # Restore bundle cache
+      - restore_cache:
+          keys:
+            - rails-labs-{{ checksum "Gemfile.lock" }}
+
+      - run:
+          name: Bundle Install
+          command: bundle check || bundle install
+
+      # Store bundle cache
+      - save_cache:
+          key: rails-labs-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
+
+      - run:
+          name: Database setup
+          command: bin/rails db:schema:load --trace
+
+      # Run rspec in parallel
+      - type: shell
+        command: |
+          bundle exec rspec
+      # Save test results for timing analysis
+      - store_test_results:
+          path: test_results
+workflows:
+  version: 2
+  test_everything:
+    jobs:
+      - frontend-tests
+      - backend-tests

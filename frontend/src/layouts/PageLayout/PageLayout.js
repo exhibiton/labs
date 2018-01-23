@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 export const PageLayout = ({ children }) => (
-  <div className='children'>
+  <div className="children">
     {children}
   </div>
 )

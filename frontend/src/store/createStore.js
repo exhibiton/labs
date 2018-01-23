@@ -16,11 +16,13 @@ const createStore = (initialState = {}) => {
   const enhancers = []
   let composeEnhancers = compose
 
+  /* eslint-disable */
   if (__DEV__) {
     if (typeof window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ === 'function') {
       composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
     }
   }
+  /* eslint-enable */
 
   // ======================================================
   // Store Instantiation and HMR Setup
@@ -33,6 +35,7 @@ const createStore = (initialState = {}) => {
       ...enhancers
     )
   )
+
   store.asyncReducers = {}
 
   // To unsubscribe, invoke `store.unsubscribeHistory()` anytime
@@ -41,6 +44,7 @@ const createStore = (initialState = {}) => {
   if (module.hot) {
     module.hot.accept('./reducers', () => {
       const reducers = require('./reducers').default
+
       store.replaceReducer(reducers(store.asyncReducers))
     })
   }

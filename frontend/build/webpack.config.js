@@ -5,11 +5,13 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const project = require('../project.config')
 
 const inProject = path.resolve.bind(path, project.basePath)
-const inProjectSrc = (file) => inProject(project.srcDir, file)
+const inProjectSrc = file => inProject(project.srcDir, file)
 
+/* eslint-disable */
 const __DEV__ = project.env === 'development'
 const __TEST__ = project.env === 'test'
 const __PROD__ = project.env === 'production'
+/* eslint-enable */
 
 const config = {
   entry: {
@@ -43,7 +45,7 @@ const config = {
       __DEV__,
       __TEST__,
       __PROD__,
-    }, project.globals))
+    }, project.globals)),
   ],
 }
 
@@ -51,7 +53,7 @@ const config = {
 // ------------------------------------
 config.module.rules.push({
   test: /\.(js|jsx)$/,
-  exclude: /node_modules/,
+  exclude: /node_modules\/(?!(chai-as-promised)\/).*/,
   use: [{
     loader: 'babel-loader',
     query: {
@@ -70,7 +72,7 @@ config.module.rules.push({
         [
           'babel-plugin-transform-object-rest-spread',
           {
-            useBuiltIns: true // we polyfill Object.assign in src/normalize.js
+            useBuiltIns: true, // we polyfill Object.assign in src/normalize.js
           },
         ],
       ],
@@ -83,7 +85,7 @@ config.module.rules.push({
             modules: false,
           },
         }],
-      ]
+      ],
     },
   }],
 })
@@ -112,7 +114,7 @@ config.module.rules.push({
               browsers: ['last 2 versions'],
             },
             discardComments: {
-              removeAll : true,
+              removeAll: true,
             },
             discardUnused: false,
             mergeIdents: false,
@@ -130,19 +132,19 @@ config.module.rules.push({
             inProjectSrc('styles'),
           ],
         },
-      }
+      },
     ],
-  })
+  }),
 })
 config.plugins.push(extractStyles)
 
 // Images
 // ------------------------------------
 config.module.rules.push({
-  test    : /\.(png|jpg|gif)$/,
-  loader  : 'url-loader',
-  options : {
-    limit : 8192,
+  test: /\.(png|jpg|gif)$/,
+  loader: 'url-loader',
+  options: {
+    limit: 8192,
   },
 })
 
@@ -155,16 +157,16 @@ config.module.rules.push({
   ['ttf', 'application/octet-stream'],
   ['eot', 'application/vnd.ms-fontobject'],
   ['svg', 'image/svg+xml'],
-].forEach((font) => {
+].forEach(font => {
   const extension = font[0]
   const mimetype = font[1]
 
   config.module.rules.push({
-    test    : new RegExp(`\\.${extension}$`),
-    loader  : 'url-loader',
-    options : {
-      name  : 'fonts/[name].[ext]',
-      limit : 10000,
+    test: new RegExp(`\\.${extension}$`),
+    loader: 'url-loader',
+    options: {
+      name: 'fonts/[name].[ext]',
+      limit: 10000,
       mimetype,
     },
   })
@@ -213,7 +215,7 @@ if (__PROD__) {
       debug: false,
     }),
     new webpack.optimize.UglifyJsPlugin({
-      sourceMap: !!config.devtool,
+      sourceMap: Boolean(config.devtool),
       comments: false,
       compress: {
         warnings: false,
