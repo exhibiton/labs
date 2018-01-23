@@ -38,6 +38,11 @@
 
 /* back, initially hidden pane */
 .back {
-    background-color:#41f4d0;
     transform: rotateY(180deg);
+}
+
+.card-logo {
+    max-height:13rem;
+    max-width:13rem;
+
 }

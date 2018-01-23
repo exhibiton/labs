@@ -9,9 +9,10 @@ export const CardList = props => {
       {
         companies.map((company, i) =>
           <Card
-            name="Tesla"
-            logo="https://simpleicons.org/icons/tesla.svg"
-            description="makes electric cars"
+            name={company.name}
+            logo={company.logo}
+            description={company.description}
+            id={company.id}
             key={i}
           />
         )
