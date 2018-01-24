@@ -34,7 +34,7 @@ class NewCompany extends React.Component {
     
     console.log(formData)
     
-    return createCompany(formData)
+    return createCompany({ company: formData})
   }
   
   render() {
