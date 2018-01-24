@@ -1,5 +1,4 @@
 import React from 'react'
-import propTypes from 'prop-types'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 
@@ -7,10 +6,6 @@ import CompanyCreateTabLinks from '../../../../../components/CompanyCreateTabLin
 import './AddFoundersStyles.scss'
 
 class AddFounders extends React.Component {
-  static propTypes = {
-
-  }
-
   render() {
     return (
       <div className="">

@@ -4,6 +4,7 @@ export const LOGIN_LOADING = 'LOGIN_LOADING'
 export const SIGN_UP = 'SIGN_UP'
 export const LOGOUT = 'LOGOUT'
 export const FORCE_SET_AUTH_TOKEN = 'FORCE_SET_AUTH_TOKEN'
+export const UPDATE_USER = 'UPDATE_USER'
 
 export const loginSuccess = promise => ({
   type: LOGIN_SUCCESS,
@@ -24,8 +25,13 @@ export const signUp = promise => ({
   payload: promise,
 })
 
-export const logout = () => ({
+export const onLogout = () => ({
   type: LOGOUT,
+})
+
+export const updateUser = promise => ({
+  type: UPDATE_USER,
+  payload: promise,
 })
 
 export const forceSetAuthToken = authToken => ({

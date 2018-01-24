@@ -1,0 +1,26 @@
+.input-field {
+  width: 22.5rem;
+  height: 3.125rem;
+  border: solid 1px gray;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.input-textarea {
+  width: 22.5rem;
+  height: 12rem;
+  border: solid 1px gray;
+  line-height: 1.25rem;
+  padding: 0.5rem;
+}
+
+.dropzone {
+  width: 22.5rem;
+}
+
+.btn-submit {
+  width: 10rem;
+  height: 3.125rem;
+  background-color: rgba(28, 31, 43, 0.5);
+  border-radius: 2px
+}
