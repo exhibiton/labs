@@ -16,12 +16,12 @@ import {
 
 export const createCompany = data => dispatch => {
   dispatch(createCompanyLoading())
-  const company = data.company
 
   return axios({
     method: 'POST',
     url: `${apiEndpoints.api}/companies`,
-    params: company,
+    headers: { 'content-type': 'multipart/form-data' },
+    data,
   }).then(res => {
     const token = res.data.auth_token
 

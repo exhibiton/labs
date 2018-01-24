@@ -2,15 +2,15 @@ import React from 'react'
 import { Field, FormSection, reduxForm } from 'redux-form'
 import PropTypes from 'prop-types'
 import Select from 'react-select';
-
+import Dropzone from 'react-dropzone'
 import './styles/FormStyles.scss'
-import dropzonePlaceholder from '../../../../../assets/dropzonePlaceholder.png'
 
 const CreateCompanyForm = props => {
   const {
     error,
     handleSubmit,
     submitting,
+    change,
   } = props
 
   // placeholders until backend is done
@@ -37,7 +37,7 @@ const CreateCompanyForm = props => {
                 component="input"
                 className="input-field t4"
                 name="name"
-                placeholder="  WeWork"
+                placeholder="WeWork"
                 type="text" />
             </div>
             <div className="flex-col flex-col-mobile">
@@ -46,7 +46,7 @@ const CreateCompanyForm = props => {
                 component="input"
                 className="input-field t4"
                 name="website"
-                placeholder="  www.wework.com"
+                placeholder="www.wework.com"
                 type="text" />
             </div>
             <div className="flex-col flex-col-mobile">
@@ -55,13 +55,33 @@ const CreateCompanyForm = props => {
                 component="textarea"
                 className="input-textarea t4"
                 name="description"
-                placeholder="  Greatest company on Earth..."
+                placeholder="Greatest company on Earth..."
                 type="textarea" />
             </div>
           </div>
           <div className="flex-col mhl">
             <div>
-              <img src={ dropzonePlaceholder } className="dropzone" />
+              <Dropzone
+                multiple={ false }
+                onDrop={ (filesToUpload, _e) =>
+                  change('company.logo', filesToUpload[0]) }
+                className="drag-and-drop-container flex-row">
+                <div className="drag-and-drop-container__image">
+                  <Field
+                    name="logo"
+                    component={ ({ input }) => {
+                      if (input.value) {
+                        return <img src={input.value.preview} alt="Logo preview" />
+                      }
+                      
+                      return <div>Your logo</div>
+                    } } />
+                </div>
+                <div className="drag-and-drop-container__info">
+                  <div className="drag-and-drop-container__info-title">Drag & Drop</div>
+                  <div className="drag-and-drop-container__info-description">to change logo, or <span>browse</span></div>
+                </div>
+              </Dropzone>
             </div>
             <div>
               <label className="t3 color-dark-grey font-semibold">Categories</label>
@@ -95,6 +115,7 @@ const CreateCompanyForm = props => {
 }
 
 CreateCompanyForm.propTypes = {
+  change: PropTypes.func.isRequired,
   error: PropTypes.string,
   submitting: PropTypes.bool.isRequired,
   handleSubmit: PropTypes.func.isRequired,

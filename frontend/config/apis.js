@@ -4,14 +4,14 @@ const env = process.env.NODE_ENV || 'development'
 
 const apiEndpoints = {
   development: {
-    api: 'http://localhost:3030/',
+    api: 'http://localhost:3030',
     assets: 'http://localhost:3030',
   },
   test: {
-    api: 'http://localhost:3030/',
+    api: 'http://localhost:3030',
   },
   production: {
-    api: 'https://api.notarea51.com/',
+    api: 'https://api.notarea51.com',
     assets: 'https://api.notarea51.com',
   },
 }

@@ -1,10 +1,9 @@
-import React from 'react';
+import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-
 import { getCompanies } from '../modules/companies'
-import CompanyHeader from './CompanyHeader';
-import CardList from './CardList';
+import CompanyHeader from './CompanyHeader'
+import CardList from './CardList'
 
 class CompanyView extends React.Component {
   static propTypes = {

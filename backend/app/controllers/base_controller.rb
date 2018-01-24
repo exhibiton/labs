@@ -46,9 +46,6 @@ class BaseController < ApplicationController
   def raise_auth_error(title)
     # filter out errors without authorization at all
     if request.headers['Authorization'].present?
-      Rollbar.error("Authentication error: #{title}",
-                    params: params,
-                    token: request.headers['Authorization'])
     end
 
     raise NotAuthenticatedError
