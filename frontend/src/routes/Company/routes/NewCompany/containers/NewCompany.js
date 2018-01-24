@@ -12,27 +12,26 @@ import './NewCompanyStyles.scss'
 class NewCompany extends React.Component {
   handleCompanyCreate = data => {
     const { createCompany } = this.props
-
-    // photos is a nested attribute for this action
-    const listOfNestedAttributes = ['logo']
-    // venue in props will be nil for new action
-    const preparedData = diffForNestedAttributes({}, data, listOfNestedAttributes)
-    console.log('diffForNestedAttributes', { data, listOfNestedAttributes })
+  
+    console.log(data.company)
+    
     // when we receive data from the server image would be a URL pointing to the image;
     // when we send data to server image should be a File instance; therefore, do not send
     // those one which are string (URLs), because there's no sense to send them back
     // (except if they are marked for destroy)
-    _.each(preparedData.photos_attributes, photo => {
-      if (_.isString(photo.image)) {
-        delete photo.image
-      }
-    })
+//    if (_.isString(data.logo)) {
+//      delete data.logo
+//    }
     
     // sending files - have to send FormData (multipart), not the plain JSON object
-    console.log({ preparedData })
-    const formData = hashToFormData(preparedData, 'company')
-    
-    console.log(formData)
+    const formData = new FormData()
+    _.each(data.company, (v, k) => {
+      formData.append(k, v)
+    })
+
+    for (var pair of formData.entries()) {
+      console.log(pair[0]+ ', ' + pair[1])
+    }
     
     return createCompany({ company: formData})
   }

@@ -67,14 +67,14 @@ const CreateCompanyForm = props => {
               <Dropzone
                 multiple={ false }
                 onDrop={ (filesToUpload, _e) =>
-                  change('company.logo', { image: filesToUpload[0] }) }
+                  change('company.logo', filesToUpload[0]) }
                 className="drag-and-drop-container flex-row">
                 <div className="drag-and-drop-container__image">
                   <Field
                     name="logo"
                     component={ ({ input }) => {
                       if (input.value) {
-                        return <img src={input.value.image.preview} alt="Logo preview" />
+                        return <img src={input.value.preview} alt="Logo preview" />
                       }
                       
                       return <div>Your logo</div>
