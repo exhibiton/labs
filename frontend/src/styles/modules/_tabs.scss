@@ -1,0 +1,32 @@
+.nav-tabs-wrapper {
+    margin: 0 0 .875rem;
+}
+  
+.nav-tabs {
+  border: 0;
+  white-space: nowrap;
+  overflow-x: auto;
+
+  .nav-item {
+    text-transform: uppercase;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    display: inline-block;
+    float: none;
+
+    &:last-child {
+      margin: 0;
+    }
+  }
+
+  .nav-link {
+    font-size: 1.5rem;
+    border: 0;
+    border-bottom: 3px solid transparent;
+
+    &.active,
+    &.active:focus {
+      border-bottom-color: #1c1f2b;
+    }
+  }
+}

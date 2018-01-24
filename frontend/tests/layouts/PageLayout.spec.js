@@ -1,19 +1,19 @@
 import React from 'react'
-import PageLayout from 'layouts/PageLayout/PageLayout'
+import AuthLayout from 'layouts/PageLayout/AuthLayout'
 import { shallow } from 'enzyme'
 
-describe('(Layout) PageLayout', () => {
+describe('(Layout) AuthLayout', () => {
   it('renders as a <div>', () => {
-    shallow(<PageLayout />).should.have.tagName('div')
+    shallow(<AuthLayout />).should.have.tagName('div')
   })
 
   it('renders its children inside of the viewport', () => {
     const Child = () => <h2>child</h2>
 
     shallow(
-      <PageLayout>
+      <AuthLayout>
         <Child />
-      </PageLayout>
+      </AuthLayout>
     )
       .find('.children')
       .should.contain(<Child />)
