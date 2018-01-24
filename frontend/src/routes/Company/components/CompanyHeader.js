@@ -1,5 +1,6 @@
 import React from 'react'
 import Select from 'react-select'
+import PropTypes from 'prop-types'
 
 export const CompanyHeader = props => {
   const { handleSelectChange, value, options } = props
@@ -24,6 +25,12 @@ export const CompanyHeader = props => {
       </div>
     </div>
   )
+}
+
+CompanyHeader.propTypes = {
+  value: PropTypes.arrayOf(PropTypes.string).isRequired,
+  options: PropTypes.arrayOf(PropTypes.object).isRequired,
+  handleSelectChange: PropTypes.func.isRequired,
 }
 
 export default CompanyHeader

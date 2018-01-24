@@ -10,7 +10,7 @@ import './NewCompanyStyles.scss'
 class NewCompany extends React.Component {
   handleCompanyCreate = ({ company }) => {
     const { createCompany } = this.props
-    
+
     // sending files - have to send FormData (multipart), not the plain JSON object
     const formData = new FormData()
 
@@ -18,7 +18,7 @@ class NewCompany extends React.Component {
 
     return createCompany(formData)
   }
-  
+
   render() {
     const {
       error,
