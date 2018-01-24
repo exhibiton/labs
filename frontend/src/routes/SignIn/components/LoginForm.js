@@ -1,8 +1,9 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
+import PropTypes from 'prop-types'
 
-const LoginForm = props => {
-  const { error, handleSubmit, submitting } = props;
+const LoginForm = properties => {
+  const { error, handleSubmit, submitting } = properties;
 
   return (
     <form className="mts mbm" onSubmit={ handleSubmit }>
@@ -28,6 +29,12 @@ const LoginForm = props => {
       </div>
     </form>
   )
+}
+
+LoginForm.PropTypes = {
+  error: PropTypes.string,
+  handleSubmit: PropTypes.func.isRequired,
+  submitting: PropTypes.bool,
 }
 
 export default reduxForm({

@@ -9,6 +9,7 @@ describe('(Layout) PageLayout', () => {
 
   it('renders its children inside of the viewport', () => {
     const Child = () => <h2>child</h2>
+
     shallow(
       <PageLayout>
         <Child />
