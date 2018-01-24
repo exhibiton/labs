@@ -90,13 +90,13 @@ RSpec.describe 'Companies API', type: :request do
       before { post '/companies', params: valid_attributes_with_user, headers: headers }
 
       it 'creates a company' do
-        expect(json['name']).to eq('WeWork Best')
-        expect(json['users'].size).to eq 1
-        expect(Company.find(json['id']).logo.file?).to be_truthy
+        expect(Company.find(json['user']['company_id']).name).to eq('WeWork Best')
+        expect((json['user']).present?).to be_truthy
+        expect(Company.find(json['user']['company_id']).logo.file?).to be_truthy
       end
 
-      it 'returns status code 201' do
-        expect(response).to have_http_status(201)
+      it 'returns status code 200' do
+        expect(response).to have_http_status(200)
       end
 
     end
@@ -105,12 +105,12 @@ RSpec.describe 'Companies API', type: :request do
       before { post '/companies', params: valid_attributes, headers: headers }
 
       it 'creates a company' do
-        expect(json['name']).to eq('WeWork Best')
-        expect(Company.find(json['id']).logo.file?).to be_truthy
+        expect(Company.find(json['user']['company_id']).name).to eq('WeWork Best')
+        expect(Company.find(json['user']['company_id']).logo.file?).to be_truthy
       end
 
-      it 'returns status code 201' do
-        expect(response).to have_http_status(201)
+      it 'returns status code 200' do
+        expect(response).to have_http_status(200)
       end
     end
 

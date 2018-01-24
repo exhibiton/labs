@@ -1,5 +1,6 @@
 // We only need to import the modules necessary for initial render
 import CoreLayout from '../layouts/PageLayout/PageLayout'
+import AuthLayout from '../layouts/PageLayout/AuthLayout'
 import { getToken } from '../api/utils/authorization-token'
 import Home from './Home'
 import SignIn from './SignIn'
@@ -34,7 +35,7 @@ export const createRoutes = store => [{
 }, {
   onEnter: redirectToHome,
   path: '/auth',
-  component: CoreLayout,
+  component: AuthLayout,
   indexRoute: SignIn(store),
 }]
 

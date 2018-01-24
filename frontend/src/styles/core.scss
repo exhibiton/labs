@@ -1,5 +1,6 @@
 // Import vendor libraries from node_modules here
 @import '~bootstrap/dist/css/bootstrap';
+@import '~react-select/dist/react-select.css';
 
 // Base classes are fundamental building blocks based on the site design
 @import 'base/reset';
@@ -13,6 +14,7 @@
 @import 'ui_components/buttons';
 
 // Components can rely on UI components, base, and vendor css
+@import 'modules/tabs';
 
 // Default page settings
 html {

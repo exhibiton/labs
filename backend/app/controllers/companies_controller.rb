@@ -13,7 +13,7 @@ class CompaniesController < BaseController
   def create
     company = Company.create!(company_params)
     company.users << @user if @user
-    json_response(company, :created)
+    render json: { user: current_user, message: "Company Created" }.merge(current_user.authentication_payload)
   end
 
 
@@ -49,7 +49,7 @@ class CompaniesController < BaseController
   private
 
   def company_params
-    params.permit(:name, :description, :github, :facebook, :linkedin, :twitter, :logo)
+    params.permit(:name, :description, :github, :facebook, :website, :linkedin, :twitter, :logo)
   end
 
   def set_company
