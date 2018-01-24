@@ -16,19 +16,12 @@ import {
 
 export const createCompany = data => dispatch => {
   dispatch(createCompanyLoading())
-  const company = data.company
-  
-  console.log({ company })
-  
-  for (var pair of company.entries()) {
-    console.log(pair[0]+ ', ' + pair[1])
-  }
-  
+
   return axios({
     method: 'POST',
     url: `${apiEndpoints.api}/companies`,
     headers: { 'content-type': 'multipart/form-data' },
-    data: company,
+    data,
   }).then(res => {
     const token = res.data.auth_token
 

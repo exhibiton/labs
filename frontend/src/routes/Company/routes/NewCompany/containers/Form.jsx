@@ -2,7 +2,6 @@ import React from 'react'
 import { Field, FormSection, reduxForm } from 'redux-form'
 import PropTypes from 'prop-types'
 import Select from 'react-select';
-import dropzonePlaceholder from '../../../../../assets/dropzonePlaceholder.png'
 import Dropzone from 'react-dropzone'
 import './styles/FormStyles.scss'
 
@@ -14,8 +13,6 @@ const CreateCompanyForm = props => {
     change,
   } = props
 
-  console.log({props})
-  
   // placeholders until backend is done
   const categories = [
     { label: 'Marketplace', value: 'Marketplace' },
