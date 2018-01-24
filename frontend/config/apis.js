@@ -11,8 +11,8 @@ const apiEndpoints = {
     api: 'http://localhost:3030/',
   },
   production: {
-    api: 'http://localhost:3030/',
-    assets: 'http://localhost:3030',
+    api: 'https://api.notarea51.com/',
+    assets: 'https://api.notarea51.com',
   },
 }
 
