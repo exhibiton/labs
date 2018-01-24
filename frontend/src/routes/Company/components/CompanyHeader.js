@@ -1,17 +1,15 @@
 import React from 'react'
-import Select from 'react-select';
-import './ReactSelect.scss';
+import Select from 'react-select'
 
-
-export const CompanyHeader = properties => {
-  const { handleSelectChange, value, options } = properties;
+export const CompanyHeader = props => {
+  const { handleSelectChange, value, options } = props
 
   return (
     <div className="">
       <div className="flex-row flex-wrap flex-hb flex-vb mal phl">
         <h2>Companies</h2>
         <div className="flex-row flex-vc flex-wrap">
-          <h4 className="mhm"> TECHNOLOGIES: </h4>
+          <h4 className="mhm">TECHNOLOGIES:</h4>
           <div className="select-wrapper">
             <Select
               multi={ true }
