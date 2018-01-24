@@ -2,8 +2,8 @@ import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 import propTypes from 'prop-types'
 
-const LoginForm = properties => {
-  const { error, handleSubmit, submitting } = properties;
+const LoginForm = props => {
+  const { error, handleSubmit, submitting } = props;
 
   return (
     <form className="mts mbm" onSubmit={ handleSubmit }>
