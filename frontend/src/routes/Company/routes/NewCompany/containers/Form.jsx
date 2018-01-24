@@ -115,6 +115,7 @@ const CreateCompanyForm = props => {
 }
 
 CreateCompanyForm.propTypes = {
+  change: PropTypes.func.isRequired,
   error: PropTypes.string,
   submitting: PropTypes.bool.isRequired,
   handleSubmit: PropTypes.func.isRequired,

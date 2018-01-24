@@ -1,6 +1,7 @@
 import React from 'react'
 import Select from 'react-select'
 import PropTypes from 'prop-types'
+import './Styles/CompanyHeaderStyles.scss'
 
 export const CompanyHeader = props => {
   const { handleSelectChange, value, options } = props
@@ -11,8 +12,9 @@ export const CompanyHeader = props => {
         <h2>Companies</h2>
         <div className="flex-row flex-vc flex-wrap">
           <h4 className="mhm">TECHNOLOGIES:</h4>
-          <div className="select-wrapper">
+          <div className="">
             <Select
+              className="select-edits t4"
               multi={ true }
               closeOnSelect={ false }
               onChange={ handleSelectChange }
