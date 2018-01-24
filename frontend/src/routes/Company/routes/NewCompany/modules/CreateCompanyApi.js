@@ -28,7 +28,7 @@ export const createCompany = data => dispatch => {
     method: 'POST',
     url: `${apiEndpoints.api}/companies`,
     headers: { 'content-type': 'multipart/form-data' },
-    params: company,
+    data: company,
   }).then(res => {
     const token = res.data.auth_token
 
