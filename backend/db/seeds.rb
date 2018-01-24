@@ -5,9 +5,8 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-
-Company.destroy_all
 User.destroy_all
+Company.destroy_all
 company1 = Company.create(name: "Best Company1", description:"greatest company in the universe")
 company2 = Company.create(name: "Best Company2", description:"greatest company in the universe")
 company3 = Company.create(name: "Best Company3", description:"greatest company in the universe")
