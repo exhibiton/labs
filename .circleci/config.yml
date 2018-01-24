@@ -109,3 +109,4 @@ workflows:
       - frontend-tests
       - backend-tests
       - deploy-frontend
+      
