@@ -39,6 +39,7 @@ class CompaniesController < BaseController
   # DELETE /companies/:id
   def destroy
     if @company.users.include?(@user)
+      @user.update_attribute :company_id, nil
       @company.destroy
       head :no_content
     else

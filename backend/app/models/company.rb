@@ -2,6 +2,7 @@ class Company < ApplicationRecord
   # model association
   has_many :users
   has_and_belongs_to_many :tools
+  has_and_belongs_to_many :categories
 
   # validations
   validates_presence_of :name, :description

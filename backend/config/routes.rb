@@ -6,6 +6,12 @@ Rails.application.routes.draw do
       get :select_options
     end
   end
+  
+  resources :categories, only: [:index, :create] do
+    collection do
+      get :select_options
+    end
+  end
 
   resources :companies
   resources :tools, only: [:index, :create] do

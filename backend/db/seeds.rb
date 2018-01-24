@@ -7,6 +7,8 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 User.destroy_all
 Company.destroy_all
+Tool.destroy_all
+Category.destroy_all
 company1 = Company.create(name: "Best Company1", description:"greatest company in the universe")
 company2 = Company.create(name: "Best Company2", description:"greatest company in the universe")
 company3 = Company.create(name: "Best Company3", description:"greatest company in the universe")
@@ -47,6 +49,12 @@ tool3.save
 tool4.save
 tool5.save
 
+category1 = Category.create(name:"SaaS")
+category2 = Category.create(name:"Marketplace")
+category3 = Category.create(name:"EdTech")
+category4 = Category.create(name:"FinTech")
+category5 = Category.create(name:"Blockchain")
+
 user1.update_attribute :company_id, company1.id
 user2.update_attribute :company_id, company2.id
 user3.update_attribute :company_id, company3.id
@@ -58,3 +66,9 @@ tool2.update_attribute :company_ids, [company1.id, company2.id, company3.id, com
 tool3.update_attribute :company_ids, [company1.id, company2.id, company3.id, company4.id, company5.id]
 tool4.update_attribute :company_ids, [company1.id, company2.id, company3.id, company4.id, company5.id]
 tool5.update_attribute :company_ids, [company1.id, company2.id, company3.id, company4.id, company5.id]
+
+category1.update_attribute :company_ids, [company1.id, company2.id, company3.id, company4.id, company5.id]
+category2.update_attribute :company_ids, [company1.id, company2.id, company3.id, company4.id, company5.id]
+category3.update_attribute :company_ids, [company1.id, company2.id, company3.id, company4.id, company5.id]
+category4.update_attribute :company_ids, [company1.id, company2.id, company3.id, company4.id, company5.id]
+category5.update_attribute :company_ids, [company1.id, company2.id, company3.id, company4.id, company5.id]
