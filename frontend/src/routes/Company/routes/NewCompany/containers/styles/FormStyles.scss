@@ -24,3 +24,48 @@
   background-color: rgba(28, 31, 43, 0.5);
   border-radius: 2px
 }
+
+.drag-and-drop-container {
+  background: #f8f8f9;
+  padding: 3rem 2rem;
+  font-size: .85rem;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  color: #000;
+
+  .drag-and-drop-container__image {
+    width: 6rem;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #afafb4;
+    font-size: .5rem;
+
+    img {
+      max-width: 100%;
+      max-height: 5.625rem;
+    }
+  }
+
+  .drag-and-drop-container__info {
+    border: 1px dashed #efefef;
+    border-left: 0;
+    background: #fff;
+    padding: 1.5rem 1rem;
+    flex: 1;
+
+    .drag-and-drop-container__info-title {
+      font-weight: 600;
+      margin-bottom: .5rem;
+    }
+    
+    .drag-and-drop-container__info-description {
+      color: #afafb4;
+
+      span {
+        text-decoration: underline;
+      }
+    }
+  }
+}

@@ -1,16 +1,23 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import _ from 'lodash'
-import PropTypes from 'prop-types'
-
 import { createCompany } from '../modules/CreateCompanyApi'
 import CreateCompanyForm from './Form'
 import CompanyCreateTabLinks from '../../../../../components/CompanyCreateTabLinks'
 import './NewCompanyStyles.scss'
 
 class NewCompany extends React.Component {
-  handleCompanyCreate = data =>
-    this.props.createCompany(data)
+  handleCompanyCreate = ({ company }) => {
+    const { createCompany } = this.props
+
+    // sending files - have to send FormData (multipart), not the plain JSON object
+    const formData = new FormData()
+
+    _.each(company, (v, k) => formData.append(k, v))
+
+    return createCompany(formData)
+  }
 
   render() {
     const {
@@ -60,6 +67,5 @@ NewCompany.propTypes = {
   isLoading: PropTypes.bool.isRequired,
   createCompany: PropTypes.func.isRequired,
 }
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewCompany)

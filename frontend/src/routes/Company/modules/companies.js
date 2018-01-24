@@ -33,7 +33,7 @@ export function getCompanies() {
     dispatch(getCompaniesLoading());
     axios({
       method: 'GET',
-      url: `${apiEndpoints.api}companies`,
+      url: `${apiEndpoints.api}/companies`,
       headers: {
         Authorization: `Bearer ${token}`,
       },
