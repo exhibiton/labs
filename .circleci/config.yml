@@ -1,5 +1,30 @@
 version: 2
 jobs:
+  deploy-frontend:
+    branches:
+    only:
+      - master
+    working_directory: ~/repo/frontend
+    docker:
+      - image: circleci/node:9.4.0
+    steps:
+      - checkout:
+          path: ~/repo
+      - run:
+          name: Install AWS CLI
+          command: 'pip install awscli==1.11.83'
+      - run:
+          name: NPM Build
+          command: yarn build
+      - run:
+          name: Upload to S3
+          command: aws s3 sync dist s3://notarea51.com
+      - run:
+          name: Set Cloudfront Preview
+          command: aws configure set preview.cloudfront true
+      - run:
+          name: Create Invalidation to Cloudfront Distribution
+          command: aws cloudfront create-invalidation --distribution-id E21EXH9T28JCUO --paths /*
   frontend-tests:
     working_directory: ~/repo/frontend
     docker:
@@ -34,7 +59,7 @@ jobs:
     parallelism: 1
     working_directory: ~/repo/backend
     docker:
-      - image: circleci/ruby:2.5-node
+      - image: circleci/ruby:2.4-node
         environment:
           BUNDLE_JOBS: 3
           BUNDLE_RETRY: 3
@@ -83,3 +108,4 @@ workflows:
     jobs:
       - frontend-tests
       - backend-tests
+      - deploy-frontend

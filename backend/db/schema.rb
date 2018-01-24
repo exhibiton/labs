@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180114220604) do
+ActiveRecord::Schema.define(version: 20180123182651) do
 
   create_table "companies", force: :cascade do |t|
     t.string "name"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20180114220604) do
     t.string "logo_content_type"
     t.integer "logo_file_size"
     t.datetime "logo_updated_at"
+    t.string "website"
   end
 
   create_table "companies_tools", id: false, force: :cascade do |t|
