@@ -65,6 +65,9 @@ jobs:
           key: rails-labs-{{ checksum "Gemfile.lock" }}
           paths:
             - vendor/bundle
+      - run:
+          name: Database create
+          command: bin/rails db:create
 
       - run:
           name: Database setup

@@ -35,8 +35,26 @@ user3.save
 user4.save
 user5.save
 
+tool1 = Tool.create(name: "JavaScript")
+tool2 = Tool.create(name: "React")
+tool3 = Tool.create(name: "React Native")
+tool4 = Tool.create(name: "Ember")
+tool5 = Tool.create(name: "Vue")
+
+tool1.save
+tool2.save
+tool3.save
+tool4.save
+tool5.save
+
 user1.update_attribute :company_id, company1.id
 user2.update_attribute :company_id, company2.id
 user3.update_attribute :company_id, company3.id
 user4.update_attribute :company_id, company4.id
 user5.update_attribute :company_id, company5.id
+
+tool1.update_attribute :company_ids, [company1.id, company2.id, company3.id, company4.id, company5.id]
+tool2.update_attribute :company_ids, [company1.id, company2.id, company3.id, company4.id, company5.id]
+tool3.update_attribute :company_ids, [company1.id, company2.id, company3.id, company4.id, company5.id]
+tool4.update_attribute :company_ids, [company1.id, company2.id, company3.id, company4.id, company5.id]
+tool5.update_attribute :company_ids, [company1.id, company2.id, company3.id, company4.id, company5.id]
