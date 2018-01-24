@@ -24,7 +24,7 @@ test:
   <<: *default
   database: labs_test
   encoding: unicode
-  username: postgres
+  username: <%= ENV.fetch('POSTGRES_USER') { 'postgres' } %>
   pool: 5
 production:
   adapter: postgresql
