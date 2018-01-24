@@ -18,6 +18,8 @@ export const createCompany = data => dispatch => {
   dispatch(createCompanyLoading())
   const company = data.company
 
+  console.log({ company })
+  
   return axios({
     method: 'POST',
     url: `${apiEndpoints.api}/companies`,
