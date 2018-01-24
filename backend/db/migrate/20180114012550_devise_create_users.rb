@@ -15,7 +15,6 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.1]
       t.string :facebook
       t.string :linkedin
       t.string :twitter
-      t.references :company, foreign_key: true
 
       ## Recoverable
       t.string   :reset_password_token
