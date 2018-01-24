@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 
 import { getCompany } from '../modules/GetCompanyApi'
 import UserList from './UserList'
+import ToolList from './ToolList'
 
 
 class CompanyDetails extends React.Component {
@@ -15,7 +16,7 @@ class CompanyDetails extends React.Component {
 
     return (
       <div className="">
-        <div className="mhxxl flex-row flex-hc ">
+        <div className="mhxxl phxxl  flex-row flex-hc">
           <div className="mvl flex-col flex-vc ">
             <div className="logo flex-row flex-hc">
               <img src={ company.logo } />
@@ -23,6 +24,7 @@ class CompanyDetails extends React.Component {
             <div className="t1 font-bold color-dark-grey">{ company.name }</div>
             <div className="t3  color-dark-grey">{ company.description }</div>
             <UserList users={ company.users } />
+            <ToolList tools={ company.tools } />
           </div>
         </div>
       </div>

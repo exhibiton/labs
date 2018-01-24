@@ -16,7 +16,7 @@ export const getCompany = id => dispatch => {
 
   return axios({
     method: 'GET',
-    url: `${apiEndpoints.api}companies/${id}`,
+    url: `${apiEndpoints.api}/companies/${id}`,
     headers: {
       Authorization: `Bearer ${token}`,
     },
