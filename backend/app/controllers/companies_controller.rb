@@ -12,10 +12,14 @@ class CompaniesController < BaseController
   # POST /companies
   def create
     tools = Tool.where(params[:tool_ids])
+    categories = Category.where(params[:category_ids])
+    additional_users = User.where(params[:user_ids])
     company = Company.create!(company_params)
     company.tools << tools if tools
     company.users << @user if @user
-    render json: { user: current_user, message: "Company Created" }.merge(current_user.authentication_payload)
+    company.users << additional_users if additional_users
+    company.categories << categories if categories
+    render json: { user: current_user, message: "Company Created" }
   end
 
 

@@ -63,6 +63,8 @@ class NewCompany extends Component {
       isLoading,
     } = this.props
 
+    if (!categories.length || !users.length || !technologies.length) return null
+    
     return (
       <div>
         <div className="mvxxl flex-row flex-hc thuge font-bold color-dark-grey">
