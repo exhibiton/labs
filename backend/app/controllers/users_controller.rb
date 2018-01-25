@@ -13,6 +13,11 @@ class UsersController < BaseController
     end
   end
 
+  def search
+    users = User.where('first_name ilike :term or last_name ilike :term or email ilike :term', term: "%#{params[:term]}%")
+    json_response(users)
+  end
+
   # GET /users
   # This path is used to find other users who have registered but do not have a company yet.
   # For example a founder adds their co-founder to the company profile.

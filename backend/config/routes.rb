@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     post :upload_photo
     collection do
       get :select_options
+      get :search
     end
   end
   
@@ -17,6 +18,7 @@ Rails.application.routes.draw do
   resources :tools, only: [:index, :create] do
     collection do
       get :select_options
+      get :search
     end
   end
 
