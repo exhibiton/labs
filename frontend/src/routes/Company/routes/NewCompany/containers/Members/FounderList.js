@@ -1,10 +1,7 @@
 import React from 'react'
 import FounderListItem from './FounderListItem'
 
-import './FounderListStyles.scss'
-
-export const FounderList = ({ users }) => (
-
+export const FounderList = ({ users }) =>
   <div className="flex-col flex-vc">
     {users.map((user, i) =>
       <FounderListItem
@@ -12,6 +9,5 @@ export const FounderList = ({ users }) => (
         user={ user } />
     )}
   </div>
-)
 
 export default FounderList

@@ -1,7 +1,5 @@
 import React from 'react'
 
-import './AddTechnologiesStyles.scss'
-
 export const TechnologyListItem = ({ technology }) => (
   <div className="flex-row technologies-list mbm">
     <div className="flex-row flex-vc technologies-list-item">

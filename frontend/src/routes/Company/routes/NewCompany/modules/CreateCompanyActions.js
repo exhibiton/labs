@@ -10,7 +10,6 @@ export const GET_USERS_LOADING = 'GET_USERS_LOADING'
 export const GET_TECHNOLOGIES_SUCCESS = 'GET_TECHNOLOGIES_SUCCESS'
 export const GET_TECHNOLOGIES_FAIL = 'GET_TECHNOLOGIES_FAIL'
 export const GET_TECHNOLOGIES_LOADING = 'GET_TECHNOLOGIES_LOADING'
-export const SELECT_TECHNOLOGIES = 'SELECT_TECHNOLGIES'
 export const SELECT_CATEGORIES = 'SELECT_CATEGORIES'
 export const SELECT_USERS = 'SELECT_USERS'
 export const CLEAR_SELECTED_TECHNOLOGIES = 'CLEAR_SELECTED_TECHNOLOGIES'
@@ -30,9 +29,9 @@ export const createCompanyLoading = () => ({
   type: CREATE_COMPANY_LOADING,
 })
 
-export const categoriesLoadingSuccess = promise => ({
+export const categoriesLoadingSuccess = payload => ({
   type: CATEGORIES_LOADING_SUCCESS,
-  payload: promise,
+  payload,
 })
 
 export const categoriesLoadingFailed = () => ({

@@ -1,18 +1,17 @@
 import React from 'react'
-import { IndexLink } from 'react-router'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router'
 
 const TabLinks = ({ tabs }) =>
   <div className="nav-tabs-wrapper">
     <ul className="nav nav-tabs" role="tablist">
-      {tabs.map(tabData => (
+      {tabs.map(tabData =>
         <li className="nav-item" key={ tabData.title }>
-          <IndexLink to={ tabData.url } className="nav-link" activeClassName="active">
+          <Link to={ tabData.url } className="nav-link" activeClassName="active">
             { tabData.title }
-          </IndexLink>
+          </Link>
         </li>
-      ))
-      }
+      )}
     </ul>
   </div>
 

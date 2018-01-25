@@ -10,6 +10,9 @@
 @import 'base/layout';
 @import 'base/spacing';
 
+// Fonts
+@import 'fonts/fonts.css';
+
 // UI Components are generic and reusable, and only relies on base and vendor css
 @import 'ui_components/buttons';
 

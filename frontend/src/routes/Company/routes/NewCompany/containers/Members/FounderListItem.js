@@ -1,10 +1,7 @@
 import React from 'react'
 
-import './FounderListStyles.scss'
-
-export const FounderListItem = ({ user }) => (
+export const FounderListItem = ({ user }) =>
   <div className="flex-row flex-hb founder-list-item mbm">
-
     <div className="flex-row founder-list-item">
       <div className="avatar mrm">
         <img src={ 'https://cdn.playven.com/defaultimg.png' } />
@@ -22,6 +19,5 @@ export const FounderListItem = ({ user }) => (
       Invite +
     </div>
   </div>
-)
 
 export default FounderListItem

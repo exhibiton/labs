@@ -1,10 +1,8 @@
 import React from 'react'
 import TechnologyListItem from './TechnologyListItem'
 
-import './AddTechnologiesStyles.scss'
-
 export const TechnologyList = ({ technologies }) => (
-  <div className="">
+  <div>
     <div className="flex-row flex-wrap">
       {technologies.map((technology, i) =>
         <TechnologyListItem
