@@ -11,7 +11,9 @@ class CompaniesController < BaseController
 
   # POST /companies
   def create
+    tools = Tool.where(params[:tool_ids])
     company = Company.create!(company_params)
+    company.tools << tools if tools
     company.users << @user if @user
     render json: { user: current_user, message: "Company Created" }.merge(current_user.authentication_payload)
   end

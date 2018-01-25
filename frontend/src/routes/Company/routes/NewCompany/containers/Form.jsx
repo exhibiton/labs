@@ -11,6 +11,9 @@ const CreateCompanyForm = props => {
     handleSubmit,
     submitting,
     change,
+    options,
+    handleSelectChange,
+    selectedOptions,
   } = props
 
   // placeholders until backend is done
@@ -21,10 +24,7 @@ const CreateCompanyForm = props => {
     { label: 'B2C', value: 'B2C' },
     { label: 'Enterprise', value: 'Enterprise' },
     { label: 'EdTech', value: 'EdTech' },
-  ];
-  const handleSelectChange = () => {
-    // probably should do something here
-  }
+  ];  
 
   return (
     <form onSubmit={ handleSubmit }>
@@ -71,15 +71,16 @@ const CreateCompanyForm = props => {
                     name="logo"
                     component={ ({ input }) => {
                       if (input.value) {
-                        return <img src={input.value.preview} alt="Logo preview" />
+                        return <img src={ input.value.preview } alt="Logo preview" />
                       }
-                      
                       return <div>Your logo</div>
                     } } />
                 </div>
                 <div className="drag-and-drop-container__info">
                   <div className="drag-and-drop-container__info-title">Drag & Drop</div>
-                  <div className="drag-and-drop-container__info-description">to change logo, or <span>browse</span></div>
+                  <div className="drag-and-drop-container__info-description">
+                    to change logo, or <span>browse</span>
+                  </div>
                 </div>
               </Dropzone>
             </div>
@@ -90,12 +91,12 @@ const CreateCompanyForm = props => {
                 closeOnSelect={ false }
                 disabled={ false }
                 multi={ true }
-                onChange={ handleSelectChange }
-                options={ categories }
+                onChange={ e => handleSelectChange(e) }
+                options={ options }
                 placeholder="Select Categories"
                 rtl={ false }
                 simpleValue={ true }
-                value={ [] } />
+                value={ selectedOptions } />
             </div>
           </div>
         </div>
@@ -119,6 +120,9 @@ CreateCompanyForm.propTypes = {
   error: PropTypes.string,
   submitting: PropTypes.bool.isRequired,
   handleSubmit: PropTypes.func.isRequired,
+  options: PropTypes.arrayOf(PropTypes.object).isRequired,
+  handleSelectChange: PropTypes.func.isRequired,
+  selectedOptions: PropTypes.arrayOf(PropTypes.string),
 }
 
 export default reduxForm({

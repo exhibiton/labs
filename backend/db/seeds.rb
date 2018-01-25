@@ -15,16 +15,16 @@ company3 = Company.create(name: "Best Company3", description:"greatest company i
 company4 = Company.create(name: "Best Company4", description:"greatest company in the universe")
 company5 = Company.create(name: "Best Company5", description:"greatest company in the universe")
 
-user1 = User.create(email: "labs1@guy.com", first_name: "Test1", last_name: "Dude", password: "12345678", company_id: company1.id)
-user2 = User.create(email: "labs2@guy.com", first_name: "Test2", last_name: "Dude", password: "12345678", company_id: company2.id)
-user3 = User.create(email: "labs3@guy.com", first_name: "Test3", last_name: "Dude", password: "12345678", company_id: company3.id)
-user4 = User.create(email: "labs4@guy.com", first_name: "Test4", last_name: "Dude", password: "12345678", company_id: company4.id)
-user5 = User.create(email: "labs5@guy.com", first_name: "Test5", last_name: "Dude", password: "12345678", company_id: company5.id)
-usernocompany = User.create(email: "user1@nocompany.com", first_name: "Test5", last_name: "Dude", password: "12345678")
-usernocompany2 = User.create(email: "user2@nocompany.com", first_name: "Test5", last_name: "Dude", password: "12345678")
-usernocompany3 = User.create(email: "user3@nocompany.com", first_name: "Test5", last_name: "Dude", password: "12345678")
-usernocompany4 = User.create(email: "user4@nocompany.com", first_name: "Test5", last_name: "Dude", password: "12345678")
-usernocompany5 = User.create(email: "user5@nocompany.com", first_name: "Test5", last_name: "Dude", password: "12345678")
+user1 = User.create(email: "labs1@guy.com", title:"Co-Founder", first_name: "Test1", last_name: "Dude", password: "12345678", company_id: company1.id)
+user2 = User.create(email: "labs2@guy.com", title:"Co-Founder", first_name: "Test2", last_name: "Dude", password: "12345678", company_id: company2.id)
+user3 = User.create(email: "labs3@guy.com", title:"Co-Founder", first_name: "Test3", last_name: "Dude", password: "12345678", company_id: company3.id)
+user4 = User.create(email: "labs4@guy.com", title:"Co-Founder", first_name: "Test4", last_name: "Dude", password: "12345678", company_id: company4.id)
+user5 = User.create(email: "labs5@guy.com", title:"Co-Founder", first_name: "Test5", last_name: "Dude", password: "12345678", company_id: company5.id)
+usernocompany = User.create(email: "user1@nocompany.com", title:"Co-Founder", first_name: "Test5", last_name: "Dude", password: "12345678")
+usernocompany2 = User.create(email: "user2@nocompany.com", title:"Co-Founder", first_name: "Test5", last_name: "Dude", password: "12345678")
+usernocompany3 = User.create(email: "user3@nocompany.com", title:"Co-Founder", first_name: "Test5", last_name: "Dude", password: "12345678")
+usernocompany4 = User.create(email: "user4@nocompany.com", title:"Co-Founder", first_name: "Test5", last_name: "Dude", password: "12345678")
+usernocompany5 = User.create(email: "user5@nocompany.com", title:"Co-Founder", first_name: "Test5", last_name: "Dude", password: "12345678")
 
 company1.save
 company2.save

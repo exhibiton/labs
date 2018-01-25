@@ -5,14 +5,77 @@ import { browserHistory } from 'react-router'
 
 // file imports
 import apiEndpoints from '../../../../../../config/apis'
-import { setAuthorizationToken } from '../../../../../api/utils/authorization-token'
+import { getToken, setAuthorizationToken } from '../../../../../api/utils/authorization-token'
 import { updateUser } from '../../../../../actions/auth-actions'
 
 import {
   createCompanySuccess,
   createCompanyFail,
   createCompanyLoading,
+  categoriesLoading,
+  categoriesLoadingFailed,
+  categoriesLoadingSuccess,
+  getTechnologiesSuccess,
+  getTechnologiesFail,
+  getTechnologiesLoading,
+  getUsersFail,
+  getUsersLoading,
+  getUsersSuccess,
 } from './CreateCompanyActions'
+
+export const getUsers = data => dispatch => {
+  dispatch(getUsersLoading())
+  const token = getToken()
+
+  return axios({
+    method: 'GET',
+    url: `${apiEndpoints.api}/users`,
+    params: data,
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }).then(res => {
+    dispatch(getUsersSuccess(res.data))
+  }).catch(error => {
+    dispatch(getUsersFail(error))
+  })
+}
+
+export const getTechnologies = data => dispatch => {
+  dispatch(getTechnologiesLoading())
+  const token = getToken()
+
+  return axios({
+    method: 'GET',
+    url: `${apiEndpoints.api}/tools`,
+    params: data,
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }).then(res => {
+    dispatch(getTechnologiesSuccess(res.data))
+  }).catch(error => {
+    dispatch(getTechnologiesFail(error))
+  })
+}
+
+export const getCategories = data => dispatch => {
+  dispatch(categoriesLoading())
+  const token = getToken()
+
+  return axios({
+    method: 'GET',
+    url: `${apiEndpoints.api}/categories/select_options`,
+    params: data,
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }).then(res => {
+    dispatch(categoriesLoadingSuccess(res.data))
+  }).catch(error => {
+    dispatch(categoriesLoadingFailed(error))
+  })
+}
 
 export const createCompany = data => dispatch => {
   dispatch(createCompanyLoading())
