@@ -53,11 +53,12 @@ class NewCompany extends Component {
   }
 
   handleCompanyCreate = ({ company }) => {
-    const { createCompany, selectedUsersById } = this.props
+    const { createCompany, selectedUsersById, selectedTechnologiesById } = this.props
 
     const data = {
       ...company,
-      users: selectedUsersById
+      users: selectedUsersById,
+      tools: selectedTechnologiesById
     }
     
     // sending files - have to send FormData (multipart), not the plain JSON object
@@ -174,7 +175,7 @@ const mapStateToProps = state => {
     users: users.byId.map(id => users.byHash[id]),
     selectedUsersById: selectedUsers.byId,
     technologies: technologies.byId.map(id => technologies.byHash[id]),
-    selectedTechnologies: selectedTechnologies.byId,
+    selectedTechnologiesById: selectedTechnologies.byId,
     selectedCategories,
   }
 }

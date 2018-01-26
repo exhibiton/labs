@@ -7,7 +7,7 @@ import { selectTechnology, deselectTechnology } from '../../modules/CreateCompan
 const StyledTechnologyListItem = styled.div`
   width: 50%;
   margin: 0 0 1.25rem;
-  border-bottom-color: ${props => props.isSelected ? '#1c1f2b' : 'white'};
+  opacity: ${props => props.isSelected ? '.5' : '1'};
 `
 
 const StyledImg = styled.img`
@@ -31,7 +31,7 @@ const TechnologyDescription = styled.div`
   color: #787882;
 `
 
-export const TechnologyListItem = ({ technology, selectedTechnologiesById, selectTechnology, deselectTechnology }) => (
+export const TechnologyListItem = ({ technology, selectedTechnologiesById, selectTechnology, deselectTechnology }) =>
   <StyledTechnologyListItem
     isSelected={selectedTechnologiesById.includes(technology.id)}
     onClick={() => {
@@ -51,7 +51,6 @@ export const TechnologyListItem = ({ technology, selectedTechnologiesById, selec
       </div>
     </div>
   </StyledTechnologyListItem>
-)
 
 const mapStateToProps = ({ createCompany }) => ({
   selectedTechnologiesById: createCompany.selectedTechnologies.byId
