@@ -190,10 +190,7 @@ export default function createCompanyReducer(state = initialState, action) {
       }
 
     case CREATE_COMPANY_SUCCESS:
-      return {
-        state,
-        isLoading: false,
-      }
+      return state
 
     default:
       return state
