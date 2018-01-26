@@ -42,12 +42,42 @@ tool2 = Tool.create(name: "React")
 tool3 = Tool.create(name: "React Native")
 tool4 = Tool.create(name: "Ember")
 tool5 = Tool.create(name: "Vue")
+tool6 = Tool.create(name: "Amazon RDS")
+tool7 = Tool.create(name: "Amazon EC2")
+tool8 = Tool.create(name: "SCSS")
+tool9 = Tool.create(name: "MongoDB")
+tool10 = Tool.create(name: "Ruby")
+tool11 = Tool.create(name: "Java")
+tool12 = Tool.create(name: "Clojure")
+tool13 = Tool.create(name: "Haskell")
+tool14 = Tool.create(name: "C++")
+tool15 = Tool.create(name: "Swift")
+tool16 = Tool.create(name: "Objective-C")
+tool17 = Tool.create(name: "Kotlin")
+tool18 = Tool.create(name: "jQuery")
+tool19 = Tool.create(name: "CSS")
+tool20 = Tool.create(name: "Apache")
 
 tool1.save
 tool2.save
 tool3.save
 tool4.save
 tool5.save
+tool6.save 
+tool7.save
+tool8.save
+tool9.save
+tool10.save
+tool11.save
+tool12.save
+tool13.save
+tool14.save
+tool15.save
+tool16.save
+tool17.save
+tool18.save
+tool19.save
+tool20.save
 
 category1 = Category.create(name:"SaaS")
 category2 = Category.create(name:"Marketplace")
