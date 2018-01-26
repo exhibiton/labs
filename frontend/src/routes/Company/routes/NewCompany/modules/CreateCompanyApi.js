@@ -90,15 +90,11 @@ export const createCompany = data => dispatch => {
     },
     data,
   }).then(res => {
-    const token = res.data.auth_token
 
     // We should set the new AuthToken because now currentUser
     // Object will have a Company created for it
-    setAuthorizationToken(token)
-    const user = jwt.decode(token)
 
     dispatch(createCompanySuccess())
-    dispatch(updateUser(user))
     browserHistory.push('/company')
   }).catch(error => {
     dispatch(createCompanyFail(error))
