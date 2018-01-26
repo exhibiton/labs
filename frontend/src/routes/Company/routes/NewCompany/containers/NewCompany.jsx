@@ -37,7 +37,7 @@ const StyledNavLink = styled(NavLink)`
 
 class NewCompany extends Component {
   state = {
-    activeTab: '3'
+    activeTab: '1'
   }
 
   componentDidMount() {

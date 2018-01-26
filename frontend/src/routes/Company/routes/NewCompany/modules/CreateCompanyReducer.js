@@ -191,7 +191,7 @@ export default function createCompanyReducer(state = initialState, action) {
 
     case CREATE_COMPANY_SUCCESS:
       return {
-        ...state,
+        state,
         isLoading: false,
       }
 
