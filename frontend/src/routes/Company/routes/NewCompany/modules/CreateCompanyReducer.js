@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import {
   CREATE_COMPANY_FAIL,
   CREATE_COMPANY_LOADING,
@@ -12,6 +13,10 @@ import {
   CATEGORIES_LOADING_FAILED,
   CATEGORIES_LOADING_SUCCESS,
   SELECT_CATEGORIES,
+  SELECT_USER,
+  DESELECT_USER,
+  SELECT_TECHNOLOGY,
+  DESELECT_TECHNOLOGY,
 } from './CreateCompanyActions'
 
 const initialState = {
@@ -20,10 +25,22 @@ const initialState = {
   messages: {},
   categories: {},
   selectedCategories: [],
-  technologies: {},
-  selectedTechnologies: {},
-  selectedUsers: {},
-  users: {},
+  technologies: {
+    byId: [],
+    byHash: {}
+  },
+  selectedTechnologies: {
+    byId: [],
+    byHash: {}
+  },
+  selectedUsers: {
+    byId: [],
+    byHash: {}
+  },
+  users: {
+    byId: [],
+    byHash: {},
+  },
 }
 
 export default function createCompanyReducer(state = initialState, action) {
@@ -37,8 +54,34 @@ export default function createCompanyReducer(state = initialState, action) {
     case GET_USERS_SUCCESS:
       return {
         ...state,
-        users: action.payload,
+        users: {
+          byId: _.map(action.payload, 'id'),
+          byHash: _.keyBy(action.payload, 'id')
+        },
         isLoading: false,
+      }
+
+    case SELECT_USER:
+      return {
+        ...state,
+        selectedUsers: {
+          byId: [ ...state.selectedUsers.byId, action.id],
+          byHash: {
+            ...state.selectedUsers.byHash,
+            [action.id]: action.payload
+          }
+        }
+      }
+
+    case DESELECT_USER:
+      delete state.selectedUsers.byHash[action.id]
+  
+      return {
+        ...state,
+        selectedUsers: {
+          byId: state.selectedUsers.byId.filter(item => item !== action.id),
+          byHash: state.selectedUsers.byHash
+        }
       }
 
     case GET_USERS_LOADING:
@@ -60,10 +103,36 @@ export default function createCompanyReducer(state = initialState, action) {
     case GET_TECHNOLOGIES_SUCCESS:
       return {
         ...state,
-        technologies: action.payload,
+        technologies: {
+          byId: _.map(action.payload, 'id'),
+          byHash: _.keyBy(action.payload, 'id')
+        },
         isLoading: false,
       }
-
+  
+    case SELECT_TECHNOLOGY:
+      return {
+        ...state,
+        selectedTechnologies: {
+          byId: [ ...state.selectedTechnologies.byId, action.id],
+          byHash: {
+            ...state.selectedTechnologies.byHash,
+            [action.id]: action.payload
+          }
+        }
+      }
+  
+    case DESELECT_TECHNOLOGY:
+      delete state.selectedTechnologies.byHash[action.id]
+    
+      return {
+        ...state,
+        selectedTechnologies: {
+          byId: state.selectedTechnologies.byId.filter(item => item !== action.id),
+          byHash: state.selectedTechnologies.byHash
+        }
+      }
+      
     case GET_TECHNOLOGIES_LOADING:
       return {
         ...state,

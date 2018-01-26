@@ -11,7 +11,10 @@ export const GET_TECHNOLOGIES_SUCCESS = 'GET_TECHNOLOGIES_SUCCESS'
 export const GET_TECHNOLOGIES_FAIL = 'GET_TECHNOLOGIES_FAIL'
 export const GET_TECHNOLOGIES_LOADING = 'GET_TECHNOLOGIES_LOADING'
 export const SELECT_CATEGORIES = 'SELECT_CATEGORIES'
-export const SELECT_USERS = 'SELECT_USERS'
+export const SELECT_USER = 'SELECT_USER'
+export const DESELECT_USER = 'DESELECT_USER'
+export const SELECT_TECHNOLOGY = 'SELECT_TECHNOLOGY'
+export const DESELECT_TECHNOLOGY = 'DESELECT_TECHNOLOGY'
 export const CLEAR_SELECTED_TECHNOLOGIES = 'CLEAR_SELECTED_TECHNOLOGIES'
 export const CLEAR_SELECTED_USERS = 'CLEAR_SELETED_USERS'
 export const CLEAR_SELECTED_CATEGORIES = 'CLEAR_SELECTED_CATEGORIES'
@@ -61,9 +64,26 @@ export const getUsersFail = promise => ({
   payload: promise,
 })
 
-export const selectUsers = promise => ({
-  type: SELECT_USERS,
-  payload: promise,
+export const selectUser = (id, payload) => ({
+  type: SELECT_USER,
+  id,
+  payload
+})
+
+export const deselectUser = id => ({
+  type: DESELECT_USER,
+  id
+})
+
+export const selectTechnology = (id, payload) => ({
+  type: SELECT_TECHNOLOGY,
+  id,
+  payload
+})
+
+export const deselectTechnology = id => ({
+  type: DESELECT_TECHNOLOGY,
+  id
 })
 
 export const getTechnologiesSuccess = promise => ({

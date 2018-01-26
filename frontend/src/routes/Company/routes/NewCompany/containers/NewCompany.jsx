@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col } from 'reactstrap'
-import classnames from 'classnames'
 import styled from 'styled-components'
 import {
   createCompany,
@@ -13,16 +12,32 @@ import {
 } from '../modules/CreateCompanyApi'
 import CompanyForm from './CompanyForm'
 import DetailsFields from './DetailsFields'
-import AddMembersFields from './AddMembersFields'
+import AddFoundersFields from './AddFoundersFields'
 import AddTechnologiesFields from './AddTechnologiesFields'
+import { ContentHolder } from './StyledComponents/TabContent'
 
 const StyledNav = styled(Nav)`
   border-bottom: 1px solid #ddd;
 `
 
+const StyledNavItem = styled(NavItem)`
+  margin: 0 2rem;
+  text-transform: uppercase;
+  display: inline-block;
+  float: none;
+`
+
+const StyledNavLink = styled(NavLink)`
+  padding: 0 0 1rem;
+  font-size: 1rem;
+  border: 0!important;
+  border-bottom: 3px solid transparent!important;
+  border-bottom-color: ${props => props.active ? '#1c1f2b' : 'white'}!important;
+`
+
 class NewCompany extends Component {
   state = {
-    activeTab: '1'
+    activeTab: '3'
   }
 
   componentDidMount() {
@@ -38,12 +53,17 @@ class NewCompany extends Component {
   }
 
   handleCompanyCreate = ({ company }) => {
-    const { createCompany } = this.props
+    const { createCompany, selectedUsersById } = this.props
 
+    const data = {
+      ...company,
+      users: selectedUsersById
+    }
+    
     // sending files - have to send FormData (multipart), not the plain JSON object
     const formData = new FormData()
 
-    _.each(company, (companyValue, companyKey) => {
+    _.each(data, (companyValue, companyKey) => {
       if (_.isArray(companyValue)) {
         return _.each(companyValue, value => formData.append(`${companyKey}[]`, value))
       }
@@ -69,38 +89,36 @@ class NewCompany extends Component {
       isLoading,
     } = this.props
 
-    if (!categories.length || !users.length || !technologies.length) return null
-    
     return (
       <div>
-        <div className="mvxxl flex-row flex-hc thuge font-bold color-dark-grey">
-          <div className="bg-yellow">Create</div>
+        <div className="mvl flex-row flex-hc t2 font-bold color-dark-grey">
+          <div className="color-bg-yellow">Create</div>
           <div className="pls">Company</div>
         </div>
         <StyledNav className="flex-row flex-hc color-dark-blue" tabs={true}>
-          <NavItem>
-            <NavLink
-              className={classnames({ active: this.state.activeTab === '1' })}
+          <StyledNavItem>
+            <StyledNavLink
+              active={this.state.activeTab === '1'}
               onClick={() => this.toggle('1')}>
               GENERAL INFO
-            </NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink
-              className={classnames({ active: this.state.activeTab === '2' })}
+            </StyledNavLink>
+          </StyledNavItem>
+          <StyledNavItem>
+            <StyledNavLink
+              active={this.state.activeTab === '2'}
               onClick={() => this.toggle('2')}>
               ADD FOUNDERS
-            </NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink
-              className={classnames({ active: this.state.activeTab === '3' })}
+            </StyledNavLink>
+          </StyledNavItem>
+          <StyledNavItem>
+            <StyledNavLink
+              active={this.state.activeTab === '3'}
               onClick={() => this.toggle('3')}>
               SELECT TECHNOLOGIES
-            </NavLink>
-          </NavItem>
+            </StyledNavLink>
+          </StyledNavItem>
         </StyledNav>
-        <div className="flex-row flex-hc mtl mbm">
+        <ContentHolder wide={this.state.activeTab === '1'}>
           <CompanyForm
             error={ error }
             onSubmit={ this.handleCompanyCreate }
@@ -116,7 +134,7 @@ class NewCompany extends Component {
               <TabPane tabId="2">
                 <Row>
                   <Col sm="12">
-                    <AddMembersFields users={ users } />
+                    <AddFoundersFields users={ users } />
                   </Col>
                 </Row>
               </TabPane>
@@ -129,7 +147,7 @@ class NewCompany extends Component {
               </TabPane>
             </TabContent>
           </CompanyForm>
-        </div>
+        </ContentHolder>
       </div>
     )
   }
@@ -143,7 +161,9 @@ const mapStateToProps = state => {
     categories,
     selectedCategories,
     users,
+    selectedUsers,
     technologies,
+    selectedTechnologies,
   } = state.createCompany
 
   return {
@@ -151,8 +171,10 @@ const mapStateToProps = state => {
     isLoading,
     error,
     categories,
-    users,
-    technologies,
+    users: users.byId.map(id => users.byHash[id]),
+    selectedUsersById: selectedUsers.byId,
+    technologies: technologies.byId.map(id => technologies.byHash[id]),
+    selectedTechnologies: selectedTechnologies.byId,
     selectedCategories,
   }
 }
@@ -169,8 +191,9 @@ NewCompany.propTypes = {
   isLoading: PropTypes.bool.isRequired,
   createCompany: PropTypes.func.isRequired,
   categories: PropTypes.arrayOf(PropTypes.object),
-  users: PropTypes.arrayOf(PropTypes.object),
-  technologies: PropTypes.arrayOf(PropTypes.object),
+  users: PropTypes.object,
+  selectedUsersById: PropTypes.arrayOf(PropTypes.number),
+  technologies: PropTypes.object,
   getCategories: PropTypes.func.isRequired,
   getUsers: PropTypes.func.isRequired,
   getTechnologies: PropTypes.func.isRequired,

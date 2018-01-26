@@ -41,6 +41,24 @@ export const getUsers = data => dispatch => {
   })
 }
 
+export const getUsersByTerm = term => dispatch => {
+  dispatch(getUsersLoading())
+  const token = getToken()
+  
+  return axios({
+    method: 'GET',
+    url: `${apiEndpoints.api}/users/search`,
+    params: { term },
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }).then(res => {
+    dispatch(getUsersSuccess(res.data))
+  }).catch(error => {
+    dispatch(getUsersFail(error))
+  })
+}
+
 export const getTechnologies = data => dispatch => {
   dispatch(getTechnologiesLoading())
   const token = getToken()
@@ -49,6 +67,24 @@ export const getTechnologies = data => dispatch => {
     method: 'GET',
     url: `${apiEndpoints.api}/tools`,
     params: data,
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }).then(res => {
+    dispatch(getTechnologiesSuccess(res.data))
+  }).catch(error => {
+    dispatch(getTechnologiesFail(error))
+  })
+}
+
+export const getTechnologiesByTerm = term => dispatch => {
+  dispatch(getTechnologiesLoading())
+  const token = getToken()
+
+  return axios({
+    method: 'GET',
+    url: `${apiEndpoints.api}/tools/search`,
+    params: { term },
     headers: {
       Authorization: `Bearer ${token}`,
     },

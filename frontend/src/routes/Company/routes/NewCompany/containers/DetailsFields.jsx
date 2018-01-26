@@ -5,6 +5,8 @@ import Select from 'react-select'
 import Dropzone from 'react-dropzone'
 
 const DetailsFields = ({ categories }) => {
+  if (!categories.length) return null
+
   return (
     <div className="flex-row flex-col-mobile flex-hc">
       <div>
@@ -86,7 +88,7 @@ const DetailsFields = ({ categories }) => {
 }
 
 DetailsFields.propTypes = {
-  categories: PropTypes.arrayOf(PropTypes.object).isRequired,
+  categories: PropTypes.arrayOf(PropTypes.object),
 }
 
 export default DetailsFields

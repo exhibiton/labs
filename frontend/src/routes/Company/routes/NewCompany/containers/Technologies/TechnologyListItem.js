@@ -1,18 +1,65 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import FA from 'react-fontawesome'
+import styled from 'styled-components'
+import { selectTechnology, deselectTechnology } from '../../modules/CreateCompanyActions'
 
-export const TechnologyListItem = ({ technology }) => (
-  <div className="flex-row technologies-list mbm">
-    <div className="flex-row flex-vc technologies-list-item">
+const StyledTechnologyListItem = styled.div`
+  width: 50%;
+  margin: 0 0 1.25rem;
+  border-bottom-color: ${props => props.isSelected ? '#1c1f2b' : 'white'};
+`
+
+const StyledImg = styled.img`
+  width: 4.25rem;
+  max-height: 4.25rem;
+  display: block;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 2px 5px 0 rgba(40, 45, 62, 0.25);
+`
+
+const TechnologyName = styled.div`
+  text-transform: uppercase;
+  font-size: .85rem;
+  color: #282d3e;
+  margin: 0 0 .5rem;
+`
+
+const TechnologyDescription = styled.div`
+  font-size: .85rem;
+  color: #787882;
+`
+
+export const TechnologyListItem = ({ technology, selectedTechnologiesById, selectTechnology, deselectTechnology }) => (
+  <StyledTechnologyListItem
+    isSelected={selectedTechnologiesById.includes(technology.id)}
+    onClick={() => {
+    if (selectedTechnologiesById.includes(technology.id)) {
+      deselectTechnology(technology.id)
+    } else {
+      selectTechnology(technology.id, technology)
+    }
+  }}>
+    <div className="flex-row flex-vc">
       <div className="icon mrm">
-        <img src={ 'https://cdn.playven.com/defaulticon.png' } />
+        <StyledImg src={ 'https://cdn.playven.com/defaulticon.png' } />
       </div>
-      <div className="">
-        <div className="t4 color-dark-blue font-bold">
-          { technology.name }
-        </div>
+      <div>
+        <TechnologyName>{technology.name}</TechnologyName>
+        <TechnologyDescription>Best ever framework</TechnologyDescription>
       </div>
     </div>
-  </div>
+  </StyledTechnologyListItem>
 )
 
-export default TechnologyListItem
+const mapStateToProps = ({ createCompany }) => ({
+  selectedTechnologiesById: createCompany.selectedTechnologies.byId
+})
+
+const mapDispatchToProps = {
+  selectTechnology,
+  deselectTechnology
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TechnologyListItem)

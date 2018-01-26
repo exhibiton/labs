@@ -1,6 +1,7 @@
 // Import vendor libraries from node_modules here
 @import '~bootstrap/dist/css/bootstrap';
 @import '~react-select/dist/react-select.css';
+@import '~font-awesome/css/font-awesome.min.css';
 
 // Base classes are fundamental building blocks based on the site design
 @import 'base/reset';
@@ -31,22 +32,7 @@ html {
 }
 
 body {
-  @extend .t4;
   @extend .color-grey;
-  @extend .flex-col;
-
   font-family: 'Proxima Nova', sans-serif;
   min-height: 100vh;
-}
-
-.no-padding {
-  padding: 0 !important;
-}
-
-.no-borders {
-  border: none !important;
-}
-
-.no-margins {
-  margin: 0 !important;
 }
