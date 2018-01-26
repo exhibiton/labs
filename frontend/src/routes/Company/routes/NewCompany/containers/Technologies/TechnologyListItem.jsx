@@ -1,6 +1,5 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import FA from 'react-fontawesome'
 import styled from 'styled-components'
 import { selectTechnology, deselectTechnology } from '../../modules/CreateCompanyActions'
 
@@ -8,6 +7,7 @@ const StyledTechnologyListItem = styled.div`
   width: 50%;
   margin: 0 0 1.25rem;
   opacity: ${props => props.isSelected ? '.5' : '1'};
+  cursor: pointer;
 `
 
 const StyledImg = styled.img`

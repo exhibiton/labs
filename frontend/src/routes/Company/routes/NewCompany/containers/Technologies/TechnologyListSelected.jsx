@@ -38,11 +38,12 @@ export const TechnologyListItem = ({ selectedTechnologies, deselectTechnology })
   return (
     <div className="flex-row flex-wrap mbm pbs">
       {selectedTechnologies.map(technology =>
-        <StyledTechnologySelected
-          onClick={() => deselectTechnology(technology.id)}>
+        <StyledTechnologySelected>
           <StyledImg src={ 'https://cdn.playven.com/defaulticon.png' } />
           <div>{technology.name}</div>
-          <StyledFA name="remove" />
+          <StyledFA
+            onClick={() => deselectTechnology(technology.id)}
+            name="remove" />
         </StyledTechnologySelected>
 
       )}
