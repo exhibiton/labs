@@ -79,11 +79,15 @@ export const getCategories = data => dispatch => {
 
 export const createCompany = data => dispatch => {
   dispatch(createCompanyLoading())
+  const token = getToken()
 
   return axios({
     method: 'POST',
     url: `${apiEndpoints.api}/companies`,
-    headers: { 'content-type': 'multipart/form-data' },
+    headers: {
+      'content-type': 'multipart/form-data',
+      Authorization: `Bearer ${token}`,
+    },
     data,
   }).then(res => {
     const token = res.data.auth_token

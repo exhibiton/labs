@@ -43,7 +43,13 @@ class NewCompany extends Component {
     // sending files - have to send FormData (multipart), not the plain JSON object
     const formData = new FormData()
 
-    _.each(company, (v, k) => formData.append(k, v))
+    _.each(company, (companyValue, companyKey) => {
+      if (_.isArray(companyValue)) {
+        return _.each(companyValue, value => formData.append(`${companyKey}[]`, value))
+      }
+
+      return formData.append(companyKey, companyValue)
+    })
 
     return createCompany(formData)
   }

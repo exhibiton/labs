@@ -56,7 +56,7 @@ class CompaniesController < BaseController
   private
 
   def company_params
-    params.permit(:name, :description, :github, :facebook, :website, :linkedin, :twitter, :logo)
+    params.permit(:name, :description, :github, :facebook, :website, :linkedin, :twitter, :logo, :categories)
   end
 
   def set_company

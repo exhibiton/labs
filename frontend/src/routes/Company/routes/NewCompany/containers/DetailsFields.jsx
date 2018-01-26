@@ -67,9 +67,16 @@ const DetailsFields = ({ categories }) => {
             return (
               <Select
                 {...props}
-                simpleValue={ true }
                 value={props.input.value}
-                onChange={value => props.input.onChange(value)} />
+                onBlur={() => props.input.onBlur(input.value)}
+                onChange={event => {
+                  let result
+
+                  if (event) result = props.multi ? event.map(x => x.value) : event.value
+                  else result = null
+
+                  return props.input.onChange(result)
+                }} />
             )
           }} />
         </div>
