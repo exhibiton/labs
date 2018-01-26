@@ -36,7 +36,7 @@ export const TechnologyListItem = ({ selectedTechnologies, deselectTechnology })
   if (!selectedTechnologies.length) return null
 
   return (
-    <div className="flex-row flex-wrap mbm pbs">
+    <div className="flex-row flex-wrap mts">
       {selectedTechnologies.map(technology =>
         <StyledTechnologySelected>
           <StyledImg src={ 'https://cdn.playven.com/defaulticon.png' } />

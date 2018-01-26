@@ -6,7 +6,6 @@ import { getTechnologiesByTerm } from '../../modules/CreateCompanyApi'
 
 const StyledSearch = styled.div`
   position: relative;
-  margin: 0 0 1rem;
 `
 
 const StyledInput = styled.input`
