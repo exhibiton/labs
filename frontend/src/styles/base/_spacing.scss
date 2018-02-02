@@ -1,7 +1,7 @@
 $spacing-tiny: 0.5rem; // 8px
 $spacing-small: 1rem; // 16px
 $spacing-medium: 2rem; // 32px
-$spacing-large: 5rem; // 64px
+$spacing-large: 5rem; // 80px
 $spacing-xlarge: 7rem; // 112px
 $spacing-xxlarge: 8.75rem; // 140
 
@@ -52,6 +52,18 @@ $size-map: (
       @include spacing-classes($type-abbr, $type, $size-abbr, $size, $breakpoint);
     }
   }
+}
+
+.no-padding {
+  padding: 0!important;
+}
+
+.no-margins {
+  margin: 0!important;
+}
+
+.no-borders {
+  border: 0!important;
 }
 
 @include spacing-classes-generator;

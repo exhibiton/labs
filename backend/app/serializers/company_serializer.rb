@@ -4,4 +4,5 @@ class CompanySerializer < ActiveModel::Serializer
   # model association
   has_many :users
   has_many :tools
+  has_many :categories
 end

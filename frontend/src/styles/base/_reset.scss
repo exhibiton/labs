@@ -28,7 +28,7 @@ footer, header, hgroup, main, menu, nav, section {
   display: block;
 }
 body {
-  line-height: 1;
+  line-height: 1.2;
 }
 ol, ul {
   list-style: none;
@@ -71,4 +71,9 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 button {
   background-color: transparent;
   cursor: pointer;
+  border-radius: 0;
+}
+
+img {
+  line-height: 1;
 }
