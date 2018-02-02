@@ -67,23 +67,23 @@ export const getUsersFail = promise => ({
 export const selectUser = (id, payload) => ({
   type: SELECT_USER,
   id,
-  payload
+  payload,
 })
 
 export const deselectUser = id => ({
   type: DESELECT_USER,
-  id
+  id,
 })
 
 export const selectTechnology = (id, payload) => ({
   type: SELECT_TECHNOLOGY,
   id,
-  payload
+  payload,
 })
 
 export const deselectTechnology = id => ({
   type: DESELECT_TECHNOLOGY,
-  id
+  id,
 })
 
 export const getTechnologiesSuccess = promise => ({

@@ -14,7 +14,7 @@ development:
   database: labs_development
   encoding: unicode
   pool: 5
-  username: postgres
+  username: jesseheikkila
   password:
 
 # Warning: The database defined as "test" will be erased and
@@ -24,7 +24,7 @@ test:
   <<: *default
   database: labs_test
   encoding: unicode
-  username: <%= ENV.fetch('POSTGRES_USER') { 'postgres' } %>
+  username: <%= ENV.fetch('POSTGRES_USER') { 'jesseheikkila' } %>
   pool: 5
 production:
   adapter: postgresql

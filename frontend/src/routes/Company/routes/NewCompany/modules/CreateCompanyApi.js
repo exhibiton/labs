@@ -1,12 +1,10 @@
 // node modules
 import axios from 'axios'
-import jwt from 'jsonwebtoken'
 import { browserHistory } from 'react-router'
 
 // file imports
 import apiEndpoints from '../../../../../../config/apis'
-import { getToken, setAuthorizationToken } from '../../../../../api/utils/authorization-token'
-import { updateUser } from '../../../../../actions/auth-actions'
+import { getToken } from '../../../../../api/utils/authorization-token'
 
 import {
   createCompanySuccess,
@@ -44,7 +42,7 @@ export const getUsers = data => dispatch => {
 export const getUsersByTerm = term => dispatch => {
   dispatch(getUsersLoading())
   const token = getToken()
-  
+
   return axios({
     method: 'GET',
     url: `${apiEndpoints.api}/users/search`,
@@ -125,8 +123,7 @@ export const createCompany = data => dispatch => {
       Authorization: `Bearer ${token}`,
     },
     data,
-  }).then(res => {
-
+  }).then(() => {
     // We should set the new AuthToken because now currentUser
     // Object will have a Company created for it
 

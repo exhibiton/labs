@@ -60,7 +60,7 @@ RSpec.describe 'Categories', type: :request do
 
       it 'creates a category with a company' do
         expect(json['name']).to eq('SaaS')
-        expect(json['companies'].size).to eq 1
+        expect(Category.find(json["id"]).companies.size).to eq 1
       end
 
       it 'returns status code 201' do
