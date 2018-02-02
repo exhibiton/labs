@@ -13,22 +13,25 @@ class UsersController < BaseController
     end
   end
 
-  # GET /users/select_options
-  # This path is used to find other users who have registered but do not have a company yet.
-  # For example a founder adds their co-founder to the company profile.
-  def index
-    options = User.where(company_id:nil).map do |tool|
-      { value: tool.id, label: "#{first_name} #{last_name}" }
-    end
-    render json: options
-
+  def search
+    users = User.where('first_name ilike :term or last_name ilike :term or email ilike :term', term: "%#{params[:term]}%")
     json_response(users)
   end
 
-  # GET /tools/select_options
+  # GET /users
+  # This path is used to find other users who have registered but do not have a company yet.
+  # For example a founder adds their co-founder to the company profile.
+  def index
+    users = User.all.where(company_id:nil)
+    json_response(users)
+  end
+
+  # GET /users/select_options
+  # This path is used to find other users who have registered but do not have a company yet.
+  # For example a founder adds their co-founder to the company profile.
   def select_options
-    options = Tool.all.map do |tool|
-      { value: tool.id, label: tool.name }
+    options = User.all.where(company_id:nil).map do |user|
+      { value: user.id, label: "#{user.first_name} #{user.last_name}" }
     end
     render json: options
   end

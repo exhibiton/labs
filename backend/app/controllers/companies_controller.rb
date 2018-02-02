@@ -11,9 +11,15 @@ class CompaniesController < BaseController
 
   # POST /companies
   def create
+    tools = Tool.where(id: params[:tools])
+    categories = Category.where(id: params[:categories])
+    additional_users = User.where(id: params[:users])
     company = Company.create!(company_params)
+    company.tools << tools if tools.present?
     company.users << @user if @user
-    render json: { user: current_user, message: "Company Created" }.merge(current_user.authentication_payload)
+    company.users << additional_users if additional_users.present?
+    company.categories << categories if categories.present?
+    render json: { user: current_user, message: "Company Created" }
   end
 
 
@@ -39,6 +45,7 @@ class CompaniesController < BaseController
   # DELETE /companies/:id
   def destroy
     if @company.users.include?(@user)
+      @user.update_attribute :company_id, nil
       @company.destroy
       head :no_content
     else
@@ -49,7 +56,7 @@ class CompaniesController < BaseController
   private
 
   def company_params
-    params.permit(:name, :description, :github, :facebook, :website, :linkedin, :twitter, :logo)
+    params.permit(:name, :description, :github, :facebook, :website, :linkedin, :twitter, :logo, :category_ids => [],  :tool_ids => [],  :user_ids => [])
   end
 
   def set_company

@@ -16,6 +16,12 @@ class ToolsController < BaseController
     render json: options
   end
 
+  def search
+    tools = Tool.where('name ilike :term', term: "%#{params[:term].capitalize}%")
+    json_response(tools)
+  end
+  
+
   # POST /tools
   def create
     if tool = Tool.create!(tool_params)

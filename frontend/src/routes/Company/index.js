@@ -1,6 +1,4 @@
 import { NewCompanyRoute } from './routes/NewCompany'
-import { AddFoundersRoute } from './routes/AddFounders/index';
-import { AddTechnologiesRoute } from './routes/AddTechnologies/index';
 import { injectReducer } from '../../store/reducers'
 
 export default store => ({
@@ -22,8 +20,6 @@ export default store => ({
 
   childRoutes: [
     NewCompanyRoute(store),
-    AddFoundersRoute(store),
-    AddTechnologiesRoute(store),
   ],
 
 })
