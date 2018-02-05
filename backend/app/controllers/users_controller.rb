@@ -15,7 +15,7 @@ class UsersController < BaseController
 
   def search
     users = User.where('first_name ilike :term or last_name ilike :term or email ilike :term', term: "%#{params[:term]}%")
-    json_response(users)
+    json_response(users.where(company_id:nil))
   end
 
   # GET /users

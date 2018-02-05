@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { IndexLink } from 'react-router'
 import './CardStyle.scss'
 
-export const Card = ({ name, description, logo, id }) => (
+export const Card = ({ name, logo, id }) => (
   <div className="card-container">
     <div className="flipper">
       <div className="front">
@@ -11,7 +11,6 @@ export const Card = ({ name, description, logo, id }) => (
       </div>
       <div className="back flex-col pas flex-vc color-bg-black">
         <h2 className="text-center color-white mbt">{name}</h2>
-        <p className="text-center color-white mbt">{description}</p>
         <IndexLink
           to={ `/company/${id}` }
           className="color-white color-bdh-white color-bdv-white pht"
@@ -26,7 +25,6 @@ export const Card = ({ name, description, logo, id }) => (
 )
 Card.propTypes = {
   name: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
   logo: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
 }
