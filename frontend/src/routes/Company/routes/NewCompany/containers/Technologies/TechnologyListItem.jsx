@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import styled from 'styled-components'
 import { selectTechnology, deselectTechnology } from '../../modules/CreateCompanyActions'
 
-const StyledTechnologyListItem = styled.div`
+const StyledTechnologyListItem = styled.div.attrs({ className: 'row align-items-center' })`
   width: 50%;
   margin: 0 0 1.25rem;
   opacity: ${props => props.isSelected ? '.5' : '1'};
@@ -19,7 +19,7 @@ const StyledImg = styled.img`
   box-shadow: 0 2px 5px 0 rgba(40, 45, 62, 0.25);
 `
 
-const TechnologyName = styled.div`
+const TechnologyName = styled.div.attrs({ className: 'font-weight-bold' })`
   text-transform: uppercase;
   font-size: .85rem;
   color: #282d3e;
@@ -41,14 +41,12 @@ export const TechnologyListItem = ({ technology, selectedTechnologiesById, selec
       selectTechnology(technology.id, technology)
     }
   }}>
-    <div className="flex-row flex-vc">
-      <div className="icon mrm">
-        <StyledImg src={ 'https://cdn.playven.com/defaulticon.png' } />
-      </div>
-      <div>
-        <TechnologyName>{technology.name}</TechnologyName>
-        <TechnologyDescription>Best ever framework</TechnologyDescription>
-      </div>
+    <div className="icon mr-2 pr-2">
+      <StyledImg src={ 'https://cdn.playven.com/defaulticon.png' } />
+    </div>
+    <div>
+      <TechnologyName>{technology.name}</TechnologyName>
+      <TechnologyDescription>Best ever framework</TechnologyDescription>
     </div>
   </StyledTechnologyListItem>
 

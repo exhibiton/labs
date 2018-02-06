@@ -1,15 +1,11 @@
 // Import vendor libraries from node_modules here
-@import '~bootstrap/dist/css/bootstrap';
+@import '~bootstrap/scss/bootstrap';
 @import '~react-select/dist/react-select.css';
 @import '~font-awesome/css/font-awesome.min.css';
 
 // Base classes are fundamental building blocks based on the site design
-@import 'base/reset';
-@import 'base/breakpoints';
-@import 'base/typography';
 @import 'base/colors';
-@import 'base/layout';
-@import 'base/spacing';
+@import 'base/typography';
 
 // Fonts
 @import 'fonts/fonts.css';
@@ -26,13 +22,14 @@ html {
 
   // Since rem is used for all font, height, and width measurements,
   // this decreases the spacing when viewed on a small screen
-  @include mobile {
+  @include media-breakpoint-down(sm) {
     font-size: 14px;
   }
 }
 
 body {
-  @extend .color-grey;
   font-family: 'Proxima Nova', sans-serif;
+  line-height: 1.2;
   min-height: 100vh;
+  color: #2a2c41;
 }

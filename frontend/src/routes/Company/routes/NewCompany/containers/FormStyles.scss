@@ -1,19 +1,4 @@
-.input-field {
-  width: 22.5rem;
-  height: 3.125rem;
-  border: solid 1px gray;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
-}
-
-.input-textarea {
-  width: 22.5rem;
-  height: 12rem;
-  border: solid 1px gray;
-  line-height: 1.25rem;
-  padding: 0.5rem;
-}
-
+// TODO: Rewrite into styled-component
 .drag-and-drop-container {
   background: #f8f8f9;
   padding: 3rem 2rem;

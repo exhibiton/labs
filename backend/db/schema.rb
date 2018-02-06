@@ -41,8 +41,8 @@ ActiveRecord::Schema.define(version: 20180124202028) do
   end
 
   create_table "companies_tools", id: false, force: :cascade do |t|
-    t.integer "company_id", null: false
-    t.integer "tool_id", null: false
+    t.bigint "company_id", null: false
+    t.bigint "tool_id", null: false
     t.index ["company_id"], name: "index_companies_tools_on_company_id"
     t.index ["tool_id"], name: "index_companies_tools_on_tool_id"
   end
@@ -81,10 +81,11 @@ ActiveRecord::Schema.define(version: 20180124202028) do
     t.string "avatar_content_type"
     t.integer "avatar_file_size"
     t.datetime "avatar_updated_at"
-    t.integer "company_id"
+    t.bigint "company_id"
     t.index ["company_id"], name: "index_users_on_company_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "users", "companies"
 end

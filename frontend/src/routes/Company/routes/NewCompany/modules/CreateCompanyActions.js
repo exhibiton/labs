@@ -1,9 +1,6 @@
 export const CREATE_COMPANY_SUCCESS = 'CREATE_COMPANY_SUCCESS'
 export const CREATE_COMPANY_FAIL = 'CREATE_COMPANY_FAIL'
 export const CREATE_COMPANY_LOADING = 'CREATE_COMPANY_LOADING'
-export const CATEGORIES_LOADING = 'CATEGORIES_LOADING'
-export const CATEGORIES_LOADING_SUCCESS = 'CATEGORIES_LOADING_SUCCESS'
-export const CATEGORIES_LOADING_FAILED = 'CATEGORIES_LOADING_FAILED'
 export const GET_USERS_SUCCESS = 'GET_USERS_SUCCESS'
 export const GET_USERS_FAIL = 'GET_USERS_FAIL'
 export const GET_USERS_LOADING = 'GET_USERS_LOADING'
@@ -30,19 +27,6 @@ export const createCompanyFail = promise => ({
 
 export const createCompanyLoading = () => ({
   type: CREATE_COMPANY_LOADING,
-})
-
-export const categoriesLoadingSuccess = payload => ({
-  type: CATEGORIES_LOADING_SUCCESS,
-  payload,
-})
-
-export const categoriesLoadingFailed = () => ({
-  type: CATEGORIES_LOADING_FAILED,
-})
-
-export const categoriesLoading = () => ({
-  type: CATEGORIES_LOADING,
 })
 
 export const selectCategories = promise => ({

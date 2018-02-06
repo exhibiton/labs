@@ -9,9 +9,6 @@ import {
   GET_USERS_FAIL,
   GET_USERS_LOADING,
   GET_USERS_SUCCESS,
-  CATEGORIES_LOADING,
-  CATEGORIES_LOADING_FAILED,
-  CATEGORIES_LOADING_SUCCESS,
   SELECT_CATEGORIES,
   SELECT_USER,
   DESELECT_USER,
@@ -23,7 +20,6 @@ const initialState = {
   isLoading: false,
   error: null,
   messages: {},
-  categories: {},
   selectedCategories: [],
   technologies: {
     byId: [],
@@ -45,12 +41,6 @@ const initialState = {
 
 export default function createCompanyReducer(state = initialState, action) {
   switch (action.type) {
-    case CATEGORIES_LOADING:
-      return {
-        ...state,
-        isLoading: true,
-      }
-
     case GET_USERS_SUCCESS:
       return {
         ...state,
@@ -149,28 +139,10 @@ export default function createCompanyReducer(state = initialState, action) {
         },
       }
 
-
     case SELECT_CATEGORIES:
       return {
         ...state,
         selectedCategories: action.payload,
-      }
-
-    case CATEGORIES_LOADING_FAILED:
-      return {
-        ...state,
-        messages: {
-          type: 'fail',
-          reason: action.payload,
-        },
-        isLoading: false,
-      }
-
-    case CATEGORIES_LOADING_SUCCESS:
-      return {
-        ...state,
-        categories: action.payload,
-        isLoading: false,
       }
 
     case CREATE_COMPANY_FAIL:

@@ -2,11 +2,11 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import _ from 'lodash'
-import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col } from 'reactstrap'
+import { Container, TabContent, TabPane, Nav, NavItem, NavLink, Row, Col } from 'reactstrap'
 import styled from 'styled-components'
+import { getCategories } from '../../../../../api/category-api'
 import {
   createCompany,
-  getCategories,
   getUsers,
   getTechnologies,
 } from '../modules/CreateCompanyApi'
@@ -18,6 +18,7 @@ import { ContentHolder } from './StyledComponents/TabContent'
 
 const StyledNav = styled(Nav)`
   border-bottom: 1px solid #ddd;
+  overflow: hidden;
 `
 
 const StyledNavItem = styled(NavItem)`
@@ -28,6 +29,7 @@ const StyledNavItem = styled(NavItem)`
 `
 
 const StyledNavLink = styled(NavLink)`
+  cursor: pointer;
   padding: 0 0 1rem;
   font-size: 1rem;
   border: 0!important;
@@ -92,33 +94,34 @@ class NewCompany extends Component {
 
     return (
       <div>
-        <div className="mvl flex-row flex-hc t2 font-bold color-dark-grey">
-          <div className="color-bg-yellow">Create</div>
-          <div className="pls">Company</div>
-        </div>
-        <StyledNav className="flex-row flex-hc color-dark-blue" tabs={true}>
-          <StyledNavItem>
-            <StyledNavLink
-              active={this.state.activeTab === '1'}
-              onClick={() => this.toggle('1')}>
-              GENERAL INFO
-            </StyledNavLink>
-          </StyledNavItem>
-          <StyledNavItem>
-            <StyledNavLink
-              active={this.state.activeTab === '2'}
-              onClick={() => this.toggle('2')}>
-              ADD FOUNDERS
-            </StyledNavLink>
-          </StyledNavItem>
-          <StyledNavItem>
-            <StyledNavLink
-              active={this.state.activeTab === '3'}
-              onClick={() => this.toggle('3')}>
-              SELECT TECHNOLOGIES
-            </StyledNavLink>
-          </StyledNavItem>
-        </StyledNav>
+        <h2 className="text-center my-5 py-3">
+          <span className="color-bg-yellow">Create</span> Company
+        </h2>
+        <Container>
+          <StyledNav className="justify-content-center" tabs={true}>
+            <StyledNavItem>
+              <StyledNavLink
+                active={this.state.activeTab === '1'}
+                onClick={() => this.toggle('1')}>
+                GENERAL INFO
+              </StyledNavLink>
+            </StyledNavItem>
+            <StyledNavItem>
+              <StyledNavLink
+                active={this.state.activeTab === '2'}
+                onClick={() => this.toggle('2')}>
+                ADD FOUNDERS
+              </StyledNavLink>
+            </StyledNavItem>
+            <StyledNavItem>
+              <StyledNavLink
+                active={this.state.activeTab === '3'}
+                onClick={() => this.toggle('3')}>
+                SELECT TECHNOLOGIES
+              </StyledNavLink>
+            </StyledNavItem>
+          </StyledNav>
+        </Container>
         <ContentHolder wide={this.state.activeTab === '1'}>
           <CompanyForm
             error={ error }
@@ -192,9 +195,9 @@ NewCompany.propTypes = {
   isLoading: PropTypes.bool.isRequired,
   createCompany: PropTypes.func.isRequired,
   categories: PropTypes.arrayOf(PropTypes.object),
-  users: PropTypes.object,
+  users: PropTypes.arrayOf(PropTypes.object),
   selectedUsersById: PropTypes.arrayOf(PropTypes.number),
-  technologies: PropTypes.object,
+  technologies: PropTypes.arrayOf(PropTypes.object),
   getCategories: PropTypes.func.isRequired,
   getUsers: PropTypes.func.isRequired,
   getTechnologies: PropTypes.func.isRequired,

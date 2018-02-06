@@ -10,9 +10,6 @@ import {
   createCompanySuccess,
   createCompanyFail,
   createCompanyLoading,
-  categoriesLoading,
-  categoriesLoadingFailed,
-  categoriesLoadingSuccess,
   getTechnologiesSuccess,
   getTechnologiesFail,
   getTechnologiesLoading,
@@ -90,24 +87,6 @@ export const getTechnologiesByTerm = term => dispatch => {
     dispatch(getTechnologiesSuccess(res.data))
   }).catch(error => {
     dispatch(getTechnologiesFail(error))
-  })
-}
-
-export const getCategories = data => dispatch => {
-  dispatch(categoriesLoading())
-  const token = getToken()
-
-  return axios({
-    method: 'GET',
-    url: `${apiEndpoints.api}/categories/select_options`,
-    params: data,
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  }).then(res => {
-    dispatch(categoriesLoadingSuccess(res.data))
-  }).catch(error => {
-    dispatch(categoriesLoadingFailed(error))
   })
 }
 

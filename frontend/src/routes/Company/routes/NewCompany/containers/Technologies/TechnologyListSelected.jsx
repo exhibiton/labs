@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import FA from 'react-fontawesome'
 import styled from 'styled-components'
+import { Row } from 'reactstrap'
 import { deselectTechnology } from '../../modules/CreateCompanyActions'
 
 const StyledTechnologySelected = styled.div`
@@ -32,13 +33,13 @@ const StyledImg = styled.img`
   margin: 0 .5rem 0 0;
 `
 
-export const TechnologyListItem = ({ selectedTechnologies, deselectTechnology }) => {
+export const TechnologyListSelected = ({ selectedTechnologies, deselectTechnology }) => {
   if (!selectedTechnologies.length) return null
 
   return (
-    <div className="flex-row flex-wrap mts">
+    <Row className="no-gutters mt-2">
       {selectedTechnologies.map(technology =>
-        <StyledTechnologySelected>
+        <StyledTechnologySelected key={ technology.id }>
           <StyledImg src={ 'https://cdn.playven.com/defaulticon.png' } />
           <div>{technology.name}</div>
           <StyledFA
@@ -47,7 +48,7 @@ export const TechnologyListItem = ({ selectedTechnologies, deselectTechnology })
         </StyledTechnologySelected>
 
       )}
-    </div>
+    </Row>
   )
 }
 
@@ -59,4 +60,4 @@ const mapDispatchToProps = {
   deselectTechnology
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TechnologyListItem)
+export default connect(mapStateToProps, mapDispatchToProps)(TechnologyListSelected)

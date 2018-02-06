@@ -2,9 +2,11 @@ import React from 'react'
 import { connect } from 'react-redux'
 import FA from 'react-fontawesome'
 import styled from 'styled-components'
+import { Row } from 'reactstrap'
 import { selectUser, deselectUser } from '../../modules/CreateCompanyActions'
 
-const StyledUserListItem = styled.div`
+const StyledUserListItem = styled(Row)
+  .attrs({ className: 'no-gutters justify-content-between mb-5' })`
   width: 100%;
 `
 
@@ -17,6 +19,9 @@ const StyledInvite = styled.button.attrs({ type: 'button' })`
   white-space: nowrap;
   text-transform: uppercase;
   color:#787882;
+  background: none;
+  border: 0;
+  cursor: pointer;
 
   &:hover {
     color: #000;
@@ -34,20 +39,20 @@ const StyledImg = styled.img`
 `
 
 export const UserListItem = ({ user, selectUser, deselectUser, selectedUsersById }) =>
-  <StyledUserListItem className="flex-row flex-hb mbm">
-    <div className="flex-row">
-      <div className="avatar mrm">
+  <StyledUserListItem>
+    <Row className="no-gutters align-items-center">
+      <div className="mr-3 pr-3">
         <StyledImg src={ 'https://cdn.playven.com/defaultimg.png' } />
       </div>
       <div>
-        <div className="t4 color-dark-blue font-bold">
+        <div>
           {user.first_name} {user.last_name}
         </div>
-        <div className="t4">
+        <div className="color-grey t14 mt-2">
           {user.title}
         </div>
       </div>
-    </div>
+    </Row>
     {selectedUsersById.includes(user.id) ?
       <StyledSelected
         isSelected={selectedUsersById.includes(user.id)}

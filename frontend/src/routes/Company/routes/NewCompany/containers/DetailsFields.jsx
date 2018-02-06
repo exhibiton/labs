@@ -1,94 +1,96 @@
 import React from 'react'
-import { Field } from 'redux-form'
+import { connect } from 'react-redux'
+import { Field, change } from 'redux-form'
+import { show as showModal } from 'redux-modal'
 import PropTypes from 'prop-types'
-import Select from 'react-select'
+import { Row, Col } from 'reactstrap'
 import Dropzone from 'react-dropzone'
+import Input from '../../../../../components/Input'
+import Textarea from '../../../../../components/Textarea'
+import Select from '../../../../../components/Select'
+import CategoryForm from './CategoryForm'
 
-const DetailsFields = ({ categories }) => {
+const DetailsFields = ({ categories, change, showModal }) => {
   if (!categories.length) return null
 
   return (
-    <div className="flex-row flex-col-mobile flex-hc">
-      <div>
-        <div className="flex-col mbs">
-          <label className="t3 pbs color-dark-grey font-semibold">Company Name</label>
+    <Row className="justify-content-center">
+      <Col>
+        <div className="mb-3 pb-3">
+          <label className="mb-3">Company Name</label>
           <Field
-            component="input"
-            className="input-field t4"
+            component={Input}
             name="name"
             placeholder="WeWork"
             type="text" />
         </div>
-        <div className="flex-col mbs">
-          <label className="t3 pbs color-dark-grey font-semibold">Website URL</label>
+        <div className="mb-3 pb-3">
+          <label className="mb-3">Website URL</label>
           <Field
-            component="input"
-            className="input-field t4"
+            component={Input}
             name="website"
             placeholder="www.wework.com"
             type="text" />
         </div>
-        <div className="flex-col mbs">
-          <label className="t3 pbs color-dark-grey font-semibold">Description</label>
+        <div className="mb-3 pb-3">
+          <label className="mb-3">Description</label>
           <Field
-            component="textarea"
-            className="input-textarea t4"
+            component={Textarea}
             name="description"
-            placeholder="Greatest company on Earth..."
-            type="textarea" />
+            placeholder="Greatest company on Earth..." />
         </div>
-      </div>
-      <div className="flex-col mll">
-        <div>
-          <Dropzone
-            multiple={ false }
-            onDrop={ (filesToUpload, _e) =>
-              change('company.logo', filesToUpload[0]) }
-            className="drag-and-drop-container flex-row">
-            <div className="drag-and-drop-container__image">
-              <Field
-                name="logo"
-                component={ ({ input }) => {
-                  if (input.value) {
-                    return <img src={ input.value.preview } alt="Logo preview" />
-                  }
-                  return <div>Your logo</div>
-                } } />
+      </Col>
+      <Col>
+        <Dropzone
+          className="row no-gutters drag-and-drop-container"
+          multiple={ false }
+          onDrop={ (filesToUpload, _e) =>
+            change('companyForm', 'company.logo', filesToUpload[0]) }>
+          <div className="drag-and-drop-container__image">
+            <Field
+              name="logo"
+              component={ ({ input }) => {
+                if (input.value) {
+                  return <img src={ input.value.preview } alt="Logo preview" />
+                }
+                return <div>Your logo</div>
+              } } />
+          </div>
+          <div className="drag-and-drop-container__info">
+            <div className="drag-and-drop-container__info-title">Drag & Drop</div>
+            <div className="drag-and-drop-container__info-description">
+              to change logo, or <span>browse</span>
             </div>
-            <div className="drag-and-drop-container__info">
-              <div className="drag-and-drop-container__info-title">Drag & Drop</div>
-              <div className="drag-and-drop-container__info-description">
-                to change logo, or <span>browse</span>
-              </div>
-            </div>
-          </Dropzone>
-        </div>
+          </div>
+        </Dropzone>
         <div>
-          <label className="t3 color-dark-grey font-semibold">Categories</label>
-          <Field name="categories" multi={true} options={categories} component={props => {
-            return (
-              <Select
-                {...props}
-                value={props.input.value}
-                onBlur={() => props.input.onBlur(input.value)}
-                onChange={event => {
-                  let result
-
-                  if (event) result = props.multi ? event.map(x => x.value) : event.value
-                  else result = null
-
-                  return props.input.onChange(result)
-                }} />
-            )
-          }} />
+          <label>Categories</label>
+          <Field
+            name="categories"
+            multi={true}
+            options={categories}
+            component={Select} />
+          <div>
+            <button
+              onClick={() => showModal('defaultModal', { title: 'Add Categories', content: <CategoryForm /> })}
+              type="button"
+              className="btn-dark">+ Add category</button>
+          </div>
         </div>
-      </div>
-    </div>
+      </Col>
+    </Row>
   )
 }
 
 DetailsFields.propTypes = {
   categories: PropTypes.arrayOf(PropTypes.object),
+  change: PropTypes.func.isRequired,
+  showModal: PropTypes.func.isRequired,
 }
 
-export default DetailsFields
+const mapDispatchToProps = {
+  change,
+  showModal,
+}
+
+export default connect(null, mapDispatchToProps)(DetailsFields)

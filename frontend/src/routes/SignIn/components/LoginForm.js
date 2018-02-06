@@ -13,17 +13,15 @@ const LoginForm = props => {
         component="input"
         type="input"
         label="Email Address"
-        placeholder="Email Address"
-        className="mts w-100" />
+        placeholder="Email Address" />
       <Field
         name="password"
         component="input"
         type="password"
         label="Password"
-        placeholder="Password"
-        className="mts w-100" />
+        placeholder="Password" />
       <div className="mvs">
-        <button className="ww-btn-primary w-100" type="submit" disabled={ submitting }>
+        <button type="submit" disabled={ submitting }>
           Log In
         </button>
       </div>
