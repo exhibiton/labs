@@ -33,10 +33,10 @@ export default function technologyReducer(state = initialState, action) {
     case CREATE_TECHNOLOGY_SUCCESS:
       return {
         ...state,
-        byId: [...state.byId, action.id],
+        byId: [...state.byId, action.payload.id],
         byHash: {
           ...state.byHash,
-          [action.id]: action.payload,
+          [action.payload.id]: action.payload,
         },
         isLoading: false,
       }
