@@ -35,7 +35,7 @@ export const createTechnology = data => dispatch => {
   
   return axios({
     method: 'POST',
-    url: `${apiEndpoints.api}/technologies`,
+    url: `${apiEndpoints.api}/tools`,
     headers: {
       Authorization: `Bearer ${token}`,
     },
