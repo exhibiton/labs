@@ -5,12 +5,14 @@ import { reducer as modal } from 'redux-modal'
 import locationReducer from './location'
 import authReducer from './reducers/auth-reducer'
 import categoryReducer from './reducers/category-reducer'
+import technologyReducer from './reducers/technology-reducer'
 
 export const makeRootReducer = asyncReducers => combineReducers({
   location: locationReducer,
   form: reduxFormReducer,
   auth: authReducer,
   categories: categoryReducer,
+  technologies: technologyReducer,
   modal,
   ...asyncReducers,
 })

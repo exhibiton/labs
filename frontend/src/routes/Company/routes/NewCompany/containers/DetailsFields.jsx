@@ -74,7 +74,7 @@ const DetailsFields = ({ categories, change, showModal }) => {
             <button
               onClick={() => showModal('defaultModal', { title: 'Add Categories', content: <CategoryForm /> })}
               type="button"
-              className="btn-dark">+ Add category</button>
+              className="btn pl-0">or <span className="font-weight-bold">Add New</span></button>
           </div>
         </div>
       </Col>

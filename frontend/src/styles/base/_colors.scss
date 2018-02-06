@@ -1,6 +1,8 @@
 $color-map: (
   'yellow': #ffed98,
   'grey': #787882,
+  'dark': #2a2c41,
+  'red': #d9534f,
 );
 
 @mixin color-classes($color-name, $color) {
