@@ -1,6 +1,5 @@
 class CategoriesController < BaseController
   before_action :authenticate_request!
-  before_action :set_company, only: [:create]
 
   # GET /categories
   def index
@@ -19,7 +18,6 @@ class CategoriesController < BaseController
   # POST /categories
   def create
     if category = Category.create!(category_params)
-      category.companies << @company if @company
       json_response(category, :created)
     else
       head :unprocessable_entity
