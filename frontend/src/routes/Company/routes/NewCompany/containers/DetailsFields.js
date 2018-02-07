@@ -4,11 +4,11 @@ import { Field, change } from 'redux-form'
 import { show as showModal } from 'redux-modal'
 import PropTypes from 'prop-types'
 import { Row, Col } from 'reactstrap'
-import Dropzone from 'react-dropzone'
 import Input from '../../../../../components/Input'
 import Textarea from '../../../../../components/Textarea'
 import Select from '../../../../../components/Select'
 import CategoryForm from './CategoryForm'
+import UploadImage from './UploadImage'
 
 const DetailsFields = ({ categories, change, showModal }) => {
   if (!categories.length) return null
@@ -41,28 +41,9 @@ const DetailsFields = ({ categories, change, showModal }) => {
         </div>
       </Col>
       <Col>
-        <Dropzone
-          className="row no-gutters drag-and-drop-container"
-          multiple={ false }
-          onDrop={ (filesToUpload, _e) =>
-            change('companyForm', 'company.logo', filesToUpload[0]) }>
-          <div className="drag-and-drop-container__image">
-            <Field
-              name="logo"
-              component={ ({ input }) => {
-                if (input.value) {
-                  return <img src={ input.value.preview } alt="Logo preview" />
-                }
-                return <div>Your logo</div>
-              } } />
-          </div>
-          <div className="drag-and-drop-container__info">
-            <div className="drag-and-drop-container__info-title">Drag & Drop</div>
-            <div className="drag-and-drop-container__info-description">
-              to change logo, or <span>browse</span>
-            </div>
-          </div>
-        </Dropzone>
+        <UploadImage
+          name="logo"
+          change={image => change('companyForm', 'company.logo', image)} />
         <div>
           <label>Categories</label>
           <Field

@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { FormSection, reduxForm } from 'redux-form'
 import styled from 'styled-components'
-import './FormStyles.scss'
 
 const StyledButton = styled.button`
   color: #fff;
@@ -31,7 +30,8 @@ const CompanyForm = props => {
 
       <div className="mvm">
         <StyledButton
-          disable={ `${submitting}` }
+          className="btn"
+          disabled={ submitting }
           type="submit">
           Create Company
         </StyledButton>

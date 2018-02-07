@@ -42,7 +42,7 @@ export const TechnologyListItem = ({ technology, selectedTechnologiesById, selec
     }
   }}>
     <div className="icon mr-2 pr-2">
-      <StyledImg src={ 'https://cdn.playven.com/defaulticon.png' } />
+      <StyledImg src={ technology.icon } />
     </div>
     <div>
       <TechnologyName>{technology.name}</TechnologyName>

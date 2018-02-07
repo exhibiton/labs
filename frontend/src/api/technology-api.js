@@ -37,9 +37,10 @@ export const createTechnology = data => dispatch => {
     method: 'POST',
     url: `${apiEndpoints.api}/tools`,
     headers: {
+      'content-type': 'multipart/form-data',
       Authorization: `Bearer ${token}`,
     },
-    params: data,
+    data,
   }).then(res => {
     try {
       dispatch(createTechnologySuccess(res.data))

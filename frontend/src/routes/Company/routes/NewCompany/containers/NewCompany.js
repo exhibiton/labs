@@ -56,24 +56,24 @@ class NewCompany extends Component {
 
   handleCompanyCreate = ({ company }) => {
     const { createCompany, selectedUsersById, selectedTechnologiesById } = this.props
-
+  
     const data = {
       ...company,
       users: selectedUsersById,
       tools: selectedTechnologiesById
     }
-    
+  
     // sending files - have to send FormData (multipart), not the plain JSON object
     const formData = new FormData()
-
+  
     _.each(data, (companyValue, companyKey) => {
       if (_.isArray(companyValue)) {
         return _.each(companyValue, value => formData.append(`${companyKey}[]`, value))
       }
-
+    
       return formData.append(companyKey, companyValue)
     })
-
+  
     return createCompany(formData)
   }
 

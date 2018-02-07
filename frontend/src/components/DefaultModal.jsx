@@ -5,8 +5,7 @@ import styled from 'styled-components'
 import { Modal, ModalHeader, ModalBody } from 'reactstrap'
 
 const StyledModal = styled(Modal)`
-  margin-right: 0;
-  margin-top: 0;
+  margin: 0 0 0 auto;
   border-radius: 0;
   height: 100%;
   

@@ -40,7 +40,7 @@ export const TechnologyListSelected = ({ selectedTechnologies, deselectTechnolog
     <Row className="no-gutters mt-2">
       {selectedTechnologies.map(technology =>
         <StyledTechnologySelected key={ technology.id }>
-          <StyledImg src={ 'https://cdn.playven.com/defaulticon.png' } />
+          <StyledImg src={ technology.icon } />
           <div>{technology.name}</div>
           <StyledFA
             onClick={() => deselectTechnology(technology.id)}
