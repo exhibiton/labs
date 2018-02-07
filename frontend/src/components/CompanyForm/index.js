@@ -190,7 +190,7 @@ class CompanyForm extends Component {
 const mapStateToProps = ({ categories, technologies, users, company }) => {
   return {
     company: company.data,
-    isLoading: categories.isLoading || technologies.isLoading || users.isLoading,
+    isLoading: categories.isLoading && technologies.isLoading && users.isLoading,
     users: users.byId.map(id => users.byHash[id]),
     categories: categories.byId.map(id => categories.byHash[id]),
     technologies: technologies.byId.map(id => technologies.byHash[id]),

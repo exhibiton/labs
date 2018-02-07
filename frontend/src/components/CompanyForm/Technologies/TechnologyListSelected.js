@@ -63,7 +63,7 @@ const mapStateToProps = state => {
   const { technologies } = state
   
   return {
-    selectedTechnologies: selectedTechnologiesById.map(id => technologies.byHash[id]),
+    selectedTechnologies: technologies.byId.length ? selectedTechnologiesById.map(id => technologies.byHash[id]) : [],
   }
 }
 

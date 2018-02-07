@@ -24,7 +24,7 @@ export const login = data => dispatch => {
     const user = jwt.decode(token)
 
     dispatch(loginSuccess(user))
-    browserHistory.push('/')
+    browserHistory.push('/company')
   }).catch(error => {
     dispatch(loginFail(error))
   })
