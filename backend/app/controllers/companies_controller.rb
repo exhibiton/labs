@@ -32,8 +32,15 @@ class CompaniesController < BaseController
   def update
     if @company.users.include?(@user)
       if @company.update(company_params)
-      @company.users << User.find(params[:new_user_id]) if params[:new_user_id].present?
-      json_response(@company)
+        users = User.where(id: params[:users])
+        categories = Category.where(id: params[:categories])
+        tools = Tool.where(id: params[:tools])
+
+        @company.tools = tools if tools.present?
+        @company.users = users if users.present?
+        @company.categories = categories if categories.present?
+        
+        json_response(@company)
       else
         head :unprocessable_entity
       end
