@@ -5,7 +5,7 @@ const Select = props =>
   <ReactSelect
     {...props}
     value={props.input.value}
-    onBlur={() => props.input.onBlur(input.value)}
+    onBlur={() => props.input.onBlur(props.input.value)}
     onChange={event => {
       let result
       

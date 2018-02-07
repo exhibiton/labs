@@ -3,51 +3,51 @@ import { hide as hideModal } from 'redux-modal'
 import apiEndpoints from '../../config/apis'
 import { getToken } from './utils/authorization-token'
 import {
-  categoriesLoading,
-  categoriesLoadingFail,
-  categoriesLoadingSuccess,
-  createCategoryLoading,
-  createCategoryFail,
-  createCategorySuccess
-} from '../actions/category-actions'
+  technologiesLoading,
+  technologiesLoadingFail,
+  technologiesLoadingSuccess,
+  createTechnologyLoading,
+  createTechnologyFail,
+  createTechnologySuccess
+} from '../actions/technology-actions'
 
-export const getCategories = data => dispatch => {
-  dispatch(categoriesLoading())
+export const getTechnologies = data => dispatch => {
+  dispatch(technologiesLoading())
   const token = getToken()
   
   return axios({
     method: 'GET',
-    url: `${apiEndpoints.api}/categories/select_options`,
+    url: `${apiEndpoints.api}/tools`,
     params: data,
     headers: {
       Authorization: `Bearer ${token}`,
     },
   }).then(res => {
-    dispatch(categoriesLoadingSuccess(res.data))
+    dispatch(technologiesLoadingSuccess(res.data))
   }).catch(error => {
-    dispatch(categoriesLoadingFail(error))
+    dispatch(technologiesLoadingFail(error))
   })
 }
 
-export const createCategory = data => dispatch => {
-  dispatch(createCategoryLoading())
+export const createTechnology = data => dispatch => {
+  dispatch(createTechnologyLoading())
   const token = getToken()
   
   return axios({
     method: 'POST',
-    url: `${apiEndpoints.api}/categories`,
+    url: `${apiEndpoints.api}/tools`,
     headers: {
       Authorization: `Bearer ${token}`,
     },
     params: data,
   }).then(res => {
     try {
-      dispatch(createCategorySuccess(res.data))
+      dispatch(createTechnologySuccess(res.data))
       dispatch(hideModal('defaultModal'))
     } catch (e) {
       console.log(e)
     }
   }).catch(error => {
-    dispatch(createCategoryFail(error))
+    dispatch(createTechnologyFail(error))
   })
 }

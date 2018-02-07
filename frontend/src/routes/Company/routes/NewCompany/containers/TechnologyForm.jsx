@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { reduxForm, Field } from 'redux-form'
 import styled from 'styled-components'
-import { createCategory } from '../../../../../api/category-api'
+import { createTechnology } from '../../../../../api/technology-api'
 import Input from '../../../../../components/Input'
 
 const StyledButton = styled.button`
@@ -19,22 +19,22 @@ const StyledButton = styled.button`
   width: 100%;
 `
 
-const CategoryForm = props => {
+const TechnologyForm = props => {
   const {
     error,
     handleSubmit,
     submitting,
-    createCategory,
+    createTechnology,
   } = props
 
   return (
-    <form onSubmit={ handleSubmit(createCategory) }>
-      <label htmlFor="category">Category Name</label>
+    <form onSubmit={ handleSubmit(createTechnology) }>
+      <label htmlFor="technology">Technology Name</label>
       <Field
-        id="category"
+        id="technology"
         component={Input}
         name="name"
-        placeholder="SaaS"
+        placeholder="JavaScript"
         type="text" />
       
       <div>
@@ -45,20 +45,20 @@ const CategoryForm = props => {
   )
 }
 
-CategoryForm.propTypes = {
+TechnologyForm.propTypes = {
   change: PropTypes.func.isRequired,
   error: PropTypes.string,
   submitting: PropTypes.bool.isRequired,
   handleSubmit: PropTypes.func.isRequired,
-  createCategory: PropTypes.func.isRequired,
+  createTechnology: PropTypes.func.isRequired,
 }
 
 const mapDispatchToProps = {
-  createCategory,
+  createTechnology,
 }
 
-const ConnectedCategoryForm = connect(null, mapDispatchToProps)(CategoryForm)
+const ConnectedTechnologyForm = connect(null, mapDispatchToProps)(TechnologyForm)
 
 export default reduxForm({
-  form: 'categoryForm',
-})(ConnectedCategoryForm)
+  form: 'technologyForm',
+})(ConnectedTechnologyForm)

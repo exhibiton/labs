@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 const socials = [
   {
@@ -15,8 +15,8 @@ const socials = [
   },
 ]
 
-export const SocialFooter = () => (
-  <div className="flex-row flex-hc">
+export const SocialFooter = () =>
+  <div className="px-4">
     <ul className="list-inline">
       <li className="list-inline-item">Follow Us:</li>
       {socials.map((social, i) => (
@@ -26,6 +26,5 @@ export const SocialFooter = () => (
       ))}
     </ul>
   </div>
-)
 
 export default SocialFooter

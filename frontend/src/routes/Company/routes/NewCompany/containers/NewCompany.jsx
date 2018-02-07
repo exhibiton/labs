@@ -5,10 +5,10 @@ import _ from 'lodash'
 import { Container, TabContent, TabPane, Nav, NavItem, NavLink, Row, Col } from 'reactstrap'
 import styled from 'styled-components'
 import { getCategories } from '../../../../../api/category-api'
+import { getTechnologies } from '../../../../../api/technology-api'
 import {
   createCompany,
   getUsers,
-  getTechnologies,
 } from '../modules/CreateCompanyApi'
 import CompanyForm from './CompanyForm'
 import DetailsFields from './DetailsFields'
@@ -158,15 +158,17 @@ class NewCompany extends Component {
 }
 
 const mapStateToProps = state => {
+  const {
+    categories,
+    technologies,
+  } = state
   const { currentUser } = state.auth
   const {
     isLoading,
     error,
-    categories,
     selectedCategories,
     users,
     selectedUsers,
-    technologies,
     selectedTechnologies,
   } = state.createCompany
 
@@ -174,7 +176,7 @@ const mapStateToProps = state => {
     currentUser,
     isLoading,
     error,
-    categories,
+    categories: categories.byId.map(id => categories.byHash[id]),
     users: users.byId.map(id => users.byHash[id]),
     selectedUsersById: selectedUsers.byId,
     technologies: technologies.byId.map(id => technologies.byHash[id]),

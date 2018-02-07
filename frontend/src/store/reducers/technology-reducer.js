@@ -1,12 +1,12 @@
 import _ from 'lodash'
 import {
-  CREATE_CATEGORY_LOADING,
-  CREATE_CATEGORY_FAIL,
-  CREATE_CATEGORY_SUCCESS,
-  CATEGORIES_LOADING,
-  CATEGORIES_LOADING_FAIL,
-  CATEGORIES_LOADING_SUCCESS,
-} from '../../actions/category-actions'
+  CREATE_TECHNOLOGY_LOADING,
+  CREATE_TECHNOLOGY_FAIL,
+  CREATE_TECHNOLOGY_SUCCESS,
+  TECHNOLOGIES_LOADING,
+  TECHNOLOGIES_LOADING_FAIL,
+  TECHNOLOGIES_LOADING_SUCCESS,
+} from '../../actions/technology-actions'
 
 const initialState = {
   byId: [],
@@ -14,14 +14,14 @@ const initialState = {
   isLoading: false,
 }
 
-export default function categoryReducer(state = initialState, action) {
+export default function technologyReducer(state = initialState, action) {
   switch (action.type) {
-    case CREATE_CATEGORY_LOADING:
+    case CREATE_TECHNOLOGY_LOADING:
       return {
         ...state,
         isLoading: true,
       }
-    case CREATE_CATEGORY_FAIL:
+    case CREATE_TECHNOLOGY_FAIL:
       return {
         ...state,
         messages: {
@@ -30,26 +30,23 @@ export default function categoryReducer(state = initialState, action) {
         },
         isLoading: false,
       }
-    case CREATE_CATEGORY_SUCCESS:
+    case CREATE_TECHNOLOGY_SUCCESS:
       return {
         ...state,
-        byId: [...state.byId, action.id],
+        byId: [...state.byId, action.payload.id],
         byHash: {
           ...state.byHash,
-          [action.id]: {
-            value: action.payload.id,
-            label: action.payload.name,
-          },
+          [action.payload.id]: action.payload,
         },
         isLoading: false,
       }
   
-    case CATEGORIES_LOADING:
+    case TECHNOLOGIES_LOADING:
       return {
         ...state,
         isLoading: true,
       }
-    case CATEGORIES_LOADING_FAIL:
+    case TECHNOLOGIES_LOADING_FAIL:
       return {
         ...state,
         messages: {
@@ -58,11 +55,11 @@ export default function categoryReducer(state = initialState, action) {
         },
         isLoading: false,
       }
-    case CATEGORIES_LOADING_SUCCESS:
+    case TECHNOLOGIES_LOADING_SUCCESS:
       return {
         ...state,
-        byId: _.map(action.payload, 'value'),
-        byHash: _.keyBy(action.payload, 'value'),
+        byId: _.map(action.payload, 'id'),
+        byHash: _.keyBy(action.payload, 'id'),
         isLoading: false,
       }
       

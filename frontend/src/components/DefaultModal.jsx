@@ -31,6 +31,10 @@ const StyledModalHeader = styled(ModalHeader)`
   }
 `
 
+const StyledModalBody = styled(ModalBody)`
+  padding: 1rem 2rem;
+`
+
 const DefaultModal = ({ show, handleHide, title, content }) =>
   <div>
     <StyledModal
@@ -38,7 +42,7 @@ const DefaultModal = ({ show, handleHide, title, content }) =>
       toggle={handleHide}
       isOpen={show}>
       <StyledModalHeader>{title}</StyledModalHeader>
-      <ModalBody>{content}</ModalBody>
+      <StyledModalBody>{content}</StyledModalBody>
     </StyledModal>
   </div>
 

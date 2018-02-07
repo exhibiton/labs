@@ -54,24 +54,6 @@ export const getUsersByTerm = term => dispatch => {
   })
 }
 
-export const getTechnologies = data => dispatch => {
-  dispatch(getTechnologiesLoading())
-  const token = getToken()
-
-  return axios({
-    method: 'GET',
-    url: `${apiEndpoints.api}/tools`,
-    params: data,
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  }).then(res => {
-    dispatch(getTechnologiesSuccess(res.data))
-  }).catch(error => {
-    dispatch(getTechnologiesFail(error))
-  })
-}
-
 export const getTechnologiesByTerm = term => dispatch => {
   dispatch(getTechnologiesLoading())
   const token = getToken()

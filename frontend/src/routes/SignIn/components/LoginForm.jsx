@@ -1,27 +1,28 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Field, reduxForm } from 'redux-form'
-import propTypes from 'prop-types'
+import Input from '../../../components/Input'
 
 const LoginForm = props => {
   const { error, handleSubmit, submitting } = props;
 
   return (
-    <form className="mts mbm" onSubmit={ handleSubmit }>
-      {error && <div className="mbs color-red"><strong>{error}</strong></div>}
+    <form onSubmit={ handleSubmit }>
+      {error && <div className="mb-3 color-red"><strong>{error}</strong></div>}
       <Field
+        className="mb-3"
+        component={Input}
         name="email"
-        component="input"
         type="input"
-        label="Email Address"
         placeholder="Email Address" />
       <Field
+        className="mb-3"
+        component={Input}
         name="password"
-        component="input"
         type="password"
-        label="Password"
         placeholder="Password" />
       <div className="mvs">
-        <button type="submit" disabled={ submitting }>
+        <button className="btn btn-dark" type="submit" disabled={ submitting }>
           Log In
         </button>
       </div>
@@ -30,9 +31,9 @@ const LoginForm = props => {
 }
 
 LoginForm.propTypes = {
-  error: propTypes.string,
-  handleSubmit: propTypes.func.isRequired,
-  submitting: propTypes.bool,
+  error: PropTypes.string,
+  handleSubmit: PropTypes.func.isRequired,
+  submitting: PropTypes.bool,
 }
 
 export default reduxForm({

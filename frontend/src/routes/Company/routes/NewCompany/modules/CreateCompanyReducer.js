@@ -21,10 +21,6 @@ const initialState = {
   error: null,
   messages: {},
   selectedCategories: [],
-  technologies: {
-    byId: [],
-    byHash: {},
-  },
   selectedTechnologies: {
     byId: [],
     byHash: {},
@@ -90,16 +86,6 @@ export default function createCompanyReducer(state = initialState, action) {
         },
       }
 
-    case GET_TECHNOLOGIES_SUCCESS:
-      return {
-        ...state,
-        technologies: {
-          byId: _.map(action.payload, 'id'),
-          byHash: _.keyBy(action.payload, 'id'),
-        },
-        isLoading: false,
-      }
-
     case SELECT_TECHNOLOGY:
       return {
         ...state,
@@ -120,22 +106,6 @@ export default function createCompanyReducer(state = initialState, action) {
         selectedTechnologies: {
           byId: state.selectedTechnologies.byId.filter(item => item !== action.id),
           byHash: state.selectedTechnologies.byHash,
-        },
-      }
-
-    case GET_TECHNOLOGIES_LOADING:
-      return {
-        ...state,
-        isLoading: true,
-      }
-
-    case GET_TECHNOLOGIES_FAIL:
-      return {
-        ...state,
-        isLoading: false,
-        messages: {
-          type: 'fail',
-          reason: action.payload,
         },
       }
 
