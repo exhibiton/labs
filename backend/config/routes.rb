@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :users, only: [:index, :update, :create] do
+  resources :users, only: [:index, :show, :update, :create] do
     post :upload_photo
     collection do
       get :select_options
