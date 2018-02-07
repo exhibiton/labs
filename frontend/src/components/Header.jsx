@@ -24,7 +24,10 @@ const Header = ({ logout }) =>
     <Container>
       <Row className="align-items-center justify-content-between">
         <Link to="/"><StyledLogo /></Link>
-        <div><button className="btn" onClick={ logout }>Logout</button></div>
+        <div>
+          <Link to="/profile">Profile</Link>
+          <button className="btn" onClick={ logout }>Logout</button>
+        </div>
       </Row>
     </Container>
     <DefaultModal />

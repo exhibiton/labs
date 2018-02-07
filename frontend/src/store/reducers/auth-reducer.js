@@ -1,9 +1,9 @@
 import {
-  LOGIN_SUCCESS,
   LOGIN_FAIL,
   LOGIN_LOADING,
+  LOGIN_SUCCESS,
   LOGOUT,
-  UPDATE_USER,
+  UPDATE_USER_SUCCESS,
 } from '../../actions/auth-actions'
 
 const initialState = {
@@ -18,7 +18,7 @@ export default function authReducer(state = initialState, action) {
   switch (action.type) {
     case LOGIN_SUCCESS:
       return {
-        ...initialState,
+        ...state,
         currentUser: action.payload,
         isSignedIn: true,
         messages: {
@@ -27,28 +27,28 @@ export default function authReducer(state = initialState, action) {
         },
       }
 
-    case UPDATE_USER:
+    case UPDATE_USER_SUCCESS:
       return {
-        ...initialState,
+        ...state,
         currentUser: action.payload,
       }
 
     case LOGIN_LOADING:
       return {
-        ...initialState,
+        ...state,
         isSigningIn: true,
       }
 
     case LOGOUT:
       return {
-        ...initialState,
+        ...state,
         currentUser: {},
         isSignedIn: false,
       }
 
     case LOGIN_FAIL:
       return {
-        ...initialState,
+        ...state,
         messages: {
           type: 'fail',
           reason: action.reason,
