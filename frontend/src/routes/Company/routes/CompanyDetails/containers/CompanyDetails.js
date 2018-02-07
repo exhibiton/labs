@@ -1,19 +1,21 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-
-import { getCompany } from '../modules/GetCompanyApi'
+import { connect } from 'react-redux'
+import _ from 'lodash'
+import { getCompany } from '../../../../../api/company-api'
 import UserList from './UserList'
 import ToolList from './ToolList'
-
 
 class CompanyDetails extends React.Component {
   componentDidMount() {
     this.props.getCompany(this.props.params.id)
   }
-  render() {
-    const company = this.props.companyDetails.company
 
+  render() {
+    const company = this.props.company
+
+    if (_.isEmpty(company)) return null
+    
     return (
       <div className="">
         <div className="mhxxl phxxl  flex-row flex-hc">
@@ -32,23 +34,20 @@ class CompanyDetails extends React.Component {
   }
 }
 
-const mapStateToProps = state => (
-  { companyDetails: state.companyDetails }
-)
+const mapStateToProps = ({ company })  => ({
+  company: company.data
+})
 
 const mapDispatchToProps = {
   getCompany,
 }
 
 CompanyDetails.propTypes = {
-  companyDetails: PropTypes.arrayOf(PropTypes.shape({
-    company: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-    }),
-  })).isRequired,
+  company: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+  }),
   params: PropTypes.objectOf(PropTypes.string),
   getCompany: PropTypes.func.isRequired,
 }
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(CompanyDetails)

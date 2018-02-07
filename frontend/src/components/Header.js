@@ -1,11 +1,9 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { Link } from 'react-router'
-import { connect } from 'react-redux'
-import { logout } from '../api/auth-api'
 import styled from 'styled-components'
 import { Container, Row } from 'reactstrap'
 import DefaultModal from './DefaultModal'
+import ProfileNav from './ProfileNav'
 
 // TODO: Use SVG
 import labsLogo from '../assets/weworklabslogo.png'
@@ -19,24 +17,15 @@ const StyledLogo = styled.img.attrs({ alt: 'Labs logo', src: labsLogo })`
   height: 2.8rem;
 `
 
-const Header = ({ logout }) =>
+const Header = () =>
   <StyledHeader>
     <Container>
       <Row className="align-items-center justify-content-between">
         <Link to="/"><StyledLogo /></Link>
-        <div>
-          <Link to="/profile">Profile</Link>
-          <button className="btn" onClick={ logout }>Logout</button>
-        </div>
+        <ProfileNav />
       </Row>
     </Container>
     <DefaultModal />
   </StyledHeader>
 
-Header.propTypes = {
-  logout: PropTypes.func.isRequired,
-}
-
-const mapDispatchToProps = { logout }
-
-export default connect(null, mapDispatchToProps)(Header)
+export default Header

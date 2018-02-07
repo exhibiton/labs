@@ -2,11 +2,10 @@ import React from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import FA from 'react-fontawesome'
-import { getUsersByTerm } from '../../modules/CreateCompanyApi'
+import { getTechnologiesByTerm } from '../../../api/technology-api'
 
 const StyledSearch = styled.div`
   position: relative;
-  margin: 0 0 2.5rem;
 `
 
 const StyledInput = styled.input`
@@ -24,16 +23,16 @@ const StyledFA = styled(FA)`
   transform: translateY(-50%);
 `
 
-export const Search = ({ getUsersByTerm }) =>
+export const Search = ({ getTechnologiesByTerm }) =>
   <StyledSearch>
     <StyledFA name="search" />
     <StyledInput
-      onChange={ e => getUsersByTerm(e.target.value)}
-      placeholder="Search by name or email" />
+      onChange={ e => getTechnologiesByTerm(e.target.value)}
+      placeholder="Search technologies..." />
   </StyledSearch>
 
 const mapDispatchToProps = {
-  getUsersByTerm,
+  getTechnologiesByTerm,
 }
 
 export default connect(null, mapDispatchToProps)(Search)

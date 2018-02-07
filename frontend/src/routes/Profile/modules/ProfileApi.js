@@ -1,7 +1,7 @@
 // node modules
 import axios from 'axios'
-import apiEndpoints from '../../../../../../config/apis'
-import { getToken } from '../../../../../api/utils/authorization-token'
+import apiEndpoints from '../../../../config/apis'
+import { getToken } from '../../../api/utils/authorization-token'
 
 import {
   getProfileFailed,
@@ -11,7 +11,7 @@ import {
   updateProfileLoading,
 } from './ProfileActions'
 
-import { updateUserSuccess } from '../../../../../actions/auth-actions'
+import { updateUserSuccess } from '../../../actions/auth-actions'
 
 export const getProfile = id => dispatch => {
   dispatch(getProfileLoading())

@@ -14,7 +14,7 @@ const StyledButton = styled.button`
   line-height: 1;
 `
 
-const CompanyForm = props => {
+const Form = props => {
   const {
     error,
     handleSubmit,
@@ -24,9 +24,7 @@ const CompanyForm = props => {
 
   return (
     <form onSubmit={ handleSubmit }>
-      <FormSection name="company">
-        {children}
-      </FormSection>
+      {children}
 
       <div className="mvm">
         <StyledButton
@@ -41,7 +39,7 @@ const CompanyForm = props => {
   )
 }
 
-CompanyForm.propTypes = {
+Form.propTypes = {
   change: PropTypes.func.isRequired,
   error: PropTypes.string,
   submitting: PropTypes.bool.isRequired,
@@ -50,4 +48,4 @@ CompanyForm.propTypes = {
 
 export default reduxForm({
   form: 'companyForm',
-})(CompanyForm)
+})(Form)

@@ -52,3 +52,21 @@ export const createTechnology = data => dispatch => {
     dispatch(createTechnologyFail(error))
   })
 }
+
+export const getTechnologiesByTerm = term => dispatch => {
+  dispatch(technologiesLoading())
+  const token = getToken()
+  
+  return axios({
+    method: 'GET',
+    url: `${apiEndpoints.api}/tools/search`,
+    params: { term },
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }).then(res => {
+    dispatch(technologiesLoadingSuccess(res.data))
+  }).catch(error => {
+    dispatch(technologiesLoadingFail(error))
+  })
+}

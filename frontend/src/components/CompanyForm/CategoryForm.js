@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { reduxForm, Field } from 'redux-form'
 import styled from 'styled-components'
-import { createCategory } from '../../../../../api/category-api'
-import Input from '../../../../../components/Input'
+import { createCategory } from '../../api/category-api'
+import Input from '../Input'
 
 const StyledButton = styled.button`
   color: #fff;

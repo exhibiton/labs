@@ -30,10 +30,8 @@ export const login = data => dispatch => {
   })
 }
 
-export function logout() {
-  return dispatch => {
-    destroyToken()
-    dispatch(onLogout())
-    browserHistory.push('/')
-  }
+export const logout = () => dispatch => {
+  destroyToken()
+  dispatch(onLogout())
+  browserHistory.push('/auth')
 }

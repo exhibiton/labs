@@ -6,6 +6,8 @@ import locationReducer from './location'
 import authReducer from './reducers/auth-reducer'
 import categoryReducer from './reducers/category-reducer'
 import technologyReducer from './reducers/technology-reducer'
+import companyReducer from './reducers/company-reducer'
+import userReducer from './reducers/user-reducer'
 
 export const makeRootReducer = asyncReducers => combineReducers({
   location: locationReducer,
@@ -13,6 +15,8 @@ export const makeRootReducer = asyncReducers => combineReducers({
   auth: authReducer,
   categories: categoryReducer,
   technologies: technologyReducer,
+  users: userReducer,
+  company: companyReducer,
   modal,
   ...asyncReducers,
 })

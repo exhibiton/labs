@@ -1,9 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { arrayPush, arrayRemove, formValueSelector } from 'redux-form'
 import FA from 'react-fontawesome'
 import styled from 'styled-components'
 import { Row } from 'reactstrap'
-import { selectUser, deselectUser } from '../../modules/CreateCompanyActions'
 
 const StyledUserListItem = styled(Row)
   .attrs({ className: 'no-gutters justify-content-between mb-5' })`
@@ -38,7 +38,7 @@ const StyledImg = styled.img`
   display: block;
 `
 
-export const UserListItem = ({ user, selectUser, deselectUser, selectedUsersById }) =>
+export const UserListItem = ({ user, arrayPush, arrayRemove, selectedUsersById }) =>
   <StyledUserListItem>
     <Row className="no-gutters align-items-center">
       <div className="mr-3 pr-3">
@@ -56,24 +56,25 @@ export const UserListItem = ({ user, selectUser, deselectUser, selectedUsersById
     {selectedUsersById.includes(user.id) ?
       <StyledSelected
         isSelected={selectedUsersById.includes(user.id)}
-        onClick={() => deselectUser(user.id)}>
+        onClick={() => arrayRemove('companyForm', 'users', selectedUsersById.indexOf(user.id))}>
         Selected <StyledFA name="check-circle" />
       </StyledSelected>
       :
       <StyledInvite
         isSelected={selectedUsersById.includes(user.id)}
-        onClick={() => selectUser(user.id, user)}>
+        onClick={() => arrayPush('companyForm', 'users', user.id)}>
         Invite <StyledFA name="plus-circle" />
       </StyledInvite>}
   </StyledUserListItem>
 
-const mapStateToProps = ({ createCompany }) => ({
-  selectedUsersById: createCompany.selectedUsers.byId
+const selectCompanyForm = formValueSelector('companyForm')
+const mapStateToProps = state => ({
+  selectedUsersById: selectCompanyForm(state, 'users') || []
 })
 
 const mapDispatchToProps = {
-  selectUser,
-  deselectUser,
+  arrayPush,
+  arrayRemove,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserListItem)

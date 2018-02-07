@@ -1,6 +1,6 @@
-import { injectReducer } from '../../../../store/reducers'
+import { injectReducer } from '../../store/reducers'
 
-export const ProfileRoute = store => ({
+export default store => ({
   path: '/profile',
   getComponent(nextState, cb) {
     require.ensure([], require => {

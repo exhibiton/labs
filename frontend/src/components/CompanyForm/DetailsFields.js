@@ -4,9 +4,9 @@ import { Field, change } from 'redux-form'
 import { show as showModal } from 'redux-modal'
 import PropTypes from 'prop-types'
 import { Row, Col } from 'reactstrap'
-import Input from '../../../../../components/Input'
-import Textarea from '../../../../../components/Textarea'
-import Select from '../../../../../components/Select'
+import Input from '../Input'
+import Textarea from '../Textarea'
+import Select from '../Select'
 import CategoryForm from './CategoryForm'
 import UploadImage from './UploadImage'
 
@@ -43,7 +43,7 @@ const DetailsFields = ({ categories, change, showModal }) => {
       <Col>
         <UploadImage
           name="logo"
-          change={image => change('companyForm', 'company.logo', image)} />
+          change={image => change('companyForm', 'logo', image)} />
         <div>
           <label>Categories</label>
           <Field

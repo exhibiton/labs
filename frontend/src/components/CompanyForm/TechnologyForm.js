@@ -4,8 +4,8 @@ import { connect } from 'react-redux'
 import { reduxForm, Field, change } from 'redux-form'
 import styled from 'styled-components'
 import _ from 'lodash'
-import { createTechnology } from '../../../../../api/technology-api'
-import Input from '../../../../../components/Input'
+import { createTechnology } from '../../api/technology-api'
+import Input from '../Input'
 import UploadImage from './UploadImage'
 
 const StyledButton = styled.button`

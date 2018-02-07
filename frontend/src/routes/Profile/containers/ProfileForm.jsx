@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { Col, Container, Row } from 'reactstrap'
 import { reduxForm, Field } from 'redux-form'
-import Input from '../../../../../components/Input'
+import Input from '../../../components/Input'
 import styled from 'styled-components'
 
 const StyledButton = styled.button`
@@ -109,7 +109,6 @@ let Form = props => {
   )
 }
 
-
 Form.propTypes = {
   error: PropTypes.string,
   submitting: PropTypes.bool.isRequired,
@@ -120,8 +119,8 @@ Form = reduxForm({
   form: 'profileForm',
 })(Form)
 
-export default connect(
-  state => ({
-    initialValues: state.profile.user,
-  })
-)(Form)
+const mapStateToProps = state => ({
+  initialValues: state.profile.user,
+})
+
+export default connect(mapStateToProps)(Form)

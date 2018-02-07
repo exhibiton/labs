@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { arrayPush, arrayRemove, formValueSelector } from 'redux-form'
 import styled from 'styled-components'
-import { selectTechnology, deselectTechnology } from '../../modules/CreateCompanyActions'
 
 const StyledTechnologyListItem = styled.div.attrs({ className: 'row align-items-center' })`
   width: 50%;
@@ -31,14 +31,14 @@ const TechnologyDescription = styled.div`
   color: #787882;
 `
 
-export const TechnologyListItem = ({ technology, selectedTechnologiesById, selectTechnology, deselectTechnology }) =>
+export const TechnologyListItem = ({ arrayPush, arrayRemove, technology, selectedTechnologiesById }) =>
   <StyledTechnologyListItem
     isSelected={selectedTechnologiesById.includes(technology.id)}
     onClick={() => {
     if (selectedTechnologiesById.includes(technology.id)) {
-      deselectTechnology(technology.id)
+      arrayRemove('companyForm', 'tools', selectedTechnologiesById.indexOf(technology.id))
     } else {
-      selectTechnology(technology.id, technology)
+      arrayPush('companyForm', 'tools', technology.id)
     }
   }}>
     <div className="icon mr-2 pr-2">
@@ -50,13 +50,14 @@ export const TechnologyListItem = ({ technology, selectedTechnologiesById, selec
     </div>
   </StyledTechnologyListItem>
 
-const mapStateToProps = ({ createCompany }) => ({
-  selectedTechnologiesById: createCompany.selectedTechnologies.byId
+const selectCompanyForm = formValueSelector('companyForm')
+const mapStateToProps = state => ({
+  selectedTechnologiesById: selectCompanyForm(state, 'tools') || []
 })
 
 const mapDispatchToProps = {
-  selectTechnology,
-  deselectTechnology
+  arrayPush,
+  arrayRemove
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(TechnologyListItem)

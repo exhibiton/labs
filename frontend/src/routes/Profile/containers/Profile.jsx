@@ -9,6 +9,8 @@ class Profile extends React.Component {
   componentDidMount() {
     const { getProfile, userId } = this.props
 
+    console.log(this.props)
+    
     getProfile(userId)
   }
 
@@ -28,11 +30,10 @@ class Profile extends React.Component {
   }
 }
 
-const mapStateToProps = state => (
-  { userId: state.auth.currentUser.id,
-    user: state.profile.user,
-  }
-)
+const mapStateToProps = state => ({
+  userId: state.auth.currentUser.id,
+  user: state.profile.user,
+})
 
 const mapDispatchToProps = {
   getProfile,
