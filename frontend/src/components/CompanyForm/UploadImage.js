@@ -46,8 +46,9 @@ const UploadImage = ({ name, change }) => {
         <Field
           name={ name }
           component={ ({ input }) => {
+            console.log(input)
             if (input.value) {
-              return <img src={ input.value.preview } alt="Logo preview" />
+              return <img src={ input.value.preview || input.value } alt="Logo preview" />
             }
             return <div>Your logo</div>
           } } />
