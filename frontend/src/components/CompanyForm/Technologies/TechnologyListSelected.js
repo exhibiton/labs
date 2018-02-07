@@ -34,7 +34,8 @@ const StyledImg = styled.img`
 `
 
 export const TechnologyListSelected = ({ selectedTechnologies }) => {
-  
+  if (!selectedTechnologies.length) return null
+
   const renderArray = ({ fields }) =>
     fields.map((value, index) => {
       const technology = selectedTechnologies[index]

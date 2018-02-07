@@ -9,7 +9,7 @@ import {
 const initialState = {
   currentUser: {},
   isSignedIn: false,
-  isSigningIn: false,
+  isSigningIn: true,
   error: null,
   messages: {},
 }
@@ -21,6 +21,7 @@ export default function authReducer(state = initialState, action) {
         ...state,
         currentUser: action.payload,
         isSignedIn: true,
+        isSigningIn: false,
         messages: {
           type: 'success',
           message: 'messages.login.success',
@@ -49,6 +50,8 @@ export default function authReducer(state = initialState, action) {
     case LOGIN_FAIL:
       return {
         ...state,
+        isSigningIn: false,
+        isSignedIn: false,
         messages: {
           type: 'fail',
           reason: action.reason,
