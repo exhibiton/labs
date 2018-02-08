@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 const StyledInput = styled.input`
@@ -9,6 +10,10 @@ const StyledInput = styled.input`
 `
 
 const Input = props =>
-  <StyledInput {...props} {...props.input} />
+  <StyledInput { ...props } { ...props.input } />
+
+Input.propTypes = {
+  input: PropTypes.object.isRequired,
+}
 
 export default Input

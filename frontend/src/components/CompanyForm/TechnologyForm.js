@@ -33,29 +33,27 @@ const TechnologyForm = props => {
   const handleCreateTechnology = data => {
     // sending files - have to send FormData (multipart), not the plain JSON object
     const formData = new FormData()
-  
-    _.each(data, (value, key) => {
-      return formData.append(key, value)
-    })
-  
+
+    _.each(data, (value, key) => formData.append(key, value))
+
     return createTechnology(formData)
   }
-  
+
   return (
     <form onSubmit={ handleSubmit(handleCreateTechnology) }>
       <label htmlFor="technology">Technology Name</label>
       <Field
         className="mb-3"
         id="technology"
-        component={Input}
+        component={ Input }
         name="name"
         placeholder="JavaScript"
         type="text" />
       <UploadImage
         name="icon"
-        change={image => change('technologyForm', 'icon', image)} />
+        change={ image => change('technologyForm', 'icon', image) } />
       <div>
-        <StyledButton className="btn" disabled={submitting} type="submit">Add</StyledButton>
+        <StyledButton className="btn" disabled={ submitting } type="submit">Add</StyledButton>
         {error}
       </div>
     </form>

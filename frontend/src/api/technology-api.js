@@ -8,13 +8,13 @@ import {
   technologiesLoadingSuccess,
   createTechnologyLoading,
   createTechnologyFail,
-  createTechnologySuccess
+  createTechnologySuccess,
 } from '../actions/technology-actions'
 
 export const getTechnologies = data => dispatch => {
   dispatch(technologiesLoading())
   const token = getToken()
-  
+
   return axios({
     method: 'GET',
     url: `${apiEndpoints.api}/tools`,
@@ -32,7 +32,7 @@ export const getTechnologies = data => dispatch => {
 export const createTechnology = data => dispatch => {
   dispatch(createTechnologyLoading())
   const token = getToken()
-  
+
   return axios({
     method: 'POST',
     url: `${apiEndpoints.api}/tools`,
@@ -42,12 +42,8 @@ export const createTechnology = data => dispatch => {
     },
     data,
   }).then(res => {
-    try {
-      dispatch(createTechnologySuccess(res.data))
-      dispatch(hideModal('defaultModal'))
-    } catch (e) {
-      console.log(e)
-    }
+    dispatch(createTechnologySuccess(res.data))
+    dispatch(hideModal('defaultModal'))
   }).catch(error => {
     dispatch(createTechnologyFail(error))
   })
@@ -56,7 +52,7 @@ export const createTechnology = data => dispatch => {
 export const getTechnologiesByTerm = term => dispatch => {
   dispatch(technologiesLoading())
   const token = getToken()
-  
+
   return axios({
     method: 'GET',
     url: `${apiEndpoints.api}/tools/search`,

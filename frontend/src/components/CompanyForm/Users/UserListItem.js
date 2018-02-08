@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { arrayPush, arrayRemove, formValueSelector } from 'redux-form'
 import FA from 'react-fontawesome'
@@ -53,23 +54,34 @@ export const UserListItem = ({ user, arrayPush, arrayRemove, selectedUsersById }
         </div>
       </div>
     </Row>
-    {selectedUsersById.includes(user.id) ?
-      <StyledSelected
-        isSelected={selectedUsersById.includes(user.id)}
-        onClick={() => arrayRemove('companyForm', 'users', selectedUsersById.indexOf(user.id))}>
-        Selected <StyledFA name="check-circle" />
-      </StyledSelected>
-      :
-      <StyledInvite
-        isSelected={selectedUsersById.includes(user.id)}
-        onClick={() => arrayPush('companyForm', 'users', user.id)}>
-        Invite <StyledFA name="plus-circle" />
-      </StyledInvite>}
+    {do {
+      if (selectedUsersById.includes(user.id)) {
+        <StyledSelected
+          isSelected={ selectedUsersById.includes(user.id) }
+          onClick={ () => arrayRemove('companyForm', 'users', selectedUsersById.indexOf(user.id)) }>
+          Selected <StyledFA name="check-circle" />
+        </StyledSelected>
+      }
+      else {
+        <StyledInvite
+          isSelected={ selectedUsersById.includes(user.id) }
+          onClick={ () => arrayPush('companyForm', 'users', user.id) }>
+          Invite <StyledFA name="plus-circle" />
+        </StyledInvite>
+      }
+    }}
   </StyledUserListItem>
+
+UserListItem.propTypes = {
+  user: PropTypes.object,
+  arrayPush: PropTypes.func.isRequired,
+  arrayRemove: PropTypes.func.isRequired,
+  selectedUsersById: PropTypes.arrayOf(PropTypes.number),
+}
 
 const selectCompanyForm = formValueSelector('companyForm')
 const mapStateToProps = state => ({
-  selectedUsersById: selectCompanyForm(state, 'users') || []
+  selectedUsersById: selectCompanyForm(state, 'users') || [],
 })
 
 const mapDispatchToProps = {

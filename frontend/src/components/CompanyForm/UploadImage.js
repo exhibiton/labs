@@ -36,31 +36,28 @@ const StyledInfo = styled.div`
   flex: 1;
 `
 
-const UploadImage = ({ name, change }) => {
-  return (
-    <StyledDropzone
-      className="row no-gutters"
-      multiple={ false }
-      onDrop={ (filesToUpload, _e) => change(filesToUpload[0]) }>
-      <StyledImgContainer>
-        <Field
-          name={ name }
-          component={ ({ input }) => {
-            if (input.value) {
-              return <img src={ input.value.preview || input.value } alt="Logo preview" />
-            }
-            return <div>Your logo</div>
-          } } />
-      </StyledImgContainer>
-      <StyledInfo>
-        <div className="mb-2 font-weight-bold">Drag & Drop</div>
-        <div className="color-grey">
-          to change logo, or <span className="text-underline">browse</span>
-        </div>
-      </StyledInfo>
-    </StyledDropzone>
-  )
-}
+const UploadImage = ({ name, change }) =>
+  <StyledDropzone
+    className="row no-gutters"
+    multiple={ false }
+    onDrop={ filesToUpload => change(filesToUpload[0]) }>
+    <StyledImgContainer>
+      <Field
+        name={ name }
+        component={ ({ input }) => {
+          if (input.value) {
+            return <img src={ input.value.preview || input.value } alt="Logo preview" />
+          }
+          return <div>Your logo</div>
+        } } />
+    </StyledImgContainer>
+    <StyledInfo>
+      <div className="mb-2 font-weight-bold">Drag & Drop</div>
+      <div className="color-grey">
+        to change logo, or <span className="text-underline">browse</span>
+      </div>
+    </StyledInfo>
+  </StyledDropzone>
 
 UploadImage.propTypes = {
   name: PropTypes.string.isRequired,

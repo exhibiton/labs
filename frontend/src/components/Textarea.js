@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 const StyledTextarea = styled.textarea`
@@ -10,6 +11,10 @@ const StyledTextarea = styled.textarea`
 `
 
 const Textarea = props =>
-  <StyledTextarea {...props} {...props.input} />
+  <StyledTextarea { ...props } { ...props.input } />
+
+Textarea.propTypes = {
+  input: PropTypes.object.isRequired,
+}
 
 export default Textarea

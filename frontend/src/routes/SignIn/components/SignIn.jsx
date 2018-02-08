@@ -36,7 +36,7 @@ class SignIn extends React.Component {
         <StyledColBg />
         <StyledCol>
           <div className="text-center">
-            <img width={200} src={ LabsLogo } alt="WeWork Labs Logo" />
+            <img width={ 200 } src={ LabsLogo } alt="WeWork Labs Logo" />
           </div>
           <div className="py-5 px-4">
             <div className="text-center">

@@ -23,8 +23,9 @@ export const getCompanySuccess = payload => ({
   payload,
 })
 
-export const getCompanyFail = () => ({
+export const getCompanyFail = payload => ({
   type: GET_COMPANY_FAIL,
+  payload,
 })
 
 export const getCompanyLoading = () => ({

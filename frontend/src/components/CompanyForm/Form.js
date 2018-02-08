@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { FormSection, reduxForm } from 'redux-form'
+import { reduxForm } from 'redux-form'
 import styled from 'styled-components'
 
 const StyledButton = styled.button`
@@ -40,7 +40,7 @@ const Form = props => {
 }
 
 Form.propTypes = {
-  change: PropTypes.func.isRequired,
+  children: PropTypes.element.isRequired,
   error: PropTypes.string,
   submitting: PropTypes.bool.isRequired,
   handleSubmit: PropTypes.func.isRequired,

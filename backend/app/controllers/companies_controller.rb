@@ -19,7 +19,7 @@ class CompaniesController < BaseController
     company.users << @user if @user
     company.users << additional_users if additional_users.present?
     company.categories << categories if categories.present?
-    render json: { user: current_user, message: "Company Created" }
+    render json: { user: current_user, message: "Company Created" }.merge(current_user.authentication_payload)
   end
 
 

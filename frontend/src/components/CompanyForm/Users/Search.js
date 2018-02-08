@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import FA from 'react-fontawesome'
@@ -28,9 +29,13 @@ export const Search = ({ getUsersByTerm }) =>
   <StyledSearch>
     <StyledFA name="search" />
     <StyledInput
-      onChange={ e => getUsersByTerm(e.target.value)}
+      onChange={ e => getUsersByTerm(e.target.value) }
       placeholder="Search by name or email" />
   </StyledSearch>
+
+Search.propTypes = {
+  getUsersByTerm: PropTypes.func.isRequired,
+}
 
 const mapDispatchToProps = {
   getUsersByTerm,

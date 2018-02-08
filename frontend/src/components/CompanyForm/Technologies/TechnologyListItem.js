@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { arrayPush, arrayRemove, formValueSelector } from 'redux-form'
 import styled from 'styled-components'
@@ -33,14 +34,15 @@ const TechnologyDescription = styled.div`
 
 export const TechnologyListItem = ({ arrayPush, arrayRemove, technology, selectedTechnologiesById }) =>
   <StyledTechnologyListItem
-    isSelected={selectedTechnologiesById.includes(technology.id)}
-    onClick={() => {
-    if (selectedTechnologiesById.includes(technology.id)) {
-      arrayRemove('companyForm', 'tools', selectedTechnologiesById.indexOf(technology.id))
-    } else {
-      arrayPush('companyForm', 'tools', technology.id)
-    }
-  }}>
+    isSelected={ selectedTechnologiesById.includes(technology.id) }
+    onClick={ () => {
+      if (selectedTechnologiesById.includes(technology.id)) {
+        arrayRemove('companyForm', 'tools', selectedTechnologiesById.indexOf(technology.id))
+      }
+      else {
+        arrayPush('companyForm', 'tools', technology.id)
+      }
+    } }>
     <div className="icon mr-2 pr-2">
       <StyledImg src={ technology.icon } />
     </div>
@@ -50,14 +52,21 @@ export const TechnologyListItem = ({ arrayPush, arrayRemove, technology, selecte
     </div>
   </StyledTechnologyListItem>
 
+TechnologyListItem.propTypes = {
+  selectedTechnologiesById: PropTypes.arrayOf(PropTypes.number),
+  technology: PropTypes.object,
+  arrayPush: PropTypes.func.isRequired,
+  arrayRemove: PropTypes.func.isRequired,
+}
+
 const selectCompanyForm = formValueSelector('companyForm')
 const mapStateToProps = state => ({
-  selectedTechnologiesById: selectCompanyForm(state, 'tools') || []
+  selectedTechnologiesById: selectCompanyForm(state, 'tools') || [],
 })
 
 const mapDispatchToProps = {
   arrayPush,
-  arrayRemove
+  arrayRemove,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(TechnologyListItem)

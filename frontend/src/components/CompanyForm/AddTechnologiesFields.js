@@ -12,11 +12,11 @@ const AddTechnologiesFields = ({ technologies, showModal }) =>
   <div>
     <SubTitle>Select technologies and tools your company uses or{' '}
       <span
-        onClick={() => showModal('defaultModal', { title: 'Add Technology', content: <TechnologyForm /> })}
+        onClick={ () => showModal('defaultModal', { title: 'Add Technology', content: <TechnologyForm /> }) }
         className="color-dark font-weight-bold">Add New</span>
     </SubTitle>
     <Search />
-    <TechnologyListSelected technologies={technologies} />
+    <TechnologyListSelected technologies={ technologies } />
     <TechnologyList technologies={ technologies } />
   </div>
 

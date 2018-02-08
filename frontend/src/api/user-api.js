@@ -10,7 +10,7 @@ import {
 export const getUsers = data => dispatch => {
   dispatch(usersLoading())
   const token = getToken()
-  
+
   return axios({
     method: 'GET',
     url: `${apiEndpoints.api}/users`,
@@ -28,7 +28,7 @@ export const getUsers = data => dispatch => {
 export const getUsersByTerm = term => dispatch => {
   dispatch(usersLoading())
   const token = getToken()
-  
+
   return axios({
     method: 'GET',
     url: `${apiEndpoints.api}/users/search`,

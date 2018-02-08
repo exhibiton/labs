@@ -32,13 +32,12 @@ const CategoryForm = props => {
       <label htmlFor="category">Category Name</label>
       <Field
         id="category"
-        component={Input}
+        component={ Input }
         name="name"
         placeholder="SaaS"
         type="text" />
-      
       <div>
-        <StyledButton disabled={submitting} type="submit">Add</StyledButton>
+        <StyledButton disabled={ submitting } type="submit">Add</StyledButton>
         {error}
       </div>
     </form>
@@ -46,7 +45,6 @@ const CategoryForm = props => {
 }
 
 CategoryForm.propTypes = {
-  change: PropTypes.func.isRequired,
   error: PropTypes.string,
   submitting: PropTypes.bool.isRequired,
   handleSubmit: PropTypes.func.isRequired,

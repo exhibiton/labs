@@ -4,7 +4,7 @@ import { Link } from 'react-router'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 import styled from 'styled-components'
-import FA from 'react-fontawesome'
+import Fa from 'react-fontawesome'
 import { Row, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap'
 import { logout } from '../api/auth-api'
 
@@ -63,17 +63,18 @@ const StyledDropdownMenu = styled(DropdownMenu)`
 class ProfileNav extends Component {
   static propTypes = {
     currentUser: PropTypes.object.isRequired,
+    logout: PropTypes.func.isRequired,
   }
-  
+
   state = {
-    dropdownOpen: false
+    dropdownOpen: false,
   }
-  
+
   toggle = () =>
     this.setState({
-      dropdownOpen: !this.state.dropdownOpen
+      dropdownOpen: !this.state.dropdownOpen,
     })
-  
+
   render() {
     const { currentUser, logout } = this.props
 
@@ -84,7 +85,7 @@ class ProfileNav extends Component {
         <StyledDropdownToggle caret={ true }>
           <StyledImg src={ currentUser.company.logo } />
           <span className="mr-3">{currentUser.first_name}</span>
-          <FA name="angle-down" />
+          <Fa name="angle-down" />
         </StyledDropdownToggle>
         <StyledDropdownMenu right={ true }>
           <StyledHeaderItem>Your account</StyledHeaderItem>
@@ -104,7 +105,7 @@ class ProfileNav extends Component {
               <StyledImg src={ currentUser.company.logo } />
               <div className="t14">
                 <div className="mb-2">{currentUser.company.name}</div>
-                <StyledLink to={`/company/${currentUser.company.id}/edit`}>Edit company</StyledLink>
+                <StyledLink to={ `/company/${currentUser.company.id}/edit` }>Edit company</StyledLink>
               </div>
             </Row>
           </DropdownItem>

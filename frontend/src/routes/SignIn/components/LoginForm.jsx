@@ -11,13 +11,13 @@ const LoginForm = props => {
       {error && <div className="mb-3 color-red"><strong>{error}</strong></div>}
       <Field
         className="mb-3"
-        component={Input}
+        component={ Input }
         name="email"
         type="input"
         placeholder="Email Address" />
       <Field
         className="mb-3"
-        component={Input}
+        component={ Input }
         name="password"
         type="password"
         placeholder="Password" />
@@ -39,4 +39,3 @@ LoginForm.propTypes = {
 export default reduxForm({
   form: 'LoginForm',
 })(LoginForm)
-

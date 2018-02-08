@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import _ from 'lodash'
@@ -6,7 +6,7 @@ import { getCompany } from '../../../../../api/company-api'
 import UserList from './UserList'
 import ToolList from './ToolList'
 
-class CompanyDetails extends React.Component {
+class CompanyDetails extends Component {
   componentDidMount() {
     this.props.getCompany(this.props.params.id)
   }
@@ -15,7 +15,7 @@ class CompanyDetails extends React.Component {
     const company = this.props.company
 
     if (_.isEmpty(company)) return null
-    
+
     return (
       <div className="">
         <div className="mhxxl phxxl  flex-row flex-hc">
@@ -34,8 +34,8 @@ class CompanyDetails extends React.Component {
   }
 }
 
-const mapStateToProps = ({ company })  => ({
-  company: company.data
+const mapStateToProps = ({ company }) => ({
+  company: company.data,
 })
 
 const mapDispatchToProps = {

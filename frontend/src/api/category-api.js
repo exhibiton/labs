@@ -8,13 +8,13 @@ import {
   categoriesLoadingSuccess,
   createCategoryLoading,
   createCategoryFail,
-  createCategorySuccess
+  createCategorySuccess,
 } from '../actions/category-actions'
 
 export const getCategories = data => dispatch => {
   dispatch(categoriesLoading())
   const token = getToken()
-  
+
   return axios({
     method: 'GET',
     url: `${apiEndpoints.api}/categories/select_options`,
@@ -32,7 +32,7 @@ export const getCategories = data => dispatch => {
 export const createCategory = data => dispatch => {
   dispatch(createCategoryLoading())
   const token = getToken()
-  
+
   return axios({
     method: 'POST',
     url: `${apiEndpoints.api}/categories`,
@@ -41,12 +41,8 @@ export const createCategory = data => dispatch => {
     },
     params: data,
   }).then(res => {
-    try {
-      dispatch(createCategorySuccess(res.data))
-      dispatch(hideModal('defaultModal'))
-    } catch (e) {
-      console.log(e)
-    }
+    dispatch(createCategorySuccess(res.data))
+    dispatch(hideModal('defaultModal'))
   }).catch(error => {
     dispatch(createCategoryFail(error))
   })

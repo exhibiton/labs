@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Row } from 'reactstrap'
 import TechnologyListItem from './TechnologyListItem'
 
@@ -12,6 +13,10 @@ export const TechnologyList = ({ technologies }) => {
       )}
     </Row>
   )
+}
+
+TechnologyList.propTypes = {
+  technologies: PropTypes.arrayOf(PropTypes.object),
 }
 
 export default TechnologyList

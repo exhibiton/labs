@@ -35,8 +35,3 @@ export const updateUserSuccess = promise => ({
   type: UPDATE_USER_SUCCESS,
   payload: promise,
 })
-
-export const forceSetAuthToken = authToken => ({
-  type: FORCE_SET_AUTH_TOKEN,
-  payload: authToken,
-})

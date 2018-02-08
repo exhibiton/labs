@@ -35,7 +35,7 @@ export default function technologyReducer(state = initialState, action) {
         byHash: _.keyBy(action.payload, 'id'),
         isLoading: false,
       }
-      
+
     default:
       return state
   }

@@ -52,7 +52,7 @@ class CompanyForm extends Component {
   }
 
   state = {
-    activeTab: '1'
+    activeTab: '1',
   }
 
   componentDidMount() {
@@ -67,7 +67,7 @@ class CompanyForm extends Component {
     getCategories()
     getUsers()
     getTechnologies()
-    
+
     if (id) {
       getCompany(id)
     }
@@ -111,8 +111,10 @@ class CompanyForm extends Component {
         categories: company.categories.map(({ id }) => id),
       }
     }
+
+    return false
   }
-  
+
   render() {
     const {
       categories,
@@ -128,36 +130,36 @@ class CompanyForm extends Component {
           <span className="color-bg-yellow">{id ? 'Edit' : 'Create'}</span> Company
         </h2>
         <Container>
-          <StyledNav className="justify-content-center" tabs={true}>
+          <StyledNav className="justify-content-center" tabs={ true }>
             <StyledNavItem>
               <StyledNavLink
-                active={this.state.activeTab === '1'}
-                onClick={() => this.toggle('1')}>
+                active={ this.state.activeTab === '1' }
+                onClick={ () => this.toggle('1') }>
                 GENERAL INFO
               </StyledNavLink>
             </StyledNavItem>
             <StyledNavItem>
               <StyledNavLink
-                active={this.state.activeTab === '2'}
-                onClick={() => this.toggle('2')}>
+                active={ this.state.activeTab === '2' }
+                onClick={ () => this.toggle('2') }>
                 ADD FOUNDERS
               </StyledNavLink>
             </StyledNavItem>
             <StyledNavItem>
               <StyledNavLink
-                active={this.state.activeTab === '3'}
-                onClick={() => this.toggle('3')}>
+                active={ this.state.activeTab === '3' }
+                onClick={ () => this.toggle('3') }>
                 SELECT TECHNOLOGIES
               </StyledNavLink>
             </StyledNavItem>
           </StyledNav>
         </Container>
-        <ContentHolder wide={this.state.activeTab === '1'}>
+        <ContentHolder wide={ this.state.activeTab === '1' }>
           <Form
-            initialValues={this.getInitialState()}
+            initialValues={ this.getInitialState() }
             onSubmit={ this.handleCompanyCreate }
             submitting={ isLoading }>
-            <TabContent activeTab={this.state.activeTab}>
+            <TabContent activeTab={ this.state.activeTab }>
               <TabPane tabId="1">
                 <Row>
                   <Col sm="12">
@@ -187,15 +189,13 @@ class CompanyForm extends Component {
   }
 }
 
-const mapStateToProps = ({ categories, technologies, users, company }) => {
-  return {
-    company: company.data,
-    isLoading: categories.isLoading && technologies.isLoading && users.isLoading,
-    users: users.byId.map(id => users.byHash[id]),
-    categories: categories.byId.map(id => categories.byHash[id]),
-    technologies: technologies.byId.map(id => technologies.byHash[id]),
-  }
-}
+const mapStateToProps = ({ categories, technologies, users, company }) => ({
+  company: company.data,
+  isLoading: categories.isLoading && technologies.isLoading && users.isLoading,
+  users: users.byId.map(id => users.byHash[id]),
+  categories: categories.byId.map(id => categories.byHash[id]),
+  technologies: technologies.byId.map(id => technologies.byHash[id]),
+})
 
 const mapDispatchToProps = {
   createCompany,

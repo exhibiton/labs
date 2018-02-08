@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import FA from 'react-fontawesome'
@@ -27,9 +28,13 @@ export const Search = ({ getTechnologiesByTerm }) =>
   <StyledSearch>
     <StyledFA name="search" />
     <StyledInput
-      onChange={ e => getTechnologiesByTerm(e.target.value)}
+      onChange={ e => getTechnologiesByTerm(e.target.value) }
       placeholder="Search technologies..." />
   </StyledSearch>
+
+Search.propTypes = {
+  getTechnologiesByTerm: PropTypes.func.isRequired,
+}
 
 const mapDispatchToProps = {
   getTechnologiesByTerm,

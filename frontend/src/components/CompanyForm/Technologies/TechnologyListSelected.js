@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { FieldArray, formValueSelector } from 'redux-form'
 import FA from 'react-fontawesome'
@@ -45,7 +46,7 @@ export const TechnologyListSelected = ({ selectedTechnologies }) => {
           <StyledImg src={ technology.icon } />
           <div>{technology.name}</div>
           <StyledFA
-            onClick={() => fields.remove(index)}
+            onClick={ () => fields.remove(index) }
             name="remove" />
         </StyledTechnologySelected>
       )
@@ -53,16 +54,20 @@ export const TechnologyListSelected = ({ selectedTechnologies }) => {
 
   return (
     <Row className="no-gutters mt-2">
-      <FieldArray name="tools" component={renderArray} />
+      <FieldArray name="tools" component={ renderArray } />
     </Row>
   )
+}
+
+TechnologyListSelected.propTypes = {
+  selectedTechnologies: PropTypes.arrayOf(PropTypes.number),
 }
 
 const selectCompanyForm = formValueSelector('companyForm')
 const mapStateToProps = state => {
   const selectedTechnologiesById = selectCompanyForm(state, 'tools') || []
   const { technologies } = state
-  
+
   return {
     selectedTechnologies: technologies.byId.length ? selectedTechnologiesById.map(id => technologies.byHash[id]) : [],
   }

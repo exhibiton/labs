@@ -37,9 +37,9 @@ const StyledModalBody = styled(ModalBody)`
 const DefaultModal = ({ show, handleHide, title, content }) =>
   <div>
     <StyledModal
-      backdrop={true}
-      toggle={handleHide}
-      isOpen={show}>
+      backdrop={ true }
+      toggle={ handleHide }
+      isOpen={ show }>
       <StyledModalHeader>{title}</StyledModalHeader>
       <StyledModalBody>{content}</StyledModalBody>
     </StyledModal>
@@ -53,5 +53,5 @@ DefaultModal.propTypes = {
 }
 
 export default connectModal({
-  name: 'defaultModal'
+  name: 'defaultModal',
 })(DefaultModal)

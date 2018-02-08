@@ -9,8 +9,6 @@ class Profile extends React.Component {
   componentDidMount() {
     const { getProfile, userId } = this.props
 
-    console.log(this.props)
-    
     getProfile(userId)
   }
 
@@ -22,9 +20,7 @@ class Profile extends React.Component {
         <div className="my-5 text-center">
           <ProfileImg src={ user.avatar } />
         </div>
-        <ProfileForm
-          onSubmit={ updateProfile }
-          user={ user } />
+        <ProfileForm onSubmit={ updateProfile } user={ user } />
       </div>
     )
   }

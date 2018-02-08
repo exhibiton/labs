@@ -43,7 +43,7 @@ export default function categoryReducer(state = initialState, action) {
         },
         isLoading: false,
       }
-  
+
     case CATEGORIES_LOADING:
       return {
         ...state,
@@ -65,7 +65,7 @@ export default function categoryReducer(state = initialState, action) {
         byHash: _.keyBy(action.payload, 'value'),
         isLoading: false,
       }
-      
+
     default:
       return state
   }
