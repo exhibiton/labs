@@ -38,7 +38,7 @@ export const CompanyHeader = ({ options, selectTagIdList, selectedTagIdList }) =
 CompanyHeader.propTypes = {
   options: PropTypes.arrayOf(PropTypes.object).isRequired,
   selectTagIdList: PropTypes.func.isRequired,
-  selectedTagIdList: PropTypes.arrayOf(PropTypes.object).isRequired,
+  selectedTagIdList: PropTypes.arrayOf(PropTypes.string).isRequired,
 }
 
 const mapStateToProps = ({ companies }) => ({

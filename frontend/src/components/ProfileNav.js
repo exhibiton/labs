@@ -58,6 +58,11 @@ const StyledDropdownMenu = styled(DropdownMenu)`
   border-radius: 0;
   padding-bottom: 0;
   width: 15rem;
+  
+  .dropdown-item:focus {
+    background: inherit!important;
+    color: inherit!important;
+  }
 `
 
 class ProfileNav extends Component {
