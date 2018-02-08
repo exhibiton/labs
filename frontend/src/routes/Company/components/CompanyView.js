@@ -15,25 +15,14 @@ class CompanyView extends React.Component {
     })).isRequired,
   }
 
-  state = {
-    value: [],
-
-  }
   componentDidMount() {
     this.props.getCompanies()
-  }
-
-  handleSelectChange = value => {
-    this.setState({ value })
-    // TODO: create function to filter list of companies
   }
 
   render() {
     return (
       <div>
         <CompanyHeader
-          value={ this.state.value }
-          handleSelectChange={ value => this.handleSelectChange(value) }
           options={ [
             { label: 'Chocolate', value: 'chocolate' },
             { label: 'Vanilla', value: 'vanilla' },
@@ -42,14 +31,15 @@ class CompanyView extends React.Component {
             { label: 'Cookies and Cream', value: 'cookiescream' },
             { label: 'Peppermint', value: 'peppermint' },
           ] } />
-        <CardList
-          companies={ this.props.companies } />
+        <CardList companies={ this.props.companies } />
       </div>
     )
   }
 }
 
-const mapStateToProps = state => ({ companies: state.companies });
+const mapStateToProps = ({ companies }) => ({
+  companies: companies.byId.map(id => companies.byHash[id]),
+})
 
 const mapDispatchToProps = {
   getCompanies,

@@ -1,15 +1,34 @@
 import axios from 'axios'
+import _ from 'lodash'
 import apiEndpoints from '../../../../config/apis'
 import { getToken } from '../../../api/utils/authorization-token'
 
 export const GET_COMPANIES_LOADING = 'GET_COMPANIES_LOADING'
 export const GET_COMPANIES_SUCCESS = 'GET_COMPANIES_SUCCESS'
 export const GET_COMPANIES_FAIL = 'GET_COMPANIES_FAIL'
+export const SELECTED_TAG_ID_LIST = 'SELECTED_TAG_ID_LIST'
 
-export default function reducer(state = [], action) {
+const initialState = {
+  byId: [],
+  byHash: {},
+  isLoading: false,
+  selectedTagIdList: [],
+}
+
+export default function reducer(state = initialState, action) {
   switch (action.type) {
     case GET_COMPANIES_SUCCESS:
-      return [...action.res.data];
+      return {
+        ...state,
+        byId: _.map(action.payload, 'id'),
+        byHash: _.keyBy(action.payload, 'id'),
+        isLoading: false,
+      }
+    case SELECTED_TAG_ID_LIST:
+      return {
+        ...state,
+        selectedTagIdList: action.payload,
+      }
     default:
       return state;
   }
@@ -18,12 +37,18 @@ export default function reducer(state = [], action) {
 const getCompaniesLoading = () => ({
   type: GET_COMPANIES_LOADING,
 })
-const getCompaniesSuccess = res => ({
+const getCompaniesSuccess = payload => ({
   type: GET_COMPANIES_SUCCESS,
-  res,
+  payload,
 })
-const getCompaniesFail = () => ({
+const getCompaniesFail = payload => ({
   type: GET_COMPANIES_FAIL,
+  payload,
+})
+
+export const selectTagIdList = payload => ({
+  type: SELECTED_TAG_ID_LIST,
+  payload,
 })
 
 export function getCompanies() {
@@ -39,13 +64,12 @@ export function getCompanies() {
       },
     })
       .then(res => {
-        dispatch(getCompaniesSuccess(res));
+        dispatch(getCompaniesSuccess(res.data))
       })
-      .catch(() => {
-        dispatch(getCompaniesFail());
+      .catch(e => {
+        dispatch(getCompaniesFail(e))
       })
-    ;
-  };
+  }
 }
 
 
