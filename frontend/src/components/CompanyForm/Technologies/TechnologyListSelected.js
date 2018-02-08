@@ -60,7 +60,7 @@ export const TechnologyListSelected = ({ selectedTechnologies }) => {
 }
 
 TechnologyListSelected.propTypes = {
-  selectedTechnologies: PropTypes.arrayOf(PropTypes.number),
+  selectedTechnologies: PropTypes.arrayOf(PropTypes.object),
 }
 
 const selectCompanyForm = formValueSelector('companyForm')

@@ -54,22 +54,18 @@ export const UserListItem = ({ user, arrayPush, arrayRemove, selectedUsersById }
         </div>
       </div>
     </Row>
-    {do {
-      if (selectedUsersById.includes(user.id)) {
-        <StyledSelected
-          isSelected={ selectedUsersById.includes(user.id) }
-          onClick={ () => arrayRemove('companyForm', 'users', selectedUsersById.indexOf(user.id)) }>
-          Selected <StyledFA name="check-circle" />
-        </StyledSelected>
-      }
-      else {
-        <StyledInvite
-          isSelected={ selectedUsersById.includes(user.id) }
-          onClick={ () => arrayPush('companyForm', 'users', user.id) }>
-          Invite <StyledFA name="plus-circle" />
-        </StyledInvite>
-      }
-    }}
+    {selectedUsersById.includes(user.id) &&
+    <StyledSelected
+      isSelected={ selectedUsersById.includes(user.id) }
+      onClick={ () => arrayRemove('companyForm', 'users', selectedUsersById.indexOf(user.id)) }>
+      Selected <StyledFA name="check-circle" />
+    </StyledSelected>}
+    {!selectedUsersById.includes(user.id) &&
+    <StyledInvite
+      isSelected={ selectedUsersById.includes(user.id) }
+      onClick={ () => arrayPush('companyForm', 'users', user.id) }>
+      Invite <StyledFA name="plus-circle" />
+    </StyledInvite>}
   </StyledUserListItem>
 
 UserListItem.propTypes = {

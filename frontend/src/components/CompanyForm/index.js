@@ -112,7 +112,7 @@ class CompanyForm extends Component {
       }
     }
 
-    return false
+    return {}
   }
 
   render() {
@@ -156,6 +156,7 @@ class CompanyForm extends Component {
         </Container>
         <ContentHolder wide={ this.state.activeTab === '1' }>
           <Form
+            buttonText={ id ? 'Update Company' : 'Create Company' }
             initialValues={ this.getInitialState() }
             onSubmit={ this.handleCompanyCreate }
             submitting={ isLoading }>

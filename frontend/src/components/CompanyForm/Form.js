@@ -20,6 +20,7 @@ const Form = props => {
     handleSubmit,
     submitting,
     children,
+    buttonText,
   } = props
 
   return (
@@ -31,7 +32,7 @@ const Form = props => {
           className="btn"
           disabled={ submitting }
           type="submit">
-          Create Company
+          {buttonText}
         </StyledButton>
         {error}
       </div>
@@ -44,6 +45,7 @@ Form.propTypes = {
   error: PropTypes.string,
   submitting: PropTypes.bool.isRequired,
   handleSubmit: PropTypes.func.isRequired,
+  buttonText: PropTypes.string.isRequired,
 }
 
 export default reduxForm({
