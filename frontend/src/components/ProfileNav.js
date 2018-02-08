@@ -94,7 +94,7 @@ class ProfileNav extends Component {
               <StyledImg src={ currentUser.company.logo } />
               <div className="t14">
                 <div className="mb-2">{currentUser.first_name}</div>
-                <StyledLink to="/profile">View profile</StyledLink>
+                <StyledLink to={ `/profile/${currentUser.id}/edit` }>View profile</StyledLink>
               </div>
             </Row>
           </DropdownItem>

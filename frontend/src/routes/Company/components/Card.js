@@ -1,30 +1,74 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { IndexLink } from 'react-router'
-import './CardStyle.scss'
+import styled from 'styled-components'
+import { Link } from 'react-router'
 
-export const Card = ({ name, logo, id }) => (
-  <div className="card-container">
-    <div className="flipper">
-      <div className="front">
-        <img className="card-logo" src={ logo } alt={ `${name} Logo` } />
-      </div>
-      <div className="back flex-col pas flex-vc color-bg-black">
-        <h2 className="text-center color-white mbt">{name}</h2>
-        <IndexLink
-          to={ `/company/${id}` }
-          className="color-white color-bdh-white color-bdv-white pht"
-          activeClassName="active">
-          Learn More
-        </IndexLink>
+const StyledImg = styled.img`
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  margin:auto;
+  max-width: 100%;
+  max-height: 100%;
+`
 
+const StyledInfo = styled.div.attrs({
+  className: 'd-flex flex-column no-gutters align-items-center justify-content-between p-3',
+})`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  background: #3e42b1;
+  color: #fff;
+  text-align: center;
+  transition: opacity .15s ease-in-out;
+  will-change: opacity;
+`
 
-      </div>
-    </div>
-  </div>
+const StyledCardContainer = styled.div`
+  position: relative;
+  margin-bottom: 1.875rem;
+  padding: 0 0 100%;
+  background: #fff;
+  overflow: hidden;
+  
+  &:hover {
+    img {
+      filter: blur(.5rem);
+    }
+    
+    ${StyledInfo} {
+      opacity: .75;
+    }
+  }
+`
+
+const StyledLink = styled(Link)`
+  background: #fff;
+  padding: .5rem 1rem;
+  border-radius: .2rem;
+  color: #2a2c41;
+  text-decoration: none!important;
+`
+
+export const Card = ({ name, description, logo, id }) => (
+  <StyledCardContainer>
+    <StyledImg src={ logo } alt={ `${name} Logo` } />
+    <StyledInfo>
+      <h3>{name}</h3>
+      <div>{description}</div>
+      <StyledLink to={ `/company/${id}` }>Learn More</StyledLink>
+    </StyledInfo>
+  </StyledCardContainer>
 )
 Card.propTypes = {
   name: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
   logo: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
 }

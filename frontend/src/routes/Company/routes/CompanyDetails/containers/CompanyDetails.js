@@ -2,9 +2,22 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import _ from 'lodash'
+import { Container } from 'reactstrap'
+import styled from 'styled-components'
 import { getCompany } from '../../../../../api/company-api'
 import UserList from './UserList'
 import ToolList from './ToolList'
+import CategoryList from './CategoryList'
+
+const StyledContainer = styled(Container)`
+  max-width: 40rem;
+`
+
+const StyledImgLogo = styled.img`
+  overflow: hidden;
+  border-radius: 50%;
+  max-width: 12rem;
+`
 
 class CompanyDetails extends Component {
   componentDidMount() {
@@ -17,19 +30,15 @@ class CompanyDetails extends Component {
     if (_.isEmpty(company)) return null
 
     return (
-      <div className="">
-        <div className="mhxxl phxxl  flex-row flex-hc">
-          <div className="mvl flex-col flex-vc ">
-            <div className="logo flex-row flex-hc">
-              <img src={ company.logo } />
-            </div>
-            <div className="t1 font-bold color-dark-grey">{ company.name }</div>
-            <div className="t3  color-dark-grey">{ company.description }</div>
-            <UserList users={ company.users } />
-            <ToolList tools={ company.tools } />
-          </div>
-        </div>
-      </div>
+      <StyledContainer className="mt-5 text-center">
+        <StyledImgLogo src={ company.logo } />
+        <h2 className="mt-4 mb-2 font-weight-bold">{ company.name }</h2>
+        <div className="pb-3 mb-3 color-grey">{ company.website || 'No website'}</div>
+        <CategoryList className="pb-3 mb-3" categories={ company.categories } />
+        <div className="pb-3 mb-3 color-dark-grey">{ company.description }</div>
+        <UserList className="mb-5" users={ company.users } />
+        <ToolList className="mb-5" tools={ company.tools } />
+      </StyledContainer>
     )
   }
 }

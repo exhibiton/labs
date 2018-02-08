@@ -8,7 +8,7 @@ import Input from '../Input'
 import Textarea from '../Textarea'
 import Select from '../Select'
 import CategoryForm from './CategoryForm'
-import UploadImage from './UploadImage'
+import UploadImage from '../UploadImage'
 
 const DetailsFields = ({ categories, change, showModal }) => {
   if (!categories.length) return null

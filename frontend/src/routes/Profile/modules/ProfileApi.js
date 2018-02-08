@@ -1,17 +1,19 @@
-// node modules
 import axios from 'axios'
+import jwt from 'jsonwebtoken'
+import { hide as hideModal } from 'redux-modal'
 import apiEndpoints from '../../../../config/apis'
-import { getToken } from '../../../api/utils/authorization-token'
-
+import { getToken, setAuthorizationToken } from '../../../api/utils/authorization-token'
+import { updateUserSuccess } from '../../../actions/auth-actions'
 import {
   getProfileFailed,
   getProfileLoading,
   getProfileSuccess,
   updateProfileFailed,
   updateProfileLoading,
+  uploadPhotoFailed,
+  uploadPhotoSuccess,
+  uploadPhotoLoading,
 } from './ProfileActions'
-
-import { updateUserSuccess } from '../../../actions/auth-actions'
 
 export const getProfile = id => dispatch => {
   dispatch(getProfileLoading())
@@ -55,5 +57,32 @@ export const updateProfile = (user, userId) => dispatch => {
     dispatch(updateUserSuccess(res.data))
   }).catch(error => {
     dispatch(updateProfileFailed(error.data.errors))
+  })
+}
+
+export const uploadPhoto = avatar => dispatch => {
+  dispatch(uploadPhotoLoading())
+  const token = getToken()
+
+  return axios({
+    method: 'PATCH',
+    url: `${apiEndpoints.api}/users/upload_photo`,
+    headers: {
+      'content-type': 'multipart/form-data',
+      Authorization: `Bearer ${token}`,
+    },
+    data: avatar,
+  }).then(res => {
+    const token = res.data.auth_token
+
+    setAuthorizationToken(token)
+    const user = jwt.decode(token)
+
+    dispatch(uploadPhotoSuccess())
+    dispatch(hideModal('defaultModal'))
+    // TODO: Add to response full user info with avatar to avoid second request `getProfile`
+    dispatch(getProfile(user.id))
+  }).catch(error => {
+    dispatch(uploadPhotoFailed(error.data.errors))
   })
 }

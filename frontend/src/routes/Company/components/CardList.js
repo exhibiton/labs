@@ -1,21 +1,29 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
+import { Container, Row, Col } from 'reactstrap'
 import Card from './Card'
 
-export const CardList = ({ companies }) => (
-  <div className="card-list color-bg-grey-200">
-    <div className="flex-row flex-wrap flex-hc mal pal">
-      {companies.map((company, i) =>
-        <Card
-          name={ company.name }
-          logo={ company.logo }
-          description={ company.description }
-          id={ company.id }
-          key={ i } />
-      )}
-    </div>
-  </div>
-)
+const Background = styled.div`
+  background: #f8f8f9;
+`
+
+export const CardList = ({ companies }) =>
+  <Background>
+    <Container className="py-4">
+      <Row>
+        {companies.map((company, i) =>
+          <Col className="col-3" key={ i }>
+            <Card
+              name={ company.name }
+              logo={ company.logo }
+              description={ company.description }
+              id={ company.id } />
+          </Col>
+        )}
+      </Row>
+    </Container>
+  </Background>
 
 CardList.propTypes = {
   companies: PropTypes.arrayOf(PropTypes.shape({

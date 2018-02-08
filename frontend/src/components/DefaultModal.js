@@ -10,7 +10,7 @@ const StyledModal = styled(Modal)`
   height: 100%;
   
   .modal-content {
-    height: 100%;
+    min-height: 100%;
     border-radius: 0;
     border: 0;
   }

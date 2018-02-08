@@ -1,7 +1,7 @@
 import { injectReducer } from '../../store/reducers'
 
 export default store => ({
-  path: '/profile',
+  path: '/profile/:userId/edit',
   getComponent(nextState, cb) {
     require.ensure([], require => {
       const Profile = require('./containers/Profile').default

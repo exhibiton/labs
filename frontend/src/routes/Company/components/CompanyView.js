@@ -1,6 +1,6 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import { getCompanies } from '../modules/companies'
 import CompanyHeader from './CompanyHeader'
 import CardList from './CardList'
