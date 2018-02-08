@@ -25,9 +25,9 @@ class CompanyDetails extends Component {
   }
 
   render() {
-    const company = this.props.company
+    const { company, params } = this.props
 
-    if (_.isEmpty(company)) return null
+    if (_.isEmpty(company) || `${company.id}` !== params.id) return null
 
     return (
       <StyledContainer className="mt-5 text-center">
