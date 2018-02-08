@@ -22,6 +22,13 @@ class CompaniesController < BaseController
     render json: { user: current_user, message: "Company Created" }.merge(current_user.authentication_payload)
   end
 
+  # Search with Tool Filters
+  def search
+    head :no_content if !params[:tools].present?
+    companies = Company.includes(:tools).where(tools: { id:[ params[:tools]] })
+    json_response(companies)
+  end
+
 
   # GET /companies/:id
   def show

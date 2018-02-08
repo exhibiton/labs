@@ -14,7 +14,11 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :companies
+  resources :companies do
+    collection do
+      get :search
+    end
+  end
   resources :tools, only: [:index, :create] do
     collection do
       get :select_options

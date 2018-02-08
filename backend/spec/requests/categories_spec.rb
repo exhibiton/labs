@@ -45,7 +45,6 @@ RSpec.describe 'Categories', type: :request do
 
     let(:valid_attributes) do
       { name: 'SaaS',
-        company_id: company.id
       }
     end
 
@@ -60,7 +59,6 @@ RSpec.describe 'Categories', type: :request do
 
       it 'creates a category with a company' do
         expect(json['name']).to eq('SaaS')
-        expect(Category.find(json["id"]).companies.size).to eq 1
       end
 
       it 'returns status code 201' do
