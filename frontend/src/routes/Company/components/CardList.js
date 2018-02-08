@@ -26,7 +26,6 @@ export const CardList = ({ companies }) => {
                     <Card
                       name={ company.name }
                       logo={ company.logo }
-                      description={ company.description }
                       id={ company.id } />
                   </Col>
                 )
@@ -44,7 +43,6 @@ export const CardList = ({ companies }) => {
 CardList.propTypes = {
   companies: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
     logo: PropTypes.string.isRequired,
   })).isRequired,
 }

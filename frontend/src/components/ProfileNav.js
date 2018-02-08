@@ -80,15 +80,36 @@ class ProfileNav extends Component {
       dropdownOpen: !this.state.dropdownOpen,
     })
 
+  renderCompanies() {
+    const { currentUser } = this.props
+
+    if (currentUser.company === null) return null
+
+    return (
+      <div>
+        <DropdownItem divider={ true } />
+        <StyledHeaderItem>Your companies</StyledHeaderItem>
+        <DropdownItem>
+          <Row className="no-gutters align-items-center">
+            <StyledImg src={ currentUser.company.logo } />
+            <div className="t14">
+              <div className="mb-2">{currentUser.company.name}</div>
+              <StyledLink to={ '/company/edit' }>Edit company</StyledLink>
+            </div>
+          </Row>
+        </DropdownItem>
+      </div>
+    )
+  }
   render() {
     const { currentUser, logout } = this.props
 
-    if (_.isEmpty(currentUser) || currentUser.company === null) return null
+    if (_.isEmpty(currentUser)) return null
 
     return (
       <Dropdown isOpen={ this.state.dropdownOpen } toggle={ this.toggle }>
         <StyledDropdownToggle caret={ true }>
-          <StyledImg src={ currentUser.company.logo } />
+          <StyledImg src={ currentUser.avatar } />
           <span className="mr-3">{currentUser.first_name}</span>
           <Fa name="angle-down" />
         </StyledDropdownToggle>
@@ -96,24 +117,14 @@ class ProfileNav extends Component {
           <StyledHeaderItem>Your account</StyledHeaderItem>
           <DropdownItem>
             <Row className="no-gutters align-items-center">
-              <StyledImg src={ currentUser.company.logo } />
+              <StyledImg src={ currentUser.avatar } />
               <div className="t14">
                 <div className="mb-2">{currentUser.first_name}</div>
                 <StyledLink to={ `/profile/${currentUser.id}/edit` }>View profile</StyledLink>
               </div>
             </Row>
           </DropdownItem>
-          <DropdownItem divider={ true } />
-          <StyledHeaderItem>Your companies</StyledHeaderItem>
-          <DropdownItem>
-            <Row className="no-gutters align-items-center">
-              <StyledImg src={ currentUser.company.logo } />
-              <div className="t14">
-                <div className="mb-2">{currentUser.company.name}</div>
-                <StyledLink to={ `/company/${currentUser.company.id}/edit` }>Edit company</StyledLink>
-              </div>
-            </Row>
-          </DropdownItem>
+          {this.renderCompanies()}
           <StyledDropdownItemLogout onClick={ logout }>Log out</StyledDropdownItemLogout>
         </StyledDropdownMenu>
       </Dropdown>

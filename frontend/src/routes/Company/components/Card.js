@@ -62,7 +62,7 @@ export const Card = ({ name, description, logo, id }) => (
     <StyledInfo>
       <h3>{name}</h3>
       <div>{description}</div>
-      <StyledLink to={ `/company/${id}` }>Learn More</StyledLink>
+      <StyledLink to={ `/company/${id}/` }>Details</StyledLink>
     </StyledInfo>
   </StyledCardContainer>
 )

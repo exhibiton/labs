@@ -1,5 +1,5 @@
 export const CompanyDetailsRoute = _store => ({
-  path: ':id',
+  path: ':id/',
   getComponent(nextState, cb) {
     require.ensure([], require => {
       const CompanyDetails = require('./containers/CompanyDetails').default

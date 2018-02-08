@@ -1,12 +1,7 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import CompanyForm from '../../../../../components/CompanyForm'
 
-const CompanyDetails = ({ params }) =>
-  <CompanyForm id={ params.id } />
+const CompanyEditRoute = () =>
+  <CompanyForm />
 
-CompanyDetails.propTypes = {
-  params: PropTypes.objectOf(PropTypes.string),
-}
-
-export default CompanyDetails
+export default CompanyEditRoute

@@ -14,7 +14,7 @@ import {
 export const getCategories = data => dispatch => {
   dispatch(categoriesLoading())
   const token = getToken()
-
+  
   return axios({
     method: 'GET',
     url: `${apiEndpoints.api}/categories/select_options`,

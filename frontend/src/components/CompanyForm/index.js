@@ -67,7 +67,6 @@ class CompanyForm extends Component {
     getCategories()
     getUsers()
     getTechnologies()
-
     if (id) {
       getCompany(id)
     }
@@ -103,7 +102,7 @@ class CompanyForm extends Component {
   getInitialState = () => {
     const { id, company } = this.props
 
-    if (id && !_.isEmpty(company)) {
+    if (id && !_.isEmpty(company) && company.id === id) {
       return {
         ...company,
         users: company.users.map(({ id }) => id),
@@ -158,6 +157,7 @@ class CompanyForm extends Component {
           <Form
             buttonText={ id ? 'Update Company' : 'Create Company' }
             initialValues={ this.getInitialState() }
+            enableReinitialize={ true }
             onSubmit={ this.handleCompanyCreate }
             submitting={ isLoading }>
             <TabContent activeTab={ this.state.activeTab }>
@@ -190,8 +190,9 @@ class CompanyForm extends Component {
   }
 }
 
-const mapStateToProps = ({ categories, technologies, users, company }) => ({
+const mapStateToProps = ({ auth, categories, technologies, users, company }) => ({
   company: company.data,
+  id: auth.currentUser.company.id,
   isLoading: categories.isLoading && technologies.isLoading && users.isLoading,
   users: users.byId.map(id => users.byHash[id]),
   categories: categories.byId.map(id => categories.byHash[id]),

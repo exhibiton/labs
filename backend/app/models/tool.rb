@@ -6,5 +6,6 @@ class Tool < ApplicationRecord
   # validations
   validates_attachment_content_type :icon, content_type: /\Aimage\/.*\z/
   validates_presence_of :name
+  validates_uniqueness_of :name, :case_sensitive => false
 
 end

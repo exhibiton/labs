@@ -29,7 +29,6 @@ class CompaniesController < BaseController
     json_response(companies)
   end
 
-
   # GET /companies/:id
   def show
     json_response(@company)
@@ -46,7 +45,6 @@ class CompaniesController < BaseController
         @company.tools = tools if tools.present?
         @company.users = users if users.present?
         @company.categories = categories if categories.present?
-        
         json_response(@company)
       else
         head :unprocessable_entity

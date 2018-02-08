@@ -3,12 +3,15 @@ import { browserHistory } from 'react-router'
 import jwt from 'jsonwebtoken'
 import apiEndpoints from '../../config/apis'
 import {
-  createCompanyFail,
-  createCompanyLoading,
-  createCompanySuccess,
   getCompanyFail,
   getCompanyLoading,
   getCompanySuccess,
+  updateCompanySuccess,
+  updateCompanyFail,
+  updateCompanyLoading,
+  createCompanySuccess,
+  createCompanyFail,
+  createCompanyLoading,
 } from '../actions/company-actions'
 import { updateUserSuccess } from '../actions/auth-actions'
 import { setAuthorizationToken, getToken } from './utils/authorization-token'
@@ -40,7 +43,7 @@ export const createCompany = data => dispatch => {
 }
 
 export const updateCompany = (id, data) => dispatch => {
-  dispatch(createCompanyLoading())
+  dispatch(updateCompanyLoading())
   const token = getToken()
 
   return axios({
@@ -51,10 +54,16 @@ export const updateCompany = (id, data) => dispatch => {
       Authorization: `Bearer ${token}`,
     },
     data,
-  }).then(() => {
-    dispatch(createCompanySuccess())
+  }).then(res => {
+    const token = res.data.auth_token
+
+    setAuthorizationToken(token)
+    const user = jwt.decode(token)
+
+    dispatch(updateCompanySuccess(res.data))
+    dispatch(updateUserSuccess(user))
   }).catch(error => {
-    dispatch(createCompanyFail(error))
+    dispatch(updateCompanyFail(error))
   })
 }
 
@@ -62,7 +71,6 @@ export const getCompany = id => dispatch => {
   const token = getToken()
 
   dispatch(getCompanyLoading())
-
   return axios({
     method: 'GET',
     url: `${apiEndpoints.api}/companies/${id}`,
