@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :category do
-    name { Faker::Company.buzzword }
+    name { Faker::Company.unique.buzzword }
   end
 end

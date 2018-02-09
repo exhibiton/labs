@@ -1,85 +1,15 @@
 $font-size-map: (
-  '1': 2.5rem,  // 40px
-  '2': 2rem,    // 32px
-  '3': 1.25rem, // 20px
-  '4': 1rem,    // 16px
-  '5': .875rem, // 14px
-  '6': .625rem, // 10px
+  '10': .625rem,
+  '12': .75rem,
+  '14': .875rem,
 );
 
 @each $font-size-number, $font-size in $font-size-map {
   .t#{$font-size-number} {
     font-size: $font-size;
-    line-height: $font-size + 1rem;
-  }
-
-  h#{$font-size-number} {
-    font-size: $font-size;
-    line-height: $font-size + 1rem;
-  }
-
-  @include mobile {
-    .t#{$font-size-number} {
-      font-size: $font-size + 0.125rem;
-      line-height: $font-size + 0.625rem;
-    }
-
-    h#{$font-size-number} {
-      font-size: $font-size + 0.125rem;
-      font-weight: 700;
-      line-height: $font-size + 0.625rem;
-    }
   }
 }
 
-h1 {
-   letter-spacing: 0.075rem;
-}
-
-h2, h3 {
-  letter-spacing: 0.0375rem;
-}
-
-.t4 {
-  letter-spacing: 0.03125rem;
-}
-
-.t5 {
-  letter-spacing: 0.0625rem;
-}
-
-.text-uc {
-  text-transform: uppercase;
-}
-
-.text-lc {
-  text-transform: lowercase;
-}
-
-.text-cz {
-  text-transform: capitalize;
-}
-
-.font-black {
-  font-weight: 900;
-}
-
-.font-bold {
-  font-weight: 700;
-}
-
-.font-semibold {
-  font-weight: 600;
-}
-
-.font-medium {
-  font-weight: 500;
-}
-
-.font-regular {
-  font-weight: 400;
-}
-
-.font-light {
-  font-weight: 300;
+.text-underline {
+  text-decoration: underline;
 }

@@ -8,12 +8,15 @@ RSpec.describe 'Companies API', type: :request do
   # authorize request
   let(:headers) { valid_headers }
 
+  let(:tool) { create(:tool) }
+
   # initialize test data
   let!(:companies) { create_list(:company, 10) }
   let(:company_id) { companies.first.id }
-  let(:company_with_user) {
+  let!(:company_with_user) {
     create(:company) do |company|
       company.users << user
+      company.tools << tool
     end
   }
 
@@ -25,7 +28,7 @@ RSpec.describe 'Companies API', type: :request do
     it 'returns companies' do
       # Note `json` is a custom helper to parse JSON responses
       expect(json).not_to be_empty
-      expect(json.size).to eq(10)
+      expect(json.size).to eq(11)
     end
 
     it 'returns status code 200' do
@@ -133,7 +136,7 @@ RSpec.describe 'Companies API', type: :request do
     let(:valid_attributes) do
       # send json payload
       { name: 'Better Name',
-        new_user_id: second_user.id
+        users: [ user.id, second_user.id ]
       }.to_json
     end
 
@@ -156,6 +159,22 @@ RSpec.describe 'Companies API', type: :request do
 
     it 'returns status code 204' do
       expect(response).to have_http_status(204)
+    end
+  end
+
+  # Test suite for FILTER /companies/filter?tool_ids
+
+  describe 'FILTER /companies/filter' do
+    let(:search_attributes) do
+      { 
+        tools: [ tool.id ]
+      }
+    end
+    
+    before { get "/companies/filter", params: search_attributes, headers: headers }
+
+    it 'returns the correct companies' do
+      expect(json.size).to eq(1)
     end
   end
 end

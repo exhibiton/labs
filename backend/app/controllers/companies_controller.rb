@@ -19,9 +19,20 @@ class CompaniesController < BaseController
     company.users << @user if @user
     company.users << additional_users if additional_users.present?
     company.categories << categories if categories.present?
-    render json: { user: current_user, message: "Company Created" }
+    render json: { user: current_user, message: "Company Created" }.merge(current_user.authentication_payload)
   end
 
+  # Search with Tool Filters
+  def filter
+    head :no_content if !params[:tools].present?
+    companies = Company.includes(:tools).where(tools: { id:[ params[:tools]] })
+    json_response(companies)
+  end
+
+  def search
+    companies = Company.where('name ilike :term', term: "%#{params[:term]}%")
+    json_response(companies)
+  end
 
   # GET /companies/:id
   def show
@@ -32,8 +43,14 @@ class CompaniesController < BaseController
   def update
     if @company.users.include?(@user)
       if @company.update(company_params)
-      @company.users << User.find(params[:new_user_id]) if params[:new_user_id].present?
-      json_response(@company)
+        users = User.where(id: params[:users])
+        categories = Category.where(id: params[:categories])
+        tools = Tool.where(id: params[:tools])
+
+        @company.tools = tools if tools.present?
+        @company.users = users if users.present?
+        @company.categories = categories if categories.present?
+        json_response(@company)
       else
         head :unprocessable_entity
       end

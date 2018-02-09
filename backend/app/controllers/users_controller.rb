@@ -26,6 +26,11 @@ class UsersController < BaseController
     json_response(users)
   end
 
+  def show
+    user = User.find(params[:id])
+    json_response(user)
+  end
+
   # GET /users/select_options
   # This path is used to find other users who have registered but do not have a company yet.
   # For example a founder adds their co-founder to the company profile.
@@ -56,7 +61,7 @@ class UsersController < BaseController
   private
 
   def user_params
-    params.permit(:email, :first_name, :avatar, :last_name, :password, :password_confirmation, :current_password)
+    params.permit(:email, :first_name, :title, :twitter, :facebook, :linkedin, :github, :avatar, :last_name, :password, :password_confirmation, :current_password)
   end
 
 end

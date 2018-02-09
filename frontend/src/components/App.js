@@ -1,12 +1,12 @@
 import React from 'react'
 import { browserHistory, Router } from 'react-router'
 import { Provider } from 'react-redux'
-import propTypes from 'prop-types'
+import PropTypes from 'prop-types'
 
 class App extends React.Component {
   static propTypes = {
-    store: propTypes.object.isRequired,
-    routes: propTypes.object.isRequired,
+    store: PropTypes.object.isRequired,
+    routes: PropTypes.arrayOf(PropTypes.object).isRequired,
   }
 
   shouldComponentUpdate() {
@@ -16,9 +16,7 @@ class App extends React.Component {
   render() {
     return (
       <Provider store={ this.props.store }>
-        <div style={ { height: '100%' } }>
-          <Router history={ browserHistory } children={ this.props.routes } />
-        </div>
+        <Router history={ browserHistory } children={ this.props.routes } />
       </Provider>
     )
   }

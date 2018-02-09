@@ -1,36 +1,31 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import { Link } from 'react-router'
-import { logout } from '../api/auth-api'
-import PropTypes from 'prop-types'
-import labs from '../assets/weworklabslogo.png'
+import styled from 'styled-components'
+import { Container, Row } from 'reactstrap'
+import DefaultModal from './DefaultModal'
+import ProfileNav from './ProfileNav'
 
-import './styles/HeaderStyles.scss'
+// TODO: Use SVG
+import labsLogo from '../assets/weworklabslogo.png'
 
-const Header = props =>
-  <div>
-    <div className="flex-row flex-vc flex-hb height phxl">
-      <div>
-        <img src={ labs } className="header-img" />
-      </div>
-      <div>
-        <Link href="/" onClick={ props.logout }>
-          Logout
-        </Link>
-      </div>
-    </div>
-    <hr />
-  </div>
+const StyledHeader = styled.div`
+  border-bottom: 1px solid #ddd;
+  padding: 1rem 0;
+`
 
-Header.propTypes = {
-  logout: PropTypes.func.isRequired,
-}
+const StyledLogo = styled.img.attrs({ alt: 'Labs logo', src: labsLogo })`
+  height: 2.8rem;
+`
 
-const mapDispatchToProps = {
-  logout,
-}
+const Header = () =>
+  <StyledHeader>
+    <Container>
+      <Row className="align-items-center justify-content-between">
+        <Link to="/"><StyledLogo /></Link>
+        <ProfileNav />
+      </Row>
+    </Container>
+    <DefaultModal />
+  </StyledHeader>
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(Header)
+export default Header

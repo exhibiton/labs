@@ -5,6 +5,7 @@ import { getToken } from '../api/utils/authorization-token'
 import Home from './Home'
 import SignIn from './SignIn'
 import CompanyRoute from './Company'
+import ProfileRoute from './Profile'
 
 function redirectToLogin(nextState, replace) {
   if (!getToken() && nextState.location.pathname !== '/signup') {
@@ -31,6 +32,7 @@ export const createRoutes = store => [{
   indexRoute: Home,
   childRoutes: [
     CompanyRoute(store),
+    ProfileRoute(store),
   ],
 }, {
   onEnter: redirectToHome,

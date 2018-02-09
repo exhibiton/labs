@@ -1,6 +1,7 @@
 import { NewCompanyRoute } from './routes/NewCompany'
 import { injectReducer } from '../../store/reducers'
-import { CompanyDetailsRoute } from './routes/CompanyDetails/index';
+import { CompanyDetailsRoute } from './routes/CompanyDetails'
+import { CompanyEditRoute } from './routes/CompanyEdit'
 
 export default store => ({
   path: 'company',
@@ -22,6 +23,7 @@ export default store => ({
   childRoutes: [
     NewCompanyRoute(store),
     CompanyDetailsRoute(store),
+    CompanyEditRoute(store),
   ],
 
 })

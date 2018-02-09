@@ -1,24 +1,37 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import './UserStyles.scss'
+import styled from 'styled-components'
+import { Row } from 'reactstrap'
+import Fa from 'react-fontawesome'
 
-export const User = ({ first_name, last_name, title, facebook, linkedin, avatar_file_name }) => (
-  <div className="user-container">
-    <div className="flex-col flex-vc" >
-      <img src={ avatar_file_name } className="avatar" alt={ `${first_name} avatar` } />
-      <h3 className="t3 color-dark-grey font-bold">{ `${first_name} ${last_name}` }</h3>
-      <h3 className="t4">{ `${title}` }</h3>
-      <div className="flex-row">
-        <a href={ facebook }> Facebook </a>
-        <a href={ linkedin }> Linkedin </a>
-      </div>
-    </div>
-  </div>
+const StyledUserContainer = styled.div`
+  max-width: 12.5rem;
+`
+
+const StyledAvatar = styled.img`
+  max-width: 100%;
+`
+
+const StyledFa = styled(Fa)`
+  color: #787882;
+  font-size: 1.25rem;
+`
+
+export const User = ({ first_name, last_name, title, facebook, linkedin, avatar }) => (
+  <StyledUserContainer>
+    <StyledAvatar className="mb-4" src={ avatar } alt={ `${first_name} avatar` } />
+    <div className="mb-2 font-weight-bold">{first_name} {last_name}</div>
+    <div className="mb-2 t14 color-grey">{title}</div>
+    <Row className="no-gutters justify-content-center">
+      {facebook && <a href={ facebook } className="mr-2" target="_blank"><StyledFa name="facebook-square" /></a>}
+      {linkedin && <a href={ linkedin } className="mr-2" target="_blank"><StyledFa name="linkedin-square" /></a>}
+    </Row>
+  </StyledUserContainer>
 )
 User.propTypes = {
   first_name: PropTypes.string.isRequired,
   last_name: PropTypes.string.isRequired,
-  avatar_file_name: PropTypes.string.isRequired,
+  avatar: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   facebook: PropTypes.string.isRequired,
   linkedin: PropTypes.string.isRequired,

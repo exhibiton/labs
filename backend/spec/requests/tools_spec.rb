@@ -49,7 +49,6 @@ RSpec.describe 'Tools', type: :request do
     let(:valid_attributes) do
       { name: 'React',
         icon: file,
-        company_id: company.id
       }
     end
 
@@ -64,7 +63,6 @@ RSpec.describe 'Tools', type: :request do
 
       it 'creates a tool' do
         expect(json['name']).to eq('React')
-        expect(json['companies'].size).to eq 1
       end
 
       it 'returns status code 201' do

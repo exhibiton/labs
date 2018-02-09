@@ -1,6 +1,5 @@
 class ToolsController < BaseController
   before_action :authenticate_request!
-  before_action :set_company, only: [:create]
 
   # GET /tools
   def index
@@ -25,7 +24,6 @@ class ToolsController < BaseController
   # POST /tools
   def create
     if tool = Tool.create!(tool_params)
-      tool.companies << @company if @company
       json_response(tool, :created)
     else
       head :unprocessable_entity

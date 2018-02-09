@@ -23,7 +23,19 @@ class User < ApplicationRecord
 
   def authentication_payload
     return nil if new_record?
-    fields = %w(id email first_name last_name avatar)
+    fields = %w(id email first_name last_name avatar.url)
+    user_fields = {
+      avatar: avatar.url,
+      email: email,
+      facebook: facebook,
+      first_name: first_name,
+      github: github,
+      id: id,
+      last_name: last_name,
+      linkedin: linkedin,
+      title: title,  
+      twitter: twitter,
+    }
     company_fields = self.company ? {
       company: {
         id: self.company.id,
@@ -34,8 +46,7 @@ class User < ApplicationRecord
     } : {
       company: nil
     }
-    attributes_hash = attributes.slice(*fields).with_indifferent_access.
-    merge(company_fields)
+    attributes_hash = user_fields.merge(company_fields)
     token = AuthToken.encode(attributes_hash)
     { auth_token: token }
   end
