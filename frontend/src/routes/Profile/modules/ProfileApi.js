@@ -55,7 +55,6 @@ export const updatePassword = params => (dispatch, getState) => {
   }).catch(error => {
     dispatch(updateProfileFailed(error.data.errors))
   })
-
 }
 
 export const updateProfile = (user, userId) => dispatch => {
