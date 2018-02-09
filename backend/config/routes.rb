@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   resources :companies do
     collection do
       get :search
+      get :filter
     end
   end
   resources :tools, only: [:index, :create] do

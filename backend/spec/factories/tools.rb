@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :tool do
-    name { Faker::ProgrammingLanguage.name }
+    name { Faker::Name.unique.name }
   end
 end

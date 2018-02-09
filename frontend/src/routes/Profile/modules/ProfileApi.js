@@ -32,6 +32,32 @@ export const getProfile = id => dispatch => {
   })
 }
 
+export const updatePassword = params => (dispatch, getState) => {
+  const token = getToken()
+  const store = getState()
+
+  dispatch(updateProfileLoading())
+  return axios({
+    method: 'PATCH',
+    url: `${apiEndpoints.api}/users/${store.auth.currentUser.id}`,
+    params,
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }).then(res => {
+    const newToken = res.data.auth_token
+
+    setAuthorizationToken(newToken)
+    const user = jwt.decode(newToken)
+
+    dispatch(updateUserSuccess(user))
+    dispatch(hideModal('defaultModal'))
+  }).catch(error => {
+    dispatch(updateProfileFailed(error.data.errors))
+  })
+
+}
+
 export const updateProfile = (user, userId) => dispatch => {
   const requestBody = {
     email: user.email,
@@ -54,7 +80,12 @@ export const updateProfile = (user, userId) => dispatch => {
       Authorization: `Bearer ${token}`,
     },
   }).then(res => {
-    dispatch(updateUserSuccess(res.data))
+    const newToken = res.data.auth_token
+
+    setAuthorizationToken(newToken)
+    const user = jwt.decode(newToken)
+
+    dispatch(updateUserSuccess(user))
   }).catch(error => {
     dispatch(updateProfileFailed(error.data.errors))
   })

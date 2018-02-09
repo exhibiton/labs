@@ -23,9 +23,14 @@ class CompaniesController < BaseController
   end
 
   # Search with Tool Filters
-  def search
+  def filter
     head :no_content if !params[:tools].present?
     companies = Company.includes(:tools).where(tools: { id:[ params[:tools]] })
+    json_response(companies)
+  end
+
+  def search
+    companies = Company.where('name ilike :term', term: "%#{params[:term]}%")
     json_response(companies)
   end
 

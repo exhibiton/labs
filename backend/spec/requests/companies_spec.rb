@@ -162,16 +162,16 @@ RSpec.describe 'Companies API', type: :request do
     end
   end
 
-  # Test suite for SEARCH /companies/search?tool_ids
+  # Test suite for FILTER /companies/filter?tool_ids
 
-  describe 'SEARCH /companies/search' do
+  describe 'FILTER /companies/filter' do
     let(:search_attributes) do
       { 
         tools: [ tool.id ]
       }
     end
     
-    before { get "/companies/search", params: search_attributes, headers: headers }
+    before { get "/companies/filter", params: search_attributes, headers: headers }
 
     it 'returns the correct companies' do
       expect(json.size).to eq(1)

@@ -6,6 +6,7 @@ import { Col, Row } from 'reactstrap'
 import { reduxForm, Field } from 'redux-form'
 import styled from 'styled-components'
 import { InputLight } from '../../../components/Input'
+import ProfileChangePasswordForm from './ProfileChangePasswordForm'
 
 const StyledButton = styled.button`
   color: #fff;
@@ -78,7 +79,7 @@ let Form = props => {
           <a
             onClick={ e => {
               e.preventDefault()
-              showModal('defaultModal', { title: 'Change Password', content: <div>Change pass</div> })
+              showModal('defaultModal', { title: 'Change Password', content: <ProfileChangePasswordForm /> })
             } }
             href="#"
             className="text-uppercase text-underline color-dark">Change Password</a>
