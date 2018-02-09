@@ -37,18 +37,18 @@ const StyledNavLink = styled(NavLink)`
 
 class CompanyForm extends Component {
   static propTypes = {
-    id: PropTypes.string,
-    company: PropTypes.object,
-    isLoading: PropTypes.bool.isRequired,
-    createCompany: PropTypes.func.isRequired,
-    updateCompany: PropTypes.func.isRequired,
-    getCompany: PropTypes.func.isRequired,
-    users: PropTypes.arrayOf(PropTypes.object),
     categories: PropTypes.arrayOf(PropTypes.object),
-    technologies: PropTypes.arrayOf(PropTypes.object),
-    getUsers: PropTypes.func.isRequired,
+    company: PropTypes.object,
+    createCompany: PropTypes.func.isRequired,
+    currentUser: PropTypes.object.isRequired,
     getCategories: PropTypes.func.isRequired,
+    getCompany: PropTypes.func.isRequired,
     getTechnologies: PropTypes.func.isRequired,
+    getUsers: PropTypes.func.isRequired,
+    isLoading: PropTypes.bool.isRequired,
+    technologies: PropTypes.arrayOf(PropTypes.object),
+    updateCompany: PropTypes.func.isRequired,
+    users: PropTypes.arrayOf(PropTypes.object),
   }
 
   state = {
@@ -61,19 +61,19 @@ class CompanyForm extends Component {
       getCategories,
       getUsers,
       getTechnologies,
-      id,
+      currentUser,
     } = this.props
 
     getCategories()
     getUsers()
     getTechnologies()
-    if (id) {
-      getCompany(id)
+    if (currentUser.company && currentUser.company.id) {
+      getCompany(currentUser.company.id)
     }
   }
 
   handleCompanyCreate = company => {
-    const { id, createCompany, updateCompany } = this.props
+    const { currentUser, createCompany, updateCompany } = this.props
 
     // sending files - have to send FormData (multipart), not the plain JSON object
     const formData = new FormData()
@@ -86,8 +86,8 @@ class CompanyForm extends Component {
       return formData.append(companyKey, companyValue)
     })
 
-    if (id) {
-      return updateCompany(id, formData)
+    if (currentUser.company && currentUser.company.id) {
+      return updateCompany(currentUser.company.id, formData)
     }
 
     return createCompany(formData)
@@ -100,9 +100,9 @@ class CompanyForm extends Component {
   }
 
   getInitialState = () => {
-    const { id, company } = this.props
+    const { currentUser, company } = this.props
 
-    if (id && !_.isEmpty(company) && company.id === id) {
+    if (currentUser.company && currentUser.company.id && !_.isEmpty(company) && company.id === currentUser.company.id) {
       return {
         ...company,
         users: company.users.map(({ id }) => id),
@@ -120,13 +120,13 @@ class CompanyForm extends Component {
       users,
       technologies,
       isLoading,
-      id,
+      currentUser,
     } = this.props
 
     return (
       <div>
         <h2 className="text-center my-5 py-3">
-          <span className="color-bg-yellow">{id ? 'Edit' : 'Create'}</span> Company
+          <span className="color-bg-yellow">{(currentUser.company && currentUser.company.id) ? 'Edit' : 'Create'}</span> Company
         </h2>
         <Container>
           <StyledNav className="justify-content-center" tabs={ true }>
@@ -155,7 +155,7 @@ class CompanyForm extends Component {
         </Container>
         <ContentHolder wide={ this.state.activeTab === '1' }>
           <Form
-            buttonText={ id ? 'Update Company' : 'Create Company' }
+            buttonText={ (currentUser.company && currentUser.company.id) ? 'Update Company' : 'Create Company' }
             initialValues={ this.getInitialState() }
             enableReinitialize={ true }
             onSubmit={ this.handleCompanyCreate }
@@ -192,7 +192,7 @@ class CompanyForm extends Component {
 
 const mapStateToProps = ({ auth, categories, technologies, users, company }) => ({
   company: company.data,
-  id: auth.currentUser.company.id,
+  currentUser: auth.currentUser,
   isLoading: categories.isLoading && technologies.isLoading && users.isLoading,
   users: users.byId.map(id => users.byHash[id]),
   categories: categories.byId.map(id => categories.byHash[id]),
