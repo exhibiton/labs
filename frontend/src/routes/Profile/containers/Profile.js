@@ -57,7 +57,7 @@ class Profile extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  user: state.profile.user,
+  user: state.auth.currentUser,
 })
 
 const mapDispatchToProps = {
