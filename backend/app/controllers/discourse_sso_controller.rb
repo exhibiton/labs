@@ -10,6 +10,7 @@ class DiscourseSsoController < ApplicationController
     sso.name = current_user.full_name # this is a custom method on the User class
     sso.username = current_user.username # from devise
     sso.external_id = current_user.id # from devise
+    sso.avatar_url = current_user.avatar.url
     sso.sso_secret = secret
 
     redirect_to sso.to_url("http://discuss.notarea51.com/session/sso_login")

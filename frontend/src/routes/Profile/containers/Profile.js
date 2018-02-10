@@ -25,6 +25,16 @@ class Profile extends React.Component {
     getProfile(userId)
   }
 
+  getInitValues = () => {
+    const { user } = this.props
+
+    if (user) {
+      return user
+    }
+
+    return {}
+  }
+
   render() {
     const { user, updateProfile, showModal } = this.props
 
@@ -40,7 +50,7 @@ class Profile extends React.Component {
               }) } />
           <img src={ user.avatar } />
         </ProfileImgHolder>
-        <ProfileForm onSubmit={ updateProfile } user={ user } />
+        <ProfileForm onSubmit={ updateProfile } initialValues={ this.getInitValues() } enableReinitialize={ true } />
       </div>
     )
   }

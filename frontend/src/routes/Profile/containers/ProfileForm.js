@@ -143,12 +143,8 @@ Form = reduxForm({
   form: 'profileForm',
 })(Form)
 
-const mapStateToProps = state => ({
-  initialValues: state.profile.user,
-})
-
 const mapDispatchToProps = {
   showModal,
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Form)
+export default connect(null, mapDispatchToProps)(Form)
