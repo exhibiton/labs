@@ -126,7 +126,9 @@ class CompanyForm extends Component {
     return (
       <div>
         <h2 className="text-center my-5 py-3">
-          <span className="color-bg-yellow">{(currentUser.company && currentUser.company.id) ? 'Edit' : 'Create'}</span> Company
+          <span className="color-bg-yellow">
+            {(currentUser.company && currentUser.company.id) ? 'Edit' : 'Create'}
+          </span> Company
         </h2>
         <Container>
           <StyledNav className="justify-content-center" tabs={ true }>
