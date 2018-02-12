@@ -11,7 +11,6 @@ import {
   updateProfileFailed,
   updateProfileLoading,
   uploadPhotoFailed,
-  uploadPhotoSuccess,
   uploadPhotoLoading,
 } from './ProfileActions'
 
@@ -108,10 +107,8 @@ export const uploadPhoto = avatar => dispatch => {
     setAuthorizationToken(token)
     const user = jwt.decode(token)
 
-    dispatch(uploadPhotoSuccess())
+    dispatch(updateUserSuccess(user))
     dispatch(hideModal('defaultModal'))
-    // TODO: Add to response full user info with avatar to avoid second request `getProfile`
-    dispatch(getProfile(user.id))
   }).catch(error => {
     dispatch(uploadPhotoFailed(error.data.errors))
   })

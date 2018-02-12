@@ -2,12 +2,23 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import createStore from './store/createStore'
 import './styles/core.scss'
+import { setAuthorizationToken } from './api/utils/authorization-token'
 
 /* eslint-disable */
 // Store Initialization
 // ------------------------------------
 const store = createStore(window.__INITIAL_STATE__)
 /* eslint-enable */
+
+// ========================================================
+// API Setup
+// ========================================================
+const authToken = localStorage.authToken
+
+if (authToken) {
+  setAuthorizationToken(authToken)
+}
+
 
 // Render Setup
 // ------------------------------------
