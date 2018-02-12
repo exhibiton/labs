@@ -43,8 +43,8 @@ Rails.application.configure do
     :s3_protocol => 'https',
     :s3_credentials => {
       :bucket => "notarea51images",
-      :access_key_id => "AKIAJY6WHWANITC57SDA", # ENV['AWS_ACCESS_KEY_ID'],
-      :secret_access_key => "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" # ENV['AWS_SECRET_ACCESS_KEY']
+      :access_key_id => ENV['AWS_ACCESS_KEY_ID'],
+      :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
     },
     :url =>':s3_domain_url',
     :path => '/:class/:attachment/:id_partition/:style/:filename',
