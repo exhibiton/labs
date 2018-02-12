@@ -32,7 +32,6 @@ const StyledInfo = styled.div.attrs({
 
 const StyledCardContainer = styled.div`
   position: relative;
-  margin-bottom: 1.875rem;
   padding: 0 0 100%;
   background: #fff;
   overflow: hidden;
