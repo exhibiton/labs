@@ -72,4 +72,24 @@ export function getCompanies() {
   }
 }
 
+export const getCompaniesByTechnologies = technologyIds => dispatch => {
+  const token = getToken()
+
+  dispatch(getCompaniesLoading());
+  axios({
+    method: 'GET',
+    url: `${apiEndpoints.api}/companies/filter`,
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    params: { tools: technologyIds },
+  })
+    .then(res => {
+      dispatch(getCompaniesSuccess(res.data))
+    })
+    .catch(e => {
+      dispatch(getCompaniesFail(e))
+    })
+}
+
 

@@ -11,14 +11,13 @@ import {
   createTechnologySuccess,
 } from '../actions/technology-actions'
 
-export const getTechnologies = data => dispatch => {
+export const getTechnologies = () => dispatch => {
   dispatch(technologiesLoading())
   const token = getToken()
 
   return axios({
     method: 'GET',
     url: `${apiEndpoints.api}/tools`,
-    params: data,
     headers: {
       Authorization: `Bearer ${token}`,
     },

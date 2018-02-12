@@ -32,7 +32,6 @@ const StyledInfo = styled.div.attrs({
 
 const StyledCardContainer = styled.div`
   position: relative;
-  margin-bottom: 1.875rem;
   padding: 0 0 100%;
   background: #fff;
   overflow: hidden;
@@ -68,7 +67,7 @@ export const Card = ({ name, description, logo, id }) => (
 )
 Card.propTypes = {
   name: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
+  description: PropTypes.string,
   logo: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
 }

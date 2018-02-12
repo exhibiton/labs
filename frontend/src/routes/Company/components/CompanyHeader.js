@@ -9,6 +9,38 @@ import { selectTagIdList } from '../modules/companies'
 const StyledSelect = styled(Select)`
   width: 100%;
   max-width: 18rem;
+  
+  &.is-focused {
+    .Select-control {
+      border-color: inherit!important;
+      box-shadow: none!important;
+      outline: none;
+    }
+  }
+  
+  .Select-option.is-focused {
+    background: #282d3e;
+    color: #fff;
+  }
+  
+  &.Select--multi {
+    .Select-value {
+      background: #f8f8f9;
+      color: #282d3e;
+      border: 0;    
+    
+      .Select-value-icon {
+        float: right;
+        border: 0;
+        padding: 3px 5px;
+        
+        &:hover {
+          background: #eee;
+          color: #000;
+        }
+      }
+    }
+  }
 `
 
 export const CompanyHeader = ({ options, selectTagIdList, selectedTagIdList }) =>
@@ -19,7 +51,6 @@ export const CompanyHeader = ({ options, selectTagIdList, selectedTagIdList }) =
         <h6 className="mb-0 mr-3">TECHNOLOGIES:</h6>
         <StyledSelect
           multi={ true }
-          closeOnSelect={ false }
           onChange={ event => {
             let result = []
 
@@ -38,7 +69,7 @@ export const CompanyHeader = ({ options, selectTagIdList, selectedTagIdList }) =
 CompanyHeader.propTypes = {
   options: PropTypes.arrayOf(PropTypes.object).isRequired,
   selectTagIdList: PropTypes.func.isRequired,
-  selectedTagIdList: PropTypes.arrayOf(PropTypes.string).isRequired,
+  selectedTagIdList: PropTypes.arrayOf(PropTypes.number).isRequired,
 }
 
 const mapStateToProps = ({ companies }) => ({
