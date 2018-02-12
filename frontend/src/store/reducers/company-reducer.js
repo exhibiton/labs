@@ -8,12 +8,17 @@ import {
   UPDATE_COMPANY_FAIL,
   UPDATE_COMPANY_LOADING,
   UPDATE_COMPANY_SUCCESS,
+  GET_COMPANY_LIST_BY_TERM_LOADING,
+  GET_COMPANY_LIST_BY_TERM_FAIL,
+  GET_COMPANY_LIST_BY_TERM_SUCCESS,
 } from '../../actions/company-actions'
 
 const initialState = {
   data: {},
   messages: {},
   isLoading: false,
+  isLoadingByTerm: false,
+  byTerm: [],
 }
 
 export default function companyReducer(state = initialState, action) {
@@ -47,6 +52,29 @@ export default function companyReducer(state = initialState, action) {
         ...state,
         data: action.payload,
         isLoading: false,
+      }
+
+    case GET_COMPANY_LIST_BY_TERM_LOADING:
+      return {
+        ...state,
+        isLoadingByTerm: true,
+      }
+
+    case GET_COMPANY_LIST_BY_TERM_FAIL:
+      return {
+        ...state,
+        messages: {
+          type: 'fail',
+          reason: action.payload,
+        },
+        isLoadingByTerm: true,
+      }
+
+    case GET_COMPANY_LIST_BY_TERM_SUCCESS:
+      return {
+        ...state,
+        byTerm: action.payload,
+        isLoadingByTerm: true,
       }
 
     default:

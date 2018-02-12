@@ -7,6 +7,9 @@ export const GET_COMPANY_LOADING = 'GET_COMPANY_LOADING'
 export const UPDATE_COMPANY_SUCCESS = 'UPDATE_COMPANY_SUCCESS'
 export const UPDATE_COMPANY_FAIL = 'UPDATE_COMPANY_FAIL'
 export const UPDATE_COMPANY_LOADING = 'UPDATE_COMPANY_LOADING'
+export const GET_COMPANY_LIST_BY_TERM_LOADING = 'GET_COMPANY_LIST_BY_TERM_LOADING'
+export const GET_COMPANY_LIST_BY_TERM_FAIL = 'GET_COMPANY_LIST_BY_TERM_FAIL'
+export const GET_COMPANY_LIST_BY_TERM_SUCCESS = 'GET_COMPANY_LIST_BY_TERM_SUCCESS'
 
 export const createCompanySuccess = payload => ({
   type: CREATE_COMPANY_SUCCESS,
@@ -46,4 +49,18 @@ export const getCompanyFail = payload => ({
 
 export const getCompanyLoading = () => ({
   type: GET_COMPANY_LOADING,
+})
+
+export const getCompanyListByTermSuccess = payload => ({
+  type: GET_COMPANY_LIST_BY_TERM_SUCCESS,
+  payload,
+})
+
+export const getCompanyListByTermFail = payload => ({
+  type: GET_COMPANY_LIST_BY_TERM_FAIL,
+  payload,
+})
+
+export const getCompanyListByTermLoading = () => ({
+  type: GET_COMPANY_LIST_BY_TERM_LOADING,
 })
