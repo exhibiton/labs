@@ -8,6 +8,8 @@ Rails.application.routes.draw do
     end
   end
   
+  get 'discourse/sso' => 'discourse_sso#sso'
+
   resources :categories, only: [:index, :create] do
     collection do
       get :select_options

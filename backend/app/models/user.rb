@@ -14,6 +14,14 @@ class User < ApplicationRecord
     company_id ? Company.find(company_id) : nil
   end
 
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+
+  def username
+    "#{first_name.downcase}#{last_name.downcase}"
+  end
+
   # credit:
   # https://github.com/plataformatec/devise/wiki/How-To:-Find-a-user-when-you-have-their-credentials
   def self.authenticate(email, password)

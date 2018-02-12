@@ -21,6 +21,7 @@ export default store => ({
   },
 
   childRoutes: [
+    CompanyEditRoute(store),
     NewCompanyRoute(store),
     CompanyDetailsRoute(store),
     CompanyEditRoute(store),
