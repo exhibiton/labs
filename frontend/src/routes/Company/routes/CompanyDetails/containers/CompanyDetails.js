@@ -24,6 +24,12 @@ class CompanyDetails extends Component {
     this.props.getCompany(this.props.params.id)
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.params.id !== prevProps.params.id) {
+      this.props.getCompany(this.props.params.id)
+    }
+  }
+
   render() {
     const { company, params } = this.props
 

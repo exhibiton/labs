@@ -12,6 +12,9 @@ import {
   createCompanySuccess,
   createCompanyFail,
   createCompanyLoading,
+  getCompanyListByTermFail,
+  getCompanyListByTermLoading,
+  getCompanyListByTermSuccess,
 } from '../actions/company-actions'
 import { updateUserSuccess } from '../actions/auth-actions'
 import { setAuthorizationToken, getToken } from './utils/authorization-token'
@@ -83,3 +86,24 @@ export const getCompany = id => dispatch => {
     dispatch(getCompanyFail(error))
   })
 }
+
+export const getCompanyListByTerm = term => dispatch => {
+  const token = getToken()
+
+  if (!term) return dispatch(getCompanyListByTermSuccess([]))
+
+  dispatch(getCompanyListByTermLoading())
+  return axios({
+    method: 'GET',
+    url: `${apiEndpoints.api}/companies/search`,
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    params: { term },
+  }).then(res => {
+    dispatch(getCompanyListByTermSuccess(res.data))
+  }).catch(error => {
+    dispatch(getCompanyListByTermFail(error))
+  })
+}
+

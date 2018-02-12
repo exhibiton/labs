@@ -22,7 +22,7 @@ export const CardList = ({ companies }) => {
                 const company = chunkCompanies[index]
 
                 return (
-                  <Col key={ i }>
+                  <Col key={ index }>
                     <Card
                       name={ company.name }
                       logo={ company.logo }
@@ -31,7 +31,7 @@ export const CardList = ({ companies }) => {
                 )
               }
 
-              return <Col />
+              return <Col key={ index } />
             })}
           </Row>
         ))}
