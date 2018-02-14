@@ -33,10 +33,10 @@ export default function categoryReducer(state = initialState, action) {
     case CREATE_CATEGORY_SUCCESS:
       return {
         ...state,
-        byId: [...state.byId, action.id],
+        byId: [...state.byId, action.payload.id],
         byHash: {
           ...state.byHash,
-          [action.id]: {
+          [action.payload.id]: {
             value: action.payload.id,
             label: action.payload.name,
           },
