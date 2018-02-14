@@ -9,6 +9,9 @@ import {
   createTechnologyLoading,
   createTechnologyFail,
   createTechnologySuccess,
+  getTechnologiesByTermFail,
+  getTechnologiesByTermLoading,
+  getTechnologiesByTermSuccess,
 } from '../actions/technology-actions'
 
 export const getTechnologies = () => dispatch => {
@@ -49,8 +52,10 @@ export const createTechnology = data => dispatch => {
 }
 
 export const getTechnologiesByTerm = term => dispatch => {
-  dispatch(technologiesLoading())
+  dispatch(getTechnologiesByTermLoading())
   const token = getToken()
+
+  if (!term) return dispatch(getTechnologiesByTermSuccess([]))
 
   return axios({
     method: 'GET',
@@ -60,8 +65,8 @@ export const getTechnologiesByTerm = term => dispatch => {
       Authorization: `Bearer ${token}`,
     },
   }).then(res => {
-    dispatch(technologiesLoadingSuccess(res.data))
+    dispatch(getTechnologiesByTermSuccess(res.data))
   }).catch(error => {
-    dispatch(technologiesLoadingFail(error))
+    dispatch(getTechnologiesByTermFail(error))
   })
 }

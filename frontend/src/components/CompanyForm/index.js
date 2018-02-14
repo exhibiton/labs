@@ -1,3 +1,4 @@
+/* eslint-disable multiline-ternary */
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
@@ -198,7 +199,9 @@ const mapStateToProps = ({ auth, categories, technologies, users, company }) => 
   isLoading: categories.isLoading && technologies.isLoading && users.isLoading,
   users: users.byId.map(id => users.byHash[id]),
   categories: categories.byId.map(id => categories.byHash[id]),
-  technologies: technologies.byId.map(id => technologies.byHash[id]),
+  technologies: technologies.byTerm.length > 0 ?
+    technologies.byTerm.map(id => technologies.byHash[id]) :
+    technologies.byId.map(id => technologies.byHash[id]),
 })
 
 const mapDispatchToProps = {
