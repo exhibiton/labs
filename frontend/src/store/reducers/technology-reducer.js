@@ -6,11 +6,15 @@ import {
   TECHNOLOGIES_LOADING,
   TECHNOLOGIES_LOADING_FAIL,
   TECHNOLOGIES_LOADING_SUCCESS,
+  GET_TECHNOLOGIES_BY_TERM_LOADING,
+  GET_TECHNOLOGIES_BY_TERM_FAIL,
+  GET_TECHNOLOGIES_BY_TERM_SUCCESS,
 } from '../../actions/technology-actions'
 
 const initialState = {
   byId: [],
   byHash: {},
+  byTerm: [],
   isLoading: false,
 }
 
@@ -42,11 +46,13 @@ export default function technologyReducer(state = initialState, action) {
       }
 
     case TECHNOLOGIES_LOADING:
+    case GET_TECHNOLOGIES_BY_TERM_LOADING:
       return {
         ...state,
         isLoading: true,
       }
     case TECHNOLOGIES_LOADING_FAIL:
+    case GET_TECHNOLOGIES_BY_TERM_FAIL:
       return {
         ...state,
         messages: {
@@ -60,6 +66,12 @@ export default function technologyReducer(state = initialState, action) {
         ...state,
         byId: _.map(action.payload, 'id'),
         byHash: _.keyBy(action.payload, 'id'),
+        isLoading: false,
+      }
+    case GET_TECHNOLOGIES_BY_TERM_SUCCESS:
+      return {
+        ...state,
+        byTerm: _.map(action.payload, 'id'),
         isLoading: false,
       }
 
