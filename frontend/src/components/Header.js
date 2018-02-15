@@ -18,6 +18,32 @@ const StyledLogo = styled.img.attrs({ alt: 'Labs logo', src: labsLogo })`
   height: 2.8rem;
 `
 
+const StyledLink = styled(Link)`
+  width: 47px;
+  height: 19px;
+  font-size: 16px;
+  text-align: left;
+  color: #282d3e;
+  &:hover {
+    color: #282d3e;
+    background: #ffed98;
+  }
+  text-decoration: none!important;
+`
+
+const StyledA = styled.a`
+  width: 47px;
+  height: 19px;
+  font-size: 16px;
+  text-align: left;
+  color: #282d3e;
+  &:hover {
+    background: #ffed98;
+    text-decoration: none;
+    color: #282d3e;
+  }
+`
+
 const Header = () =>
   <StyledHeader>
     <Container>
@@ -26,6 +52,8 @@ const Header = () =>
           <Link to="/"><StyledLogo /></Link>
           <SearchCompany />
         </Row>
+        <StyledLink to="/" style={ [{ textDecoration: 'none' }] }> Companies </StyledLink>
+        <StyledA href="http://discuss.notarea51.com/">Discussion </StyledA>
         <ProfileNav />
       </Row>
     </Container>

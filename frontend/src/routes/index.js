@@ -6,6 +6,7 @@ import Home from './Home'
 import SignIn from './SignIn'
 import CompanyRoute from './Company'
 import ProfileRoute from './Profile'
+import SingleSignOn from './Sso'
 
 function redirectToLogin(nextState, replace) {
   if (!getToken() && nextState.location.pathname !== '/signup') {
@@ -33,6 +34,7 @@ export const createRoutes = store => [{
   childRoutes: [
     CompanyRoute(store),
     ProfileRoute(store),
+    SingleSignOn(store),
   ],
 }, {
   onEnter: redirectToHome,

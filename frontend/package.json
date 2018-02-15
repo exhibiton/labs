@@ -38,6 +38,7 @@
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-dropzone": "^4.2.7",
+    "react-epic-spinners": "^0.2.0",
     "react-fontawesome": "^1.6.1",
     "react-highlight-words": "^0.10.0",
     "react-onclickoutside": "^6.7.1",
